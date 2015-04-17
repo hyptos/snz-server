@@ -3,15 +3,23 @@
 
 #include "Message/protocolemanager.h"
 #include "Message/message.hpp"
+#include "communicationserver.hpp"
 
 class MessageHandlerExample : public IMessageHandler
 {
 public:
-    MessageHandlerExample();
-    ~MessageHandlerExample();
-    void onOutPutMessage(IMessage *msg) {
-        std::cout << "message recu dans le handler ;) \n";
+    MessageHandlerExample(ICommunicationServer *_com) {
+        com = _com;
     }
+
+    ~MessageHandlerExample();
+
+    void onOutPutMessage(IMessage *msg) {
+        WopawopaMessage tes;
+        com->sendBroadCast(&tes);
+    }
+
+    ICommunicationServer *com;
 };
 
 #endif // MESSAGEHANDLEREXAMPLE_H

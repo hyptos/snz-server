@@ -7,11 +7,11 @@
 #include "Message/protocolemanager.h"
 #include "Message/message.hpp"
 #include <vector>
-
+#include "communicationserver.hpp"
 
 typedef struct  _clientData ClientData;
 
-class SNZ_Server : virtual protocoleManager {
+class SNZ_Server : virtual protocoleManager , virtual public ICommunicationServer {
 
 public:
 
@@ -34,6 +34,8 @@ public:
     IMessage *getMessage(ByteBuffer &buffer) const;
 
     void setMessageDispatcher(IMessageDispatcher *dispt);
+
+    void sendBroadCast(IMessage *);
 
 private :
 

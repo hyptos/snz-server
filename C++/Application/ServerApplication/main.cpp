@@ -8,13 +8,11 @@
 #include "Server/server.hpp"
 #include "Server/messagehandlerexample.hpp"
 
-#define TRAME_TEST '}'
-
 int main ( int argc, char** argv ) {
     SNZ_Server s;
     implMessageDispatcher dispatcher;
-    MessageHandlerExample msgH;
-    dispatcher.registerMessageHandler('{', (IMessageHandler*) &msgH);
+    MessageHandlerExample msgH(&s);
+    dispatcher.registerMessageHandler('w', (IMessageHandler*) &msgH);
     s.setMessageDispatcher(&dispatcher);
     s.start();
     while(s.isRunning()) {
