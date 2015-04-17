@@ -31,7 +31,7 @@ class Agent : public Entity{
     public :
 
         ///Constructeur
-        Agent(unsigned long, EntityType, EntityState, double, double, double, double, Body*, Brain*);
+        Agent(unsigned long long, EntityType, EntityState, double, double, double, double, double, double, Body*, Brain*);
 
         ///Destructeur
         virtual ~Agent() = 0;
@@ -52,8 +52,6 @@ class Agent : public Entity{
 
         ///Génére et émet les infos concernant l'agent
         virtual void emitInfo();
-
-
 
     protected :
 

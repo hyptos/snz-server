@@ -22,6 +22,7 @@
 #include "Entities/Agents/zagent.hpp"
 #include "Info/infoagent.hpp"
 #include "Info/infoentity.hpp"
+ #include "Info/infoaction.hpp"
 
 
 //! SNZ_Model Class
@@ -45,24 +46,36 @@ class SNZ_Model : public QObject{
 
     public slots :
 
-        void actions();
+        ///Function de reception d'une action faite par une entité
+        void entity_action(InfoAction);
 
-        void entity_maj(unsigned long, InfoEntity);
+        ///Function de reception d'une modification d'une entité (position, état...)
+        void entity_maj(InfoEntity);
+
+        ///Function pour demander au model d'envoyer l'état de ses entités
+        void ask_maj();
+
+        ///Déclenche un son
+        void do_sound(double, double);
 
     signals :
 
         ///Signal du son
-        void sound(double x, double y, double power);
+        void sound(double,double,double,double);
 
-        void maj_view(unsigned long, InfoEntity);
+        ///Signal envoyé pour indiquer un changement pour une entité (position, état...)
+        void maj_entity(InfoEntity);
+
+        ///Signal envoyé pour indiquer une action faite par une entité
+        void maj_action(InfoAction);
 
     private :
 
-        std::vector<Entity*> m_entities;  ///< Liste des entités
-        unsigned long m_nbEntities;       ///< Nombres d'entités présent dans le modèle
+        std::vector<Entity*> m_entities;    ///< Liste des entités
+        unsigned long long m_nbEntities;    ///< Nombres d'entités présent dans le modèle
 
-        int m_envX;                     ///< Taille en X de l'environnement
-        int m_envY;                     ///< Taille en Y de l'environnement
+        int m_envX;                         ///< Taille en X de l'environnement
+        int m_envY;                         ///< Taille en Y de l'environnement
 
 };
 

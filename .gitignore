@@ -1,0 +1,8 @@
+build/
+C++/CMakeLists.txt
+CMakeLists.txt.user
+*.creator.user
+*.files
+*.includes
+*.creator
+*.config
