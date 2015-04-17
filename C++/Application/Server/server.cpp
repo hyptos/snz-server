@@ -128,11 +128,12 @@ void *client_thread_send ( void* data )
 void SNZ_Server::OnDisconnect ( QUuid client ) {
     std::cout << "Client " << client.toString().toStdString() << " has been disconnected!!" << std::endl;
     SNZ_Server::mClients[ client ]->closeMe = true;
-  /*  pthread_join(mClients [ client ]->send_thread, NULL );
-    pthread_join(mClients [ client ]->recv_thread, NULL );
+    //pthread_join(mClients [ client ]->send_thread, NULL );
+    //pthread_join(mClients [ client ]->recv_thread, NULL );
+
     if(mClients.contains(client)) {
         SNZ_Server::mClients.remove( client );
-    } */
+    }
 }
 
 

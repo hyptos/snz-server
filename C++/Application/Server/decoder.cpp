@@ -16,7 +16,6 @@ template<> void decode(ByteBuffer &buff, ReceiveMessage &res) {
 }
 
 template<> void decode(ByteBuffer &buff, StringMessage &res) {
-    std::cout << "template<> void decode(ByteBuffer &buff, StringMessage &res) { \n";
     char* str = new char[buff.getLength()];
     unsigned char* data = buff.getData();
     for(int i = 0 ; i < buff.getLength(); i++) {

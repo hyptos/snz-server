@@ -92,6 +92,7 @@ bool FiFoBuffering::add ( ByteBuffer* buffer )
 
 void FiFoBuffering::get ( ByteBuffer*& buffer )
 {
+    //std::cout<< "avant lock \n";
     pthread_mutex_lock (&mBufferLock);
     buffer = NULL;
     if ( mBuffers.size() > 0 )
@@ -99,6 +100,7 @@ void FiFoBuffering::get ( ByteBuffer*& buffer )
     if ( mGettingReleaseBuffer )
         mBuffers.dequeue();
     pthread_mutex_unlock (&mBufferLock);
+    //std::cout<< "apres lock \n";
 }
 
 void FiFoBuffering::get ( QList < ByteBuffer* >& buffer )
