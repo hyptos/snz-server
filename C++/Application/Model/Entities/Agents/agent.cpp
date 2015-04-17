@@ -13,7 +13,7 @@ Agent::Agent(unsigned long long id, EntityType type, EntityState state, double x
     QObject::connect(m_brain, SIGNAL(lets_go_to(double,double)), m_body, SLOT(move_to(double,double)));
 
     //Connection Body->Agent
-    QObject::connect(body, SIGNAL(coordinates(double,double,double)), this, SLOT(setCoordinate(double,double,double)));
+    QObject::connect(body, SIGNAL(coordinates(double,double,double)), this, SLOT(setCoordinates(double,double,double)));
     QObject::connect(body, SIGNAL(direction(double,double,double)), this, SLOT(setDirection(double,double,double)));
     QObject::connect(body, SIGNAL(speed(double)), this, SLOT(setSpeed(double)));
 }
@@ -22,6 +22,31 @@ Agent::Agent(unsigned long long id, EntityType type, EntityState state, double x
 Agent::~Agent(){
 }
 
+//Modifie la coordonnée X de l'agent dans l'environnement (et met la vitesse à 0)
+void Agent::setX(double x){
+    m_body->setX(x);
+}
+
+//Modifie la coordonnée Z de l'agent dans l'environnement (et met la vitesse à 0)
+void Agent::setZ(double z){
+    m_body->setZ(z);
+}
+
+//Modifie la coordonnée Y de l'agent dans l'environnement (et met la vitesse à 0)
+void Agent::setY(double y){
+    m_body->setY(y);
+}
+
+//Modifie les coordonnées X, Z et Y de l'agent dans l'environnement (et met la vitesse à 0)
+void Agent::setCoordinates(double x, double z, double y){
+    m_x = x;
+    m_z = z;
+    m_y = y;
+
+    emitInfo();
+}
+
+//Retourne la vitesse
 double Agent::getSpeed() const{
     return m_speed;
 }

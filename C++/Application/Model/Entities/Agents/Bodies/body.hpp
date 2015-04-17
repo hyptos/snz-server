@@ -34,7 +34,55 @@ class Body : public QObject{
         ///Destructeur
         virtual ~Body();
 
+        ///Retourne la coordonnée X du body dans l'environnement
+        virtual double getX() const;
+
+        ///Retourne la coordonnée Z du body dans l'environnement
+        virtual double getZ() const;
+
+        ///Retourne la coordonnée Y du body dans l'environnement
+        virtual double getY() const;
+
+        ///Retourne la coordonnée X du vecteur direction du body
+        virtual double getDX() const;
+
+        ///Retourne la coordonnée Z du vecteur direction du body
+        virtual double getDZ() const;
+
+        ///Retourne la coordonnée Z du vecteur direction du body
+        virtual double getDY() const;
+
+        ///Retourne la vitesse du body
+        virtual double getSpeed() const;
+
     public slots :
+
+        ///Modifie la coordonnée X de l'entité
+        virtual void setX(double);
+
+        ///Modifie la coordonnée Z de l'entité
+        virtual void setZ(double);
+
+        ///Modifie la coordonnée Y de l'entité
+        virtual void setY(double);
+
+        ///Modife la coordonnée X du vecteur direction de l'entité
+        virtual void setDX(double);
+
+        ///Modife la coordonnée Z du vecteur direction de l'entité
+        virtual void setDZ(double);
+
+        ///Modife la coordonnée Y du vecteur direction de l'entité
+        virtual void setDY(double);
+
+        ///Modifie les coordonnées X, Z et Y de l'entité
+        virtual void setCoordinates(double, double, double);
+
+        ///Modifie le vecteur direction de l'entité
+        virtual void setDirection(double, double, double);
+
+        ///Modifie la vitesse du body
+        virtual void setSpeed(double);
 
         ///Fonction senseur appellée lors de l'émition d'un son quelque part dans l'environnement
         virtual void hear(double, double, double, double);

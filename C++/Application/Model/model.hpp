@@ -16,13 +16,15 @@
 #include <ctime>
 #include <thread>
 #include <chrono>
+#include <climits>
 
+#include "environment.hpp"
 #include "Entities/entity.hpp"
 #include "Entities/Agents/agent.hpp"
 #include "Entities/Agents/zagent.hpp"
 #include "Info/infoagent.hpp"
 #include "Info/infoentity.hpp"
- #include "Info/infoaction.hpp"
+#include "Info/infoaction.hpp"
 
 
 //! SNZ_Model Class
@@ -74,8 +76,7 @@ class SNZ_Model : public QObject{
         std::vector<Entity*> m_entities;    ///< Liste des entités
         unsigned long long m_nbEntities;    ///< Nombres d'entités présent dans le modèle
 
-        int m_envX;                         ///< Taille en X de l'environnement
-        int m_envY;                         ///< Taille en Y de l'environnement
+        Environment *m_environment;          //< Environnement de déplacement des entités
 
 };
 

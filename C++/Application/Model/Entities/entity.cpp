@@ -111,7 +111,7 @@ void Entity::setDY(double dy){
 }
 
 //Modifie les coordonnée X et Y de l'entité dans l'environnement
-void Entity::setCoordinate(double x, double z, double y){
+void Entity::setCoordinates(double x, double z, double y){
     m_x = x;
     m_z = z;
     m_y = y;

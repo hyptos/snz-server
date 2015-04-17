@@ -49,7 +49,7 @@ class Environment
 		 * position passée en paramètre se trouve entre 0 et la taille
 		 * de l'environnement.
 		 */
-        bool validePosition(double, double, double) const;
+        int validePosition(double, double, double) const;
 
 		///Retourne des infos sur l'environnement
 		/*!
@@ -59,7 +59,7 @@ class Environment
 		 * précisant ainsi une zone, Environment retourne toutes 
 		 * les données concernant cette dite zone.
 		 */
-		void getArea(double, double, double) const;
+        void getArea(double, double, double) const;
 
 	private :
 

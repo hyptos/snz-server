@@ -37,18 +37,30 @@ class Agent : public Entity{
         virtual ~Agent() = 0;
 
         ///Retourne la vitesse de l'agent
-        double getSpeed() const;
+        virtual double getSpeed() const;
 
         ///Retourne un pointeur sur le Body de l'agent
-        Body* getBody();
+        virtual Body* getBody();
 
         ///Retourne un pointeur sur le Brain de l'agent
-        Brain* getBrain();
+        virtual Brain* getBrain();
 
     public slots :
 
+        ///Modifie la coordonnée X de l'entité
+        virtual void setX(double);
+
+        ///Modifie la coordonnée Z de l'entité
+        virtual void setZ(double);
+
+        ///Modifie la coordonnée Y de l'entité
+        virtual void setY(double);
+
+        ///Modifie les coordonnées X, Z et Y de l'entité
+        virtual void setCoordinates(double, double, double);
+
         ///Modifie la vitesse
-        void setSpeed(double speed);
+        virtual void setSpeed(double speed);
 
         ///Génére et émet les infos concernant l'agent
         virtual void emitInfo();

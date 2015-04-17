@@ -2,7 +2,7 @@
 
 //Constructeur
 SNZ_Model::SNZ_Model(int size, int nbZ)
-    : m_envX(size), m_envY(size), m_nbEntities(0){
+    : m_nbEntities(0), m_environment(new Environment(size, size, INT_MAX)){
 
     std::srand(std::time(NULL));
 
@@ -31,9 +31,53 @@ void SNZ_Model::entity_action(InfoAction info){
     emit maj_action(info);
 }
 
-//Transmet les info des entités à la vue
+//Transmet les info des entités à la vue (en vérifiant si le déplacement est valide)
 void SNZ_Model::entity_maj(InfoEntity info){
-    emit maj_entity(info);
+
+    //OK : 0
+    //X+ : 1
+    //X+ Z+ : 2
+    //X+ Z- : 3
+
+    //X- : 4
+    //X- Z+ : 5
+    //X- Z- : 6
+
+    //Z+ : 7
+    //Z- : 8
+
+    int result = m_environment->validePosition(info.getX(), info.getZ(), info.getY());
+
+    if(result == 0)
+        emit maj_entity(info);
+    else if(result == 1){
+        m_entities[info.getEntity()]->setX(1.0);
+    }
+    else if(result == 2){
+        m_entities[info.getEntity()]->setX(1.0);
+        m_entities[info.getEntity()]->setZ(1.0);
+    }
+    else if(result == 3){
+        m_entities[info.getEntity()]->setX(1.0);
+        m_entities[info.getEntity()]->setZ(m_environment->getWidth() - 1);
+    }
+    else if(result == 4){
+        m_entities[info.getEntity()]->setX(m_environment->getLength() - 1);
+    }
+    else if(result == 5){
+        m_entities[info.getEntity()]->setX(m_environment->getLength() - 1);
+        m_entities[info.getEntity()]->setZ(1.0);
+    }
+    else if(result == 6){
+        m_entities[info.getEntity()]->setX(m_environment->getLength() - 1);
+        m_entities[info.getEntity()]->setZ(m_environment->getWidth() - 1);
+    }
+    else if(result == 7){
+        m_entities[info.getEntity()]->setZ(1.0);
+    }
+    else if(result == 8){
+        m_entities[info.getEntity()]->setZ(m_environment->getWidth() - 1);
+    }
 }
 
 //Demande à chaque entités d'émettre ses infos

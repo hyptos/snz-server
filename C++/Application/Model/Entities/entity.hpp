@@ -48,63 +48,63 @@ class Entity : public QObject
         virtual ~Entity() = 0;
 
         ///Retourne id de l'entité
-        unsigned long long getId() const;
+        virtual unsigned long long getId() const;
 
         ///Retourne le type de l'entité
-        EntityType getType() const;
+        virtual EntityType getType() const;
 
         ///Retourne l'état de l'entité
-        EntityState getState() const;
+        virtual EntityState getState() const;
 
         ///Retourne la coordonnée X de l'entité dans l'environnement
-        double getX() const;
+        virtual double getX() const;
 
         ///Retourne la coordonnée Z de l'entité dans l'environnement
-        double getZ() const;
+        virtual double getZ() const;
 
         ///Retourne la coordonnée Y de l'entité dans l'environnement
-        double getY() const;
+        virtual double getY() const;
 
         ///Retourne la coordonnée X du vecteur direction de l'entité
-        double getDX() const;
+        virtual double getDX() const;
 
         ///Retourne la coordonnée Z du vecteur direction de l'entité
-        double getDZ() const;
+        virtual double getDZ() const;
 
         ///Retourne la coordonnée Z du vecteur direction de l'entité
-        double getDY() const;
+        virtual double getDY() const;
 
     public slots :
 
         ///Modifie la valeur de l'id de l'entité
-        void setId(unsigned long long);
+        virtual void setId(unsigned long long);
 
         ///Modife l'état de l'entité
-        void setState(EntityState);
+        virtual void setState(EntityState);
 
         ///Modifie la coordonnée X de l'entité
-        void setX(double);
+        virtual void setX(double);
 
         ///Modifie la coordonnée Z de l'entité
-        void setZ(double);
+        virtual void setZ(double);
 
         ///Modifie la coordonnée Y de l'entité
-        void setY(double);
+        virtual void setY(double);
 
         ///Modife la coordonnée X du vecteur direction de l'entité
-        void setDX(double);
+        virtual void setDX(double);
 
         ///Modife la coordonnée Z du vecteur direction de l'entité
-        void setDZ(double);
+        virtual void setDZ(double);
 
         ///Modife la coordonnée Y du vecteur direction de l'entité
-        void setDY(double);
+        virtual void setDY(double);
 
         ///Modifie les coordonnées X, Z et Y de l'entité
-        void setCoordinate(double, double, double);
+        virtual void setCoordinates(double, double, double);
 
         ///Modifie le vecteur direction de l'entité
-        void setDirection(double, double, double);
+        virtual void setDirection(double, double, double);
 
         //Génére et émet les infos concernant l'entité
         virtual void emitInfo();
