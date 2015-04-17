@@ -52,6 +52,7 @@ bool SimpleTcpStartPoint::send ( QUuid client, const ByteBuffer& buffer )
     bool result = true;
     unsigned int lg;
     unsigned int length = buffer.getLength();
+
     lg = mSocket->sendData( client, (unsigned char*) & length, sizeof ( unsigned int ) );
     if ( lg != sizeof ( unsigned int ) ) {
         result = false;

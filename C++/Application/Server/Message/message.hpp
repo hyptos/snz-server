@@ -1,37 +1,46 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+#include "string.h"
 #include "Utility/utility.hpp"
+
+#define MSG_WOPAWOPA 'w'
 
 class IMessage
 {
 public:
     IMessage();
-    IMessage(char var_code);
-    IMessage(char var_code, void* mData);
     ~IMessage();
 
-    template<typename T> T *getGeneriqueData() {
-        return (T*) mData;
-    }
+    virtual ByteBuffer *toByteBuffer() = 0;
+    virtual char getCode() = 0;
 
-    void* mData;
-    char code;
 };
 
-template<typename T>
-class Message : public IMessage {
-public:
-    Message() : IMessage() {
+class WopawopaMessage  : public IMessage {
+public :
 
-    }
-
-    Message(char code ,T* data) : IMessage(code, data ) {}
-
-    T* getData() {
-        return getGeneriqueData<T>;
+    WopawopaMessage() : wopa() {
+        strcpy(wopa, "wopawopa");
     };
-};
 
+    ~WopawopaMessage() {};
+
+    ByteBuffer *toByteBuffer() {
+        ByteBuffer *res = new ByteBuffer();
+        res->append(toBuffer<char>(MSG_WOPAWOPA));
+        for(int i = 0; i < 9; i++) {
+            res->append(toBuffer<char>(wopa[i]));
+        }
+        return res;
+    }
+
+    char getCode() {
+        return MSG_WOPAWOPA;
+    }
+
+    char wopa[9];
+
+};
 
 #endif // MESSAGE_H

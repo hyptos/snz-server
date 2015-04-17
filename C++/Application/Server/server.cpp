@@ -118,6 +118,7 @@ void *client_thread_send ( void* data )
             delete message;
         }
         pthread_yield();
+        pthread_yield();
     }
     std::cout << "fin thread send ! \n" ;
     return NULL;
@@ -135,12 +136,17 @@ void SNZ_Server::OnDisconnect ( QUuid client ) {
 
 
 IMessage *SNZ_Server::getMessage(ByteBuffer &buffer) const {
-    char code;
-    fromBuffer<char>(buffer ,0 , code);
-    return new Message<ByteBuffer>(code, &buffer);
+    return new  WopawopaMessage();
 }
 
 void SNZ_Server::setMessageDispatcher(IMessageDispatcher *dispt) {
     mMessageDispatcher = dispt;
 }
 
+void SNZ_Server::sendBroadCast(IMessage *msg) {
+    for( auto key: mClients.keys() )
+    {
+        ByteBuffer *test = msg->toByteBuffer();
+        mClients.value( key )->send_buffering.add(test);
+    }
+}
