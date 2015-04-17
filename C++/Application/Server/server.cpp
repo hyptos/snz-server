@@ -1,4 +1,5 @@
 #include "server.hpp"
+#include "decoder.h"
 
 QMap<QUuid , ClientData*> SNZ_Server::mClients;
 
@@ -136,7 +137,9 @@ void SNZ_Server::OnDisconnect ( QUuid client ) {
 
 
 IMessage *SNZ_Server::getMessage(ByteBuffer &buffer) const {
-    return new  WopawopaMessage();
+    ReceiveMessage *msg = new ReceiveMessage();
+    decode<ReceiveMessage>(buffer, *msg);
+    return msg;
 }
 
 void SNZ_Server::setMessageDispatcher(IMessageDispatcher *dispt) {

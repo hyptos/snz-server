@@ -3,6 +3,7 @@
 #include "Wavefront/wavefront.hpp"
 #include "../../Application/Server/Message/message.hpp"
 #include "TcpNetworking/simpletcpendpoint.hpp"
+#include "../../Application/Server/decoder.h"
 
 extern void __attach(void);
 extern void __attachInterfaces(void);
@@ -31,23 +32,32 @@ int main ( int argc, char** argv ) {
     //ByteBuffer stringtest = new ByteBuffer(test, 8);
     SimpleTcpEndPoint::Options options;
     options.serverIP = "localhost";
-    WopawopaMessage wopa;
     options.connectionPort = 3000;
     SimpleTcpEndPoint client ( options );
+
+    StringMessage wopa;
+    char back_wopa[10];
+    strcpy(back_wopa, "aapowupowa");
+    wopa.setLen(10);
+    wopa.setstr(back_wopa);
+
     if ( client.open() == false ) exit ( -1 );
     client.send(*(wopa.toByteBuffer())); std::cout << "Sent : " << message.getLength() << " bytes" << std::endl;
     ByteBuffer msg;
-    char test[9];
+
+    ReceiveMessage rec_msg;
+    StringMessage str_msg;
 
     client.receive(msg); std::cout << "Recv : " << msg.getLength() << " bytes" << std::endl;
+    decode<ReceiveMessage>(msg, rec_msg);
+    decode<StringMessage>(*(rec_msg.toByteBuffer()), str_msg);
+    char * str = str_msg.getStr();
 
-    for(int i = 0 ; i < msg.getLength() ; i++) {
-        char test_c;
-        fromBuffer<char>(msg,i,test_c);
-        std::cout<< (char) test_c << " <- \n";
-
+    std::cout<< "recu : ";
+    for(int i = 0; i < str_msg.getLen(); i++) {
+        std::cout<< str[i];
     }
-    std::cout << (char*)test << "\n";
+    std::cout << " \n ";
     client.close ();
     return 0;
 }

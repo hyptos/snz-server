@@ -2,6 +2,7 @@
 #define MESSAGEHANDLEREXAMPLE_H
 
 #include "Message/protocolemanager.h"
+#include "decoder.h"
 #include "Message/message.hpp"
 #include "communicationserver.hpp"
 
@@ -15,8 +16,15 @@ public:
     ~MessageHandlerExample();
 
     void onOutPutMessage(IMessage *msg) {
-        WopawopaMessage tes;
-        com->sendBroadCast(&tes);
+        StringMessage res;
+        decode<StringMessage>(*(msg->toByteBuffer()), res);
+        char * str = res.getStr();
+        std::cout<< "recu : ";
+        for(int i = 0; i < res.getLen(); i++) {
+            std::cout<< str[i];
+        }
+        com->sendBroadCast(&res);
+        std::cout<< "\n";
     }
 
     ICommunicationServer *com;
