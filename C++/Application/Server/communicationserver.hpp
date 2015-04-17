@@ -7,7 +7,7 @@ class ICommunicationServer {
 public :
     ICommunicationServer();
     ~ICommunicationServer();
-    virtual void sendBroadCast(IMessage *) = 0;
+    virtual int sendBroadCast(IMessage *) = 0;
 };
 
 #endif // COMMUNICATIONSERVER

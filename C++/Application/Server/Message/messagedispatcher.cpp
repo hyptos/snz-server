@@ -12,7 +12,6 @@ implMessageDispatcher::~implMessageDispatcher()
 }
 
 void implMessageDispatcher::dispatchMessage(IMessage *msg) {
-    std::cout << "--------------- ----------------------------- \n";
     if(mProtocoleMap.find(msg->getCode()) == mProtocoleMap.end()) {
         std::cerr << "dispatch error , message id unknow : "<< msg->getCode() << std::endl;
         return;

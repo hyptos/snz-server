@@ -75,8 +75,11 @@ public :
     StringMessage(){}
     StringMessage(char* str, int len) : mStr(NULL), mLen(len) {
         mStr = new char[len];
-        for(int i = 0; i < len ; i++) {
+        for(int i = 0; i < len; i++) {
             mStr[i] = str[i];
+            if(i == len - 1) {
+                mStr[i] = '\0';
+            }
         }
     }
 

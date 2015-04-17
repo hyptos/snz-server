@@ -23,8 +23,8 @@ public:
         for(int i = 0; i < res.getLen(); i++) {
             std::cout<< str[i];
         }
-        com->sendBroadCast(&res);
-        std::cout<< "\n";
+        int nb_client = com->sendBroadCast(&res);
+        std::cout<< "  message envoyé à "<< nb_client <<"\n";
     }
 
     ICommunicationServer *com;

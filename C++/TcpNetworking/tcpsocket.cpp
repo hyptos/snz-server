@@ -273,13 +273,18 @@ bool TcpSocket::isValid ()
 
 void TcpSocket::cleanUp(DisconnectedCallback* cbDisconnect)
 {
-    pthread_mutex_lock (&mClientListLock);
     foreach ( QUuid client, mEndPoints.keys() ) {
         if ( ! mEndPoints[client]->isValid() ) {
-            if ( cbDisconnect ) (*cbDisconnect) ( client );
-            mEndPoints[client]->closeConnection();
-            mEndPoints.remove(client);
+            if(!pthread_mutex_trylock(&mClientListLock)) {
+                std::cout << "locked from CleanUp \n";
+                if ( cbDisconnect ) (*cbDisconnect) ( client );
+                mEndPoints[client]->closeConnection();
+                mEndPoints.remove(client);
+                pthread_mutex_unlock (&mClientListLock);
+                std::cout << "UNlocked from CleanUp \n";
+            } else {
+                std::cout << "cannot acces to critical zone, already in use \n";
+            }
         }
     }
-    pthread_mutex_unlock (&mClientListLock);
 }

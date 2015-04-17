@@ -37,17 +37,17 @@ int main ( int argc, char** argv ) {
 
     StringMessage wopa;
     char back_wopa[10];
-    strcpy(back_wopa, "aapowupowa");
+    strcpy(back_wopa, "apowupowa");
     wopa.setLen(10);
     wopa.setstr(back_wopa);
 
     if ( client.open() == false ) exit ( -1 );
+
     client.send(*(wopa.toByteBuffer())); std::cout << "Sent : " << message.getLength() << " bytes" << std::endl;
     ByteBuffer msg;
 
     ReceiveMessage rec_msg;
     StringMessage str_msg;
-
     client.receive(msg); std::cout << "Recv : " << msg.getLength() << " bytes" << std::endl;
     decode<ReceiveMessage>(msg, rec_msg);
     decode<StringMessage>(*(rec_msg.toByteBuffer()), str_msg);

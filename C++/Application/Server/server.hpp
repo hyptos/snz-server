@@ -35,7 +35,7 @@ public:
 
     void setMessageDispatcher(IMessageDispatcher *dispt);
 
-    void sendBroadCast(IMessage *);
+    int sendBroadCast(IMessage *);
 
 private :
 

@@ -7,7 +7,7 @@ SNZ_Server::SNZ_Server() : protocoleManager(), running(false), mMessageDispatche
   SimpleTcpStartPoint::Options options;
   options.connectionPort = 3000;
   options.cbDisconnect = OnDisconnect;
-  options.maximumConnectedClients = 1;
+  options.maximumConnectedClients = 10;
   mSocketServer = new SimpleTcpStartPoint( options );
 }
 
@@ -57,15 +57,14 @@ void SNZ_Server::stopServer() {
 }
 
 void SNZ_Server::acceptClient(QUuid client) {
-    std::cout << "Client " << client.toString().toStdString() << " has connected!!" << std::endl;
     ClientData* clt_data  = new ClientData;
     clt_data->uuid        = client;
     clt_data->server      = this;
     clt_data->recv_buffering.mGettingReleaseBuffer = true;
     clt_data->send_buffering.mGettingReleaseBuffer = true;
     clt_data->closeMe     = false;
-    pthread_create ( &(clt_data->recv_thread), NULL, client_thread_receive, clt_data );
     pthread_create ( &(clt_data->send_thread), NULL, client_thread_send, clt_data );
+    pthread_create ( &(clt_data->recv_thread), NULL, client_thread_receive, clt_data );
     mClients[ client ]     = clt_data;
 }
 
@@ -102,7 +101,6 @@ void *client_thread_receive ( void* data)
         }
         pthread_yield();
     }
-      std::cout << "fin thread receive ! \n" ;
       return NULL;
 }
 
@@ -119,17 +117,14 @@ void *client_thread_send ( void* data )
             delete message;
         }
         pthread_yield();
-        pthread_yield();
     }
-    std::cout << "fin thread send ! \n" ;
     return NULL;
 }
 
 void SNZ_Server::OnDisconnect ( QUuid client ) {
-    std::cout << "Client " << client.toString().toStdString() << " has been disconnected!!" << std::endl;
     SNZ_Server::mClients[ client ]->closeMe = true;
-    //pthread_join(mClients [ client ]->send_thread, NULL );
-    //pthread_join(mClients [ client ]->recv_thread, NULL );
+    pthread_join(mClients [ client ]->send_thread, NULL );
+    pthread_join(mClients [ client ]->recv_thread, NULL );
 
     if(mClients.contains(client)) {
         SNZ_Server::mClients.remove( client );
@@ -147,10 +142,13 @@ void SNZ_Server::setMessageDispatcher(IMessageDispatcher *dispt) {
     mMessageDispatcher = dispt;
 }
 
-void SNZ_Server::sendBroadCast(IMessage *msg) {
+int SNZ_Server::sendBroadCast(IMessage *msg) {
+    int  i = 0;
     for( auto key: mClients.keys() )
     {
+
         ByteBuffer *test = msg->toByteBuffer();
-        mClients.value( key )->send_buffering.add(test);
+        mClients.value( key )->send_buffering.add(test);i++;
     }
+    return i;
 }
