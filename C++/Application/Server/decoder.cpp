@@ -26,6 +26,7 @@ template<> void decode(ByteBuffer &buff, StringMessage &res) {
 }
 
 template<> void decode(ByteBuffer &buff, InfoEntity &res) {
+      std::cout << "decode bytebuffer to InfoEntity" << std::endl;
 //    char* str = new char[buff.getLength()];
 //    unsigned char* data = buff.getData();
 //    for(int i = 0 ; i < buff.getLength(); i++) {
