@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="Utility" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;CMake Files\AssetGenerics\;CMake Files\AssetInterfaces\;CMake Files\Assets\;CMake Files\FuzzyLogicBehaviour\;CMake Files\Application\;CMake Files\Application\Model\;CMake Files\Application\Model\Info\;CMake Files\Application\Model\Entities\;CMake Files\Application\Model\Entities\Agents\;CMake Files\Application\Model\Entities\Agents\Bodies\;CMake Files\Application\Model\Entities\Agents\Brains\;CMake Files\Application\Model\Entities\Objects\;CMake Files\Application\Model\Entities\Players\;CMake Files\Application\Server\;CMake Files\Application\Server\Message\;CMake Files\Application\ServerApplication\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\Qt\;CMake Files\..\..\..\..\Qt\5.4\;CMake Files\..\..\..\..\Qt\5.4\gcc_64\;CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\;CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\;CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Core\;CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\;CMake Files\Utility\;CMake Files\Networking\;CMake Files\TcpNetworking\;CMake Files\Wavefront\;CMake Files\QImageLoader\;CMake Files\Samples\;CMake Files\Samples\WavefrontTest\;CMake Files\Samples\SimpleAssetServer\;CMake Files\Samples\SimpleAssetClient\;CMake Files\Samples\ThreadedServer\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/home/antoine/Documents/MIF39/snz-server/C++-build/Utility" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="Utility">
+         <Option output="/home/antoine/Documents/MIF39/snz-server/C++-build/lib/libUtility.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/antoine/Documents/MIF39/snz-server/C++-build/Utility" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add option="-DQT_CORE_LIB" />
+            <Add option="-DQT_NO_DEBUG" />
+            <Add option="-DQT_GUI_LIB" />
+            <Add directory="/home/antoine/Documents/MIF39/snz-server/C++-build/Utility" />
+            <Add directory="/home/antoine/Documents/MIF39/snz-server/C++/." />
+            <Add directory="/home/antoine/Documents/MIF39/snz-server/C++/Application" />
+            <Add directory="/home/antoine/Documents/MIF39/snz-server/C++/Utility" />
+            <Add directory="/home/antoine/Qt/5.4/gcc_64/include" />
+            <Add directory="/home/antoine/Qt/5.4/gcc_64/include/QtCore" />
+            <Add directory="/home/antoine/Qt/5.4/gcc_64/include/QtGui" />
+            <Add directory="/home/antoine/Qt/5.4/gcc_64/mkspecs/linux-g++" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 Utility" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="Utility/fast">
+         <Option output="/home/antoine/Documents/MIF39/snz-server/C++-build/lib/libUtility.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/home/antoine/Documents/MIF39/snz-server/C++-build/Utility" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add option="-DQT_CORE_LIB" />
+            <Add option="-DQT_NO_DEBUG" />
+            <Add option="-DQT_GUI_LIB" />
+            <Add directory="/home/antoine/Documents/MIF39/snz-server/C++-build/Utility" />
+            <Add directory="/home/antoine/Documents/MIF39/snz-server/C++/." />
+            <Add directory="/home/antoine/Documents/MIF39/snz-server/C++/Application" />
+            <Add directory="/home/antoine/Documents/MIF39/snz-server/C++/Utility" />
+            <Add directory="/home/antoine/Qt/5.4/gcc_64/include" />
+            <Add directory="/home/antoine/Qt/5.4/gcc_64/include/QtCore" />
+            <Add directory="/home/antoine/Qt/5.4/gcc_64/include/QtGui" />
+            <Add directory="/home/antoine/Qt/5.4/gcc_64/mkspecs/linux-g++" />
+            <Add directory="/usr/include" />
+            <Add directory="/usr/include/c++/4.8" />
+            <Add directory="/usr/include/c++/4.8/backward" />
+            <Add directory="/usr/include/x86_64-linux-gnu" />
+            <Add directory="/usr/include/x86_64-linux-gnu/c++/4.8" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include" />
+            <Add directory="/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed" />
+            <Add directory="/usr/local/include" />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 Utility/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/home/antoine/Documents/MIF39/snz-server/C++-build/Utility/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/bytebuffer.cpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/filedescriptor.cpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/filetokenizer.cpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/hasname.cpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/hasuuid.cpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/utility.cpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/bytebuffer.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/filedescriptor.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/filetokenizer.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/hasname.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/hasuuid.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/includes.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/listof.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/singleton.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/tokenized.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/utility.hpp">
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/AssetGenerics/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\AssetGenerics\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/AssetGenerics/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\AssetGenerics\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/AssetInterfaces/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\AssetInterfaces\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/AssetInterfaces/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\AssetInterfaces\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Assets/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Assets\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Assets/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Assets\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/FuzzyLogicBehaviour/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\FuzzyLogicBehaviour\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/FuzzyLogicBehaviour/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\FuzzyLogicBehaviour\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Info/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Info\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Info/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Info\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Info/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Info\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Agents/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Agents\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Agents/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Agents\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Agents/Bodies/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Agents\Bodies\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Agents/Bodies/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Agents\Bodies\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Agents/Brains/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Agents\Brains\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Agents/Brains/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Agents\Brains\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Objects/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Objects\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Objects/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Objects\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Players/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Players\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Model/Entities/Players/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Model\Entities\Players\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Server/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Server\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Server/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Server\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Server/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Server\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Server/Message/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Server\Message\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Server/Message/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Server\Message\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Server/Message/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Server\Message\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/Server/Message/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\Server\Message\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/ServerApplication/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\ServerApplication\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/ServerApplication/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\ServerApplication\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Application/ServerApplication/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Application\ServerApplication\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Core\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Core\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Core\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Core\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Core\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QJp2Plugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QEvdevKeyboardPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QEvdevMousePlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QComposePlatformInputContextPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QMinimalEglIntegrationPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QIbusPlatformInputContextPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QEvdevTabletPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QEglFSIntegrationPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QGtk2ThemePlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QEvdevTouchScreenPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QLinuxFbIntegrationPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QXcbIntegrationPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QMngPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5Gui_QDDSPlugin.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/../../../../Qt/5.4/gcc_64/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake">
+          <Option virtualFolder="CMake Files\..\..\..\..\Qt\5.4\gcc_64\lib\cmake\Qt5Gui\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Utility\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Utility/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Utility\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Networking/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Networking\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Networking/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Networking\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/TcpNetworking/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\TcpNetworking\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/TcpNetworking/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\TcpNetworking\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Wavefront/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Wavefront\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Wavefront/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Wavefront\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/QImageLoader/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\QImageLoader\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/QImageLoader/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\QImageLoader\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/WavefrontTest/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\WavefrontTest\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/WavefrontTest/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\WavefrontTest\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/WavefrontTest/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\WavefrontTest\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/SimpleAssetServer/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\SimpleAssetServer\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/SimpleAssetServer/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\SimpleAssetServer\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/SimpleAssetServer/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\SimpleAssetServer\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/SimpleAssetClient/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\SimpleAssetClient\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/SimpleAssetClient/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\SimpleAssetClient\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/SimpleAssetClient/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\SimpleAssetClient\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/ThreadedServer/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\ThreadedServer\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/ThreadedServer/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\ThreadedServer\" />
+      </Unit>
+      <Unit filename="/home/antoine/Documents/MIF39/snz-server/C++/Samples/ThreadedServer/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\Samples\ThreadedServer\" />
+      </Unit>
+   </Project>
+</CodeBlocks_project_file>

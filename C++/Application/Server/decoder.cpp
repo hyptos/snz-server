@@ -24,3 +24,14 @@ template<> void decode(ByteBuffer &buff, StringMessage &res) {
     res.setstr(str);
     res.setLen(buff.getLength());
 }
+
+template<> void decode(ByteBuffer &buff, InfoEntity &res) {
+//    char* str = new char[buff.getLength()];
+//    unsigned char* data = buff.getData();
+//    for(int i = 0 ; i < buff.getLength(); i++) {
+//        str[i] = (char) data[i];
+//    }
+//    res.setstr(str);
+//    res.setLen(buff.getLength());
+}
+
