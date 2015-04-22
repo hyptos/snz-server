@@ -1,8 +1,16 @@
 #include "infoentity.hpp"
 
-//Constructeur
-InfoEntity::InfoEntity(const unsigned long long& entity, const EntityType &type, const EntityState& state, const double& x, const double& z, const double& y, const double &dx, const double &dz, const double &dy)
-    : m_entity(entity), m_type(type), m_state(state), m_x(x), m_z(z), m_y(y), m_dx(dx), m_dz(dz), m_dy(dy){
+//Constructeur par défaut
+InfoEntity::InfoEntity(){
+}
+
+//Constructeur avec params
+InfoEntity::InfoEntity(unsigned long long& entity, EntityType& type, double& x, double& z, double& y, double &dx, double &dz, double &dy)
+    : m_entity(entity), m_type(type), m_x(x), m_z(z), m_y(y), m_dx(dx), m_dz(dz), m_dy(dy){
+}
+
+InfoEntity::InfoEntity(const InfoEntity& info)
+    : m_entity(info.getEntity()), m_type(info.getType()), m_x(info.getX()), m_z(info.getZ()), m_y(info.getY()), m_dx(info.getDX()), m_dz(info.getDZ()), m_dy(info.getDY()){
 }
 
 //Destructeur
@@ -10,47 +18,81 @@ InfoEntity::~InfoEntity(){
 }
 
 //Retourne l'id de l'entité
-unsigned long long InfoEntity::getEntity(){
+unsigned long long InfoEntity::getEntity() const {
     return m_entity;
 }
 
 //Retourne le type de l'entité
-EntityType InfoEntity::getType(){
+EntityType InfoEntity::getType() const {
     return m_type;
 }
 
-//Retourne l'état de l'entité
-EntityState InfoEntity::getState(){
-    return m_state;
-}
-
 //Retourne la coordonnée X de l'entité dans l'environnement
-double InfoEntity::getX(){
+double InfoEntity::getX() const {
     return m_x;
 }
 
 //Retourne la coordonnée Z de l'entité dans l'environnement
-double InfoEntity::getZ(){
+double InfoEntity::getZ() const {
     return m_z;
 }
 
 //Retourne la coordonnée Y de l'entité dans l'environnement
-double InfoEntity::getY(){
+double InfoEntity::getY() const {
     return m_y;
 }
 
 //Retourne la coordonnée X du vecteur direction de l'entité
-double InfoEntity::getDX(){
+double InfoEntity::getDX() const {
     return m_dx;
 }
 
 //Retourne la coordonnée Z du vecteur direction de l'entité
-double InfoEntity::getDZ(){
+double InfoEntity::getDZ() const {
     return m_dz;
 }
 
 //Retourne la coordonnée Y du vecteur direction de l'entité
-double InfoEntity::getDY(){
+double InfoEntity::getDY() const {
     return m_dy;
 }
 
+//Modifie l'ID de l'entité
+void InfoEntity::setEntity(unsigned long long entity){
+    m_entity = entity;
+}
+
+//Modifie le Type de l'entité
+void InfoEntity::setType(EntityType type){
+    m_type = type;
+}
+
+//Modifie la coordonnée X
+void InfoEntity::setX(double x){
+    m_x = x;
+}
+
+//Modifie la coordonnée Z
+void InfoEntity::setZ(double z){
+    m_z = z;
+}
+
+//Modifie la coordonnée Y
+void InfoEntity::setY(double y){
+    m_y = y;
+}
+
+//Modifie la coordonnée DX
+void InfoEntity::setDX(double dx){
+    m_dx = dx;
+}
+
+//Modifie la coordonnée DZ
+void InfoEntity::setDZ(double dz){
+    m_dz = dz;
+}
+
+//Modifie la coordonnée DY
+void InfoEntity::setDY(double dy){
+    m_dy = dy;
+}

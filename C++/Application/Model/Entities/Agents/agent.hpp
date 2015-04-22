@@ -12,7 +12,6 @@
 
 #include <QObject>
 
-#include "../../Info/infoagent.hpp"
 #include "../entity.hpp"
 #include "Bodies/body.hpp"
 #include "Brains/brain.hpp"
@@ -61,10 +60,7 @@ class Agent : public Entity{
 
         ///Modifie la vitesse
         virtual void setSpeed(double speed);
-
-        ///Génére et émet les infos concernant l'agent
-        virtual void emitInfo();
-
+        
     protected :
 
         double m_speed;     ///< Vitesse de l'agent

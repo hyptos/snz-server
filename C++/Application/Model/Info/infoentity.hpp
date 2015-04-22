@@ -18,47 +18,80 @@
  * concernant une entité. (à instant t non précisé)
  */
 class InfoEntity{
+    
     public :
 
-        ///Constructeur
-        InfoEntity(const unsigned long long&, const EntityType&, const EntityState&, const double&, const double&, const double&, const double&, const double&, const double&);
-        InfoEntity(){
-        }
+        ///Constructeur par défaut
+        InfoEntity();
+
+        ///Constructeur avec paramètres
+        InfoEntity(unsigned long long&, EntityType&, double&, double&, double&, double&, double&, double&);
+
+        ///Constructeur par copie
+        InfoEntity(const InfoEntity&);
 
         ///Destructeur
         virtual ~InfoEntity();
 
+
+
+
         ///Retourne l'id de l'entité
-        unsigned long long getEntity();
+        virtual unsigned long long getEntity() const;
 
         ///Retourne le type de l'entité
-        EntityType getType();
-
-        ///Retourne l'état de l'entité
-        EntityState getState();
+        virtual EntityType getType() const;
 
         ///Retourne la coordonnée X de l'entité dans l'environnement
-        double getX();
+        virtual double getX() const;
 
         ///Retourne la coordonnée Z de l'entité dans l'environnement
-        double getZ();
+        virtual double getZ() const;
 
         ///Retourne la coordonnée Y de l'entité dans l'environnement
-        double getY();
+        virtual double getY() const;
 
         ///Retourne la coordonnée X du vecteur direction de l'entité
-        double getDX();
+        virtual double getDX() const;
 
         ///Retourne la coordonnée Z du vecteur direction de l'entité
-        double getDZ();
+        virtual double getDZ() const;
 
         ///Retourne la coordonnée Y du vecteur direction de l'entité
-        double getDY();
+        virtual double getDY() const;
+
+
+
+
+        ///Modifie l'ID de l'entité
+        virtual void setEntity(unsigned long long);
+
+        ///Modifie le Type de l'entité
+        virtual void setType(EntityType);
+
+        ///Modifie la coordonnée X
+        virtual void setX(double);
+
+        ///Modifie la coordonnée Z
+        virtual void setZ(double);
+
+        ///Modifie la coordonnée Y
+        virtual void setY(double);
+
+        ///Modifie la coordonnée DX
+        virtual void setDX(double);
+
+        ///Modifie la coordonnée DZ
+        virtual void setDZ(double);
+
+        ///Modifie la coordonnée DY
+        virtual void setDY(double);
+
+    protected :
 
         unsigned long long m_entity;  ///< Id de l'entité
 
         EntityType m_type;            ///< Type de l'entité
-        EntityState m_state;          ///< Etat de l'entité
 
         double m_x;                   ///< Coordonnée X de l'entité dans l'environnement
         double m_z;                   ///< Coordonnée Z de l'entité dans l'environnement

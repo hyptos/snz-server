@@ -22,7 +22,6 @@
 #include "Entities/entity.hpp"
 #include "Entities/Agents/agent.hpp"
 #include "Entities/Agents/zagent.hpp"
-#include "Info/infoagent.hpp"
 #include "Info/infoentity.hpp"
 #include "Info/infoaction.hpp"
 

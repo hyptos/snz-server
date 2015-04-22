@@ -127,7 +127,7 @@ class Entity : public QObject
 
         unsigned long long m_id;         ///< Id de l'entité
 
-        const EntityType m_type;    ///< Type de l'entité (constant)
+        EntityType m_type;    ///< Type de l'entité (constant)
         EntityState m_state;        ///< Etat de l'entité
 
         double m_x;                 ///< Coordonnée X de l'entité dans l'environnement
