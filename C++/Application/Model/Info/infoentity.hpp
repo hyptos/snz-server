@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-#include "../constante.hpp"
+#include "../constantes.hpp"
 
 //! InfoEntity Class
 /*!
@@ -25,7 +25,7 @@ class InfoEntity{
         InfoEntity();
 
         ///Constructeur avec paramètres
-        InfoEntity(unsigned long long&, EntityType&, double&, double&, double&, double&, double&, double&);
+        InfoEntity(unsigned long long, EntityType, double, double, double, double, double, double);
 
         ///Constructeur par copie
         InfoEntity(const InfoEntity&);

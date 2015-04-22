@@ -1,89 +1,66 @@
 /**
  * File: brain.hpp
- * Author: Antoine
+ * Author: Antoine "Avzgui" Richard
  *
- * Created on April 14, 2015, 4:19 PM
+ * Created on April 20, 2015, 8:46 AM
  */
 
 #ifndef BRAIN_HPP
 #define BRAIN_HPP
 
 #include <iostream>
+#include <list>
+#include <thread>
+#include <chrono>
 
-#include <QObject>
+#include "../../../module.hpp"
+#include "../Bodies/body.hpp"
+#include "../../../Stimuli/soundstimulus.hpp"
 
-#include "../../../constante.hpp"
+class Body;
 
 //! Brain Class
 /*!
- * La classe Brain est la classe générique
- * implémentant les attributs et méthodes
- * communes de ses filles.
+ * \brief La classe Brain est une
+ * classe mère abstraite contenant
+ * les attributs et méthodes communes
+ * à toutes ses classes filles.
  *
- * Elle est abstraite pour obliger le programmeur
- * à définir le comportement du brain en fonction
- * du type de ses agents.
- *
- * Par définition le brain est la thread contenant
- * la boucle d'actions exécutés par l'agent tous les
- * t temps.
+ * l'opérateur () défini la "boucle d'actions"
+ * fait par l'agent. Il doit être surchagé par
+ * le programmeur dans une classe fille.
  */
-class Brain : public QObject{
-
-    Q_OBJECT
+class Brain : public Module {
 
     public :
 
         ///Constructeur
         Brain();
 
-        ///Destructeur
+        ///Destructeur (virtuel pur)
         virtual ~Brain() = 0;
 
-    public slots :
-
-        ///Slot Function gérant les entrée sonore
+        ///Relit le Brain à un Body
         /*!
-         * Cette fonction est appellé lorsque le body à perçu un son,
-         * le body fait remonter l'information au cerveau qui va exécuter
-         * le traitement associé au son.
-         *
-         * La fonction est définie comme virtuelle pure car il faut que le
-         * programmeur définisse le comportement du brain lors de la réception
-         * d'un son par le body.
+         * \brief par défaut le lien entre
+         * le Brain et le Body est à null,
+         * il faut utiliser cette fonction
+         * pour relier le Brain au Body
          */
-        virtual void something_heard(double, double, double) = 0;
+        virtual void connect_to_body(Body*);
 
-        ///Slot Function gérant la boucle d'actions
+        ///Indique au Brain un Stimulus sonore capté par le Body
         /*!
-         * Cette fonction gère la boucle d'actions faites par
-         * l'agent tous les t temps.
-         *
-         * Elle est à définir par le programmeur lors de l'implémentation
-         * de la classe fille.
+         * \brief Les actions faites lors de la réception d'un
+         * stimulus difère d'un Brain à l'autre, c'est donc au
+         * programmeur de réimplémenter cette fonction
          */
-        virtual void actions() = 0;
+        virtual void addSoundStimulus(SoundStimulus&) = 0;
 
-    signals :
+    protected :
 
-        ///Signal pour que le body bouge
-        /*!
-         * Signal envoyé par le cerveau lorsqu'il demande au
-         * corps de déplacer l'agent dans l'environnement.
-         */
-        void move_body_move();
-
-        ///Signal pour indiquer au body où aller
-        /*!
-         * Signal envoyé au corps lorsque le cerveau
-         * a déterminé un endroit où aller
-         *
-         * \param x : coordonnée x de l'endroit où aller dans l'environnement
-         * \param y : coordonnée y de l'endroit où aller dans l'environnement
-         */
-        void lets_go_to(double, double);
+        Body* m_body;   ///< Lien vers le Body de l'agent
 };
-
 
 #endif // BRAIN_HPP
 

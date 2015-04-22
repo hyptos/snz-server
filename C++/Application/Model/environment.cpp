@@ -1,69 +1,66 @@
 #include "environment.hpp"
+#include "Entities/Agents/agent.hpp"
 
 //Constructeur
-Environment::Environment(int length, int width, int height = INT_MAX)
-    : m_length(length), m_width(width), m_height(height) {
+Environment::Environment(const int &length, const int &width)
+    : m_length(length), m_width(width), m_height(INT_MAX) {
 }
 
 //Destructeur
-Environment::~Environment(){}
+Environment::~Environment(){
+    m_entities.clear();
+}
 
 //Retourne la longueur de l'environnement
-int Environment::getLength() const{
-	return m_length;
+int Environment::getLength(){
+    return m_length;
 }
 
 //Retourne la largeur de l'environnement
-int Environment::getWidth() const{
-	return m_width;
+int Environment::getWidth(){
+    return m_width;
 }
 
-int Environment::getHeight() const{
+//Retourne la hauteur de l'environnement
+int Environment::getHeight(){
     return m_height;
 }
 
-//Retourne si un emplacement est valide par rapport à l'environnement
-int Environment::validePosition(double x, double z, double y) const{
+//Retourne une liste d'InfoEntité (A améliorer pour ne retourner que les entités autour d'un seul points, voir différencier objets de zombies)
+std::list<InfoEntity> Environment::getEntities(){
 
-    //X+ : 1
-    //X+ Z+ : 2
-    //X+ Z- : 3
+    std::list<InfoEntity> infos;
 
-    //X- : 4
-    //X- Z+ : 5
-    //X- Z- : 6
+    for(std::list<Entity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++)
+        infos.push_back((*it)->getInfo());
 
-    //Z+ : 7
-    //Z- : 8
-
-    //TODO : gérer la hauteur
-
-    if(x < 0){
-
-        if(z < 0)
-            return 2;
-        else if(z > m_width)
-            return 3;
-
-        return 1;
-    }
-    else if(x > m_length){
-        if(z < 0)
-            return 5;
-        else if(z > m_width)
-            return 6;
-
-        return 4;
-    }
-
-    if(z < 0)
-        return 7;
-    else if(z > m_width)
-        return 8;
-
-    return 0;
+    return infos;
 }
 
-//Retourne des info sur l'environnement autour d'un point (TODO)
-void Environment::getArea(double x, double z, double dist) const{
+//Retourne si un déplacement est valide ou non (TODO)
+bool Environment::validTravel(double old_x, double old_z, double new_x, double new_z){
+    return true;
+}
+
+//TODO
+//Retourne les données concernant la zone autour d'un point (x, z)
+void Environment::getArea(double x, double z){
+}
+
+//Ajoute un lien vers un agent dans l'environnement
+void Environment::addEntity(Entity *entity){
+    m_entities.push_back(entity);
+}
+
+//Emet un son à un point (x,z,y)
+void Environment::emitSound(double x, double z, double y, double power){
+    SoundStimulus sound(x, z, y, power);
+
+    for(std::list<Entity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++){
+        if((*it)->getType() == EntityType::AGENT){
+            Agent *agent = dynamic_cast<Agent*>(*it);
+            agent->getBody()->catchSound(sound);
+        }
+    }
+
 }

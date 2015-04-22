@@ -8,8 +8,17 @@
 #include "Server/server.hpp"
 #include "Server/messagehandlerexample.hpp"
 
+#include <QApplication>
+#include "../Model/modelview.hpp"
+#include "../Model/model.hpp"
+
+#define NB_ZOMBIE   10
+#define ENV_SIZE    500
+
 int main ( int argc, char** argv ) {
-    SNZ_Server s;
+    
+    //Main Server
+    /*SNZ_Server s;
     implMessageDispatcher dispatcher;
     MessageHandlerExample msgH(&s);
     dispatcher.registerMessageHandler('u', (IMessageHandler*) &msgH);
@@ -18,5 +27,16 @@ int main ( int argc, char** argv ) {
     while(s.isRunning()) {
         pthread_yield();
     }
-    return 0;
+    return 0;*/
+
+    //Main IA
+    QApplication app(argc, argv);
+
+    SNZ_Model model(ENV_SIZE, NB_ZOMBIE);
+
+    ModelView view(&model);
+
+    view.show();
+
+    return app.exec();
 }

@@ -5,7 +5,7 @@ InfoEntity::InfoEntity(){
 }
 
 //Constructeur avec params
-InfoEntity::InfoEntity(unsigned long long& entity, EntityType& type, double& x, double& z, double& y, double &dx, double &dz, double &dy)
+InfoEntity::InfoEntity(unsigned long long entity, EntityType type, double x, double z, double y, double dx, double dz, double dy)
     : m_entity(entity), m_type(type), m_x(x), m_z(z), m_y(y), m_dx(dx), m_dz(dz), m_dy(dy){
 }
 

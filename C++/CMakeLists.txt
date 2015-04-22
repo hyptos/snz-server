@@ -9,6 +9,8 @@ project ( Mif39 CXX )
 list ( APPEND CMAKE_PREFIX_PATH "/home/avzgui/Qt/5.4/gcc_64/lib/cmake")
 find_package(Qt5Core)
 find_package(Qt5Gui)
+FIND_PACKAGE(Qt5Widgets)
+FIND_PACKAGE(Qt5Declarative)
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/bin)
