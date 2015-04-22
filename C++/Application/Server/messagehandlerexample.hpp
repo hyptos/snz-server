@@ -16,6 +16,14 @@ public:
     ~MessageHandlerExample();
 
     void onOutPutMessage(IMessage *msg) {
+        char code = msg->getCode();
+        switch(code){
+        case 'u':
+            InfoEntity tamere;
+            decode<InfoEntity>(*(msg->toByteBuffer()), tamere);
+            break;
+        }
+
         StringMessage res;
         decode<StringMessage>(*(msg->toByteBuffer()), res);
         char * str = res.getStr();

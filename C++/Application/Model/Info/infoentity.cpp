@@ -11,7 +11,7 @@ InfoEntity::~InfoEntity(){
 
 //Retourne l'id de l'entité
 unsigned long long InfoEntity::getEntity(){
-	return m_entity;
+    return m_entity;
 }
 
 //Retourne le type de l'entité
@@ -53,3 +53,4 @@ double InfoEntity::getDZ(){
 double InfoEntity::getDY(){
     return m_dy;
 }
+

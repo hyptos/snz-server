@@ -22,6 +22,8 @@ class InfoEntity{
 
         ///Constructeur
         InfoEntity(const unsigned long long&, const EntityType&, const EntityState&, const double&, const double&, const double&, const double&, const double&, const double&);
+        InfoEntity(){
+        }
 
         ///Destructeur
         virtual ~InfoEntity();
@@ -53,20 +55,18 @@ class InfoEntity{
         ///Retourne la coordonnée Y du vecteur direction de l'entité
         double getDY();
 
-    protected :
+        unsigned long long m_entity;  ///< Id de l'entité
 
-        const unsigned long long m_entity;  ///< Id de l'entité
+        EntityType m_type;            ///< Type de l'entité
+        EntityState m_state;          ///< Etat de l'entité
 
-        const EntityType m_type;            ///< Type de l'entité
-        const EntityState m_state;          ///< Etat de l'entité
+        double m_x;                   ///< Coordonnée X de l'entité dans l'environnement
+        double m_z;                   ///< Coordonnée Z de l'entité dans l'environnement
+        double m_y;                   ///< Coordonnée Y de l'entité dans l'environnement
 
-        const double m_x;                   ///< Coordonnée X de l'entité dans l'environnement
-        const double m_z;                   ///< Coordonnée Z de l'entité dans l'environnement
-        const double m_y;                   ///< Coordonnée Y de l'entité dans l'environnement
-
-        const double m_dx;                  ///< Coordonnée X du vecteur direction de l'entité
-        const double m_dz;                  ///< Coordonnée Z du vecteur direction de l'entité
-        const double m_dy;                  ///< Coordonnée Y du vecteur direction de l'entité
+        double m_dx;                  ///< Coordonnée X du vecteur direction de l'entité
+        double m_dz;                  ///< Coordonnée Z du vecteur direction de l'entité
+        double m_dy;                  ///< Coordonnée Y du vecteur direction de l'entité
 
 };
 

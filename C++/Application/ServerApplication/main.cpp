@@ -12,7 +12,7 @@ int main ( int argc, char** argv ) {
     SNZ_Server s;
     implMessageDispatcher dispatcher;
     MessageHandlerExample msgH(&s);
-    dispatcher.registerMessageHandler('w', (IMessageHandler*) &msgH);
+    dispatcher.registerMessageHandler('u', (IMessageHandler*) &msgH);
     s.setMessageDispatcher(&dispatcher);
     s.start();
     while(s.isRunning()) {

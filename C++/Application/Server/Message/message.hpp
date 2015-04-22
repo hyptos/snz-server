@@ -5,6 +5,7 @@
 #include "Utility/utility.hpp"
 
 #define MSG_WOPAWOPA 'w'
+#define MSG_WOPAINFO 'u'
 
 class IMessage
 {
@@ -111,7 +112,7 @@ public :
     }
 
     char getCode() {
-        return MSG_WOPAWOPA;
+        return MSG_WOPAINFO;
     }
 
     char *mStr;
