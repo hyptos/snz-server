@@ -9,10 +9,11 @@
 #include "Server/messagehandlerexample.hpp"
 
 #include <QApplication>
+#include <QWidget>
 #include "Model/modelview.hpp"
 #include "Model/model.hpp"
 
-#define NB_ZOMBIE   10
+#define NB_ZOMBIE   1000
 #define ENV_SIZE    500
 
 int main ( int argc, char** argv ) {
@@ -34,7 +35,11 @@ int main ( int argc, char** argv ) {
 
     SNZ_Model model(ENV_SIZE, NB_ZOMBIE);
 
-    ModelView view(&model);
+    ModelView view(ENV_SIZE, ENV_SIZE);
+
+    view.connect_to_model(&model);
+
+    model.connect_to_view(&view);
 
     view.show();
 

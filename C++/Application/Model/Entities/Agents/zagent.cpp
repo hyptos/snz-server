@@ -1,7 +1,7 @@
 #include "zagent.hpp"
 
-ZAgent::ZAgent(unsigned long long id, Environment *env, double x, double z, double y, double dx, double dz, double dy)
-    : Agent(id, AgentType::ZOMBIE, env, new Body(env, this), new ZBrain, x, z, y, dx, dz, dy){
+ZAgent::ZAgent(unsigned long long id, Environment *env, double x, double z, double y, double dx, double dz, double dy, SNZ_Model* model)
+    : Agent(id, AgentType::ZOMBIE, env, new Body(env, this), new ZBrain, x, z, y, dx, dz, dy, model){
 
     m_body->connect_to_brain(m_brain);
     m_brain->connect_to_body(m_body);

@@ -25,7 +25,7 @@ class ZAgent : public Agent{
 
     public :
 
-        ZAgent(unsigned long long, Environment*, double, double, double, double, double, double);
+        ZAgent(unsigned long long, Environment*, double, double, double, double, double, double, SNZ_Model*);
 
         ~ZAgent();
 };

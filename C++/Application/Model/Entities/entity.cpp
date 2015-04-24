@@ -1,8 +1,10 @@
 #include "entity.hpp"
 
+#include "Model/model.hpp"
+
 //Constructeur
-Entity::Entity(unsigned long long id, EntityType type, double x, double z, double y, double dx, double dz, double dy)
-    : m_id(id), m_type(type), m_x(x), m_z(z), m_y(y), m_dx(dx), m_dz(dz), m_dy(dy){
+Entity::Entity(unsigned long long id, EntityType type, double x, double z, double y, double dx, double dz, double dy, SNZ_Model* model)
+    : m_id(id), m_type(type), m_x(x), m_z(z), m_y(y), m_dx(dx), m_dz(dz), m_dy(dy), m_model(model){
 }
 
 //Destructeur
@@ -60,41 +62,65 @@ InfoEntity Entity::getInfo() const {
 //Modifie l'ID de l'entité
 void Entity::setId(unsigned long long id){
     m_id = id;
+
+    if(m_model != NULL)
+        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie le Type de l'entité
 void Entity::setType(EntityType type){
     m_type = type;
+
+    if(m_model != NULL)
+        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie la Coordonnée X de l'Entité dans l'Environnement
 void Entity::setX(double x){
     m_x = x;
+
+    if(m_model != NULL)
+        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie la Coordonnée Z de l'Entité dans l'Environnement
 void Entity::setZ(double z){
     m_z = z;
+
+    if(m_model != NULL)
+        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie la Coordonnée Y de l'Entité dans l'Environnement
 void Entity::setY(double y){
     m_y = y;
+
+    if(m_model != NULL)
+        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie la Coordonnée X du vecteur direction de l'Entité
 void Entity::setDX(double dx){
     m_dx = dx;
+
+    if(m_model != NULL)
+        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie la Coordonnée Z du vecteur direction de l'Entité
 void Entity::setDZ(double dz){
     m_dz = dz;
+
+    if(m_model != NULL)
+        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie la Coordonnée Y du vecteur direction de l'Entité
 void Entity::setDY(double dy){
     m_dy = dy;
+
+    if(m_model != NULL)
+        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Vérifie l'égalité entre deux Entités

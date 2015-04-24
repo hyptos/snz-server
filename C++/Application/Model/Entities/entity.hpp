@@ -14,6 +14,8 @@
 #include "Model/constantes.hpp"
 #include "Model/Info/infoentity.hpp"
 
+class SNZ_Model;
+
 class Agent;
 
 //! Entity Class
@@ -28,7 +30,7 @@ class Entity {
     public :
 
         ///Constructeur
-        Entity(unsigned long long, EntityType, double, double, double, double, double, double);
+        Entity(unsigned long long, EntityType, double, double, double, double, double, double, SNZ_Model*);
 
         ///Destructeur
         virtual ~Entity() = 0;
@@ -106,6 +108,9 @@ class Entity {
         double m_dx;                    ///< Coordonnée X du vecteur direction de l'entité
         double m_dz;                    ///< Coordonnée Z du vecteur direction de l'entité
         double m_dy;                    ///< Coordonnée Y du vecteur direction de l'entité
+
+
+        SNZ_Model *m_model;                ///< Lien vers le modèle pour notifier des changements
 };
 
 #endif // ENTITY_HPP

@@ -9,6 +9,7 @@
 #define ENVIRONMENT_HPP
 
 #include <iostream>
+#include <vector>
 #include <list>
 #include <climits>
 
@@ -42,8 +43,8 @@ class Environment {
         ///Retourne la hauteur de l'environnement
         int getHeight();
 
-        ///Retourne une liste d'informations sur les Entités à un instant t
-        std::list<InfoEntity> getEntities();
+        ///Retourne une liste d'informations sur les Entités d'une zone à un instant t
+        std::vector<InfoEntity> getEntities();
 
         ///Retourne si un déplacement entre un point (x1,z1) et un point (x2,z2) est valide ou non
         bool validTravel(double,double,double,double);

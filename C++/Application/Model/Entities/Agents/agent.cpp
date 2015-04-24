@@ -1,8 +1,8 @@
 #include "agent.hpp"
 
 //Constructeur
-Agent::Agent(unsigned long long id, AgentType atype, Environment *env, Body *body, Brain *brain, double x, double z, double y, double dx, double dz, double dy)
-    : Entity(id, EntityType::AGENT, x, z, y, dx, dz, dy), m_atype(atype), m_environment(env), m_body(body), m_brain(brain), m_life(AgentLifeState::ALIVE), m_health(AgentHealthState::NORMAL), m_moveState(AgentMoveState::WALK), m_speed(0.0){
+Agent::Agent(unsigned long long id, AgentType atype, Environment *env, Body *body, Brain *brain, double x, double z, double y, double dx, double dz, double dy, SNZ_Model* model)
+    : Entity(id, EntityType::AGENT, x, z, y, dx, dz, dy, model), m_atype(atype), m_environment(env), m_body(body), m_brain(brain), m_life(AgentLifeState::ALIVE), m_health(AgentHealthState::NORMAL), m_moveState(AgentMoveState::WALK), m_speed(0.0){
 }
 
 //Destructeur

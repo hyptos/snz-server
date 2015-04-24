@@ -27,7 +27,7 @@ class Agent : public Entity {
     public :
 
         ///Constructeur
-        Agent(unsigned long long, AgentType, Environment*, Body*, Brain*, double, double, double, double, double, double);
+        Agent(unsigned long long, AgentType, Environment*, Body*, Brain*, double, double, double, double, double, double, SNZ_Model*);
 
         ///Destructeur
         virtual ~Agent() = 0;

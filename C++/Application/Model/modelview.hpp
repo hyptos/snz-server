@@ -25,6 +25,8 @@
 #include "model.hpp"
 #include "Info/infoentity.hpp"
 
+ class SNZ_Model;
+
 
 class ModelView : public QWidget{
 
@@ -33,15 +35,19 @@ class ModelView : public QWidget{
     public :
 
         ///Conctructeur
-        ModelView(SNZ_Model*);
+        ModelView(int, int);
 
         ~ModelView();
+
+        void connect_to_model(SNZ_Model*);
+
+        void setEntity(unsigned long long, InfoEntity);
 
     public slots :
 
         void repaint_scene();
 
-    protected:
+    protected :
 
         void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 
@@ -51,6 +57,8 @@ class ModelView : public QWidget{
 
         QGraphicsScene* m_scene;
         QGraphicsView*  m_view;
+
+        std::vector<InfoEntity> m_entities;
 };
 
 #endif // SERVERVIEW_H

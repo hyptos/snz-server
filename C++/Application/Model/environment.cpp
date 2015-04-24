@@ -27,9 +27,9 @@ int Environment::getHeight(){
 }
 
 //Retourne une liste d'InfoEntité (A améliorer pour ne retourner que les entités autour d'un seul points, voir différencier objets de zombies)
-std::list<InfoEntity> Environment::getEntities(){
+std::vector<InfoEntity> Environment::getEntities(){
 
-    std::list<InfoEntity> infos;
+    std::vector<InfoEntity> infos;
 
     for(std::list<Entity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++)
         infos.push_back((*it)->getInfo());
