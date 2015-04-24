@@ -12,8 +12,8 @@
 
 #include "Bodies/body.hpp"
 #include "Brains/brain.hpp"
-#include "../../constantes.hpp"
-#include "../entity.hpp"
+#include "Model/constantes.hpp"
+#include "Model/Entities/entity.hpp"
 
 class Environment;
 

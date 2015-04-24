@@ -9,8 +9,8 @@
 #include "Server/messagehandlerexample.hpp"
 
 #include <QApplication>
-#include "../Model/modelview.hpp"
-#include "../Model/model.hpp"
+#include "Model/modelview.hpp"
+#include "Model/model.hpp"
 
 #define NB_ZOMBIE   10
 #define ENV_SIZE    500

@@ -11,7 +11,7 @@
 #include <iostream>
 
 #include "brain.hpp"
-#include "../../../Stimuli/soundstimulus.hpp"
+#include "Model/Stimuli/soundstimulus.hpp"
 
 //! ZBrain Class
 /*!

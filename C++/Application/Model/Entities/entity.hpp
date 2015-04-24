@@ -11,8 +11,8 @@
 #include <iostream>
 #include <thread>
 
-#include "../constantes.hpp"
-#include "../Info/infoentity.hpp"
+#include "Model/constantes.hpp"
+#include "Model/Info/infoentity.hpp"
 
 class Agent;
 

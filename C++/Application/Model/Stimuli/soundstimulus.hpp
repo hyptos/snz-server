@@ -11,7 +11,7 @@
 #include <iostream>
 
 #include "stimulus.hpp"
-#include "../constantes.hpp"
+#include "Model/constantes.hpp"
 
 class SoundStimulus : public Stimulus {
 

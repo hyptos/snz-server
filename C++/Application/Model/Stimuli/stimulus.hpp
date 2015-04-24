@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-#include "../constantes.hpp"
+#include "Model/constantes.hpp"
 
 //! Stimulus Class
 /*!

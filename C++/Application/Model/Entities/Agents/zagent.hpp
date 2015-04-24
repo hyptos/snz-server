@@ -11,9 +11,9 @@
 #include <iostream>
 #include <thread>
 
-#include "../../module.hpp"
+#include "Model/module.hpp"
 #include "Brains/zbrain.hpp"
-#include "../../environment.hpp"
+#include "Model/environment.hpp"
 #include "Bodies/body.hpp"
 #include "agent.hpp"
 

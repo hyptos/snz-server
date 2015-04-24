@@ -15,12 +15,12 @@
 #include <thread>
 #include <chrono>
 
-#include "../Brains/brain.hpp"
-#include "../../../constantes.hpp"
-#include "../../../module.hpp"
-#include "Modules/ear.hpp"
-#include "../../../Stimuli/soundstimulus.hpp"
-#include "../../../environment.hpp"
+#include "Model/Entities/Agents/Brains/brain.hpp"
+#include "Model/constantes.hpp"
+#include "Model/module.hpp"
+#include "SensorModules/ear.hpp"
+#include "Model/Stimuli/soundstimulus.hpp"
+#include "Model/environment.hpp"
 
 class Brain;
 
