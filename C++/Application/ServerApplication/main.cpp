@@ -13,7 +13,7 @@
 #include "Model/modelview.hpp"
 #include "Model/model.hpp"
 
-#define NB_ZOMBIE   1000
+#define NB_ZOMBIE   100
 #define ENV_SIZE    500
 
 int main ( int argc, char** argv ) {

@@ -32,13 +32,26 @@ void ModelView::repaint_scene(){
 
     for(std::vector<InfoEntity>::iterator it = m_entities.begin(); it != m_entities.end(); it++){
         InfoEntity entity = *it;
-        m_scene->addEllipse(entity.getX(), entity.getZ(), 5, 5, QPen(QColor("red"), 1), QBrush(QColor("red")));
+
+        if(entity.getType() == EntityType::PLAYER)
+            m_scene->addEllipse(entity.getX(), entity.getZ(), 5, 5, QPen(QColor("yellow"), 1), QBrush(QColor("yellow")));
+        else
+            m_scene->addEllipse(entity.getX(), entity.getZ(), 5, 5, QPen(QColor("red"), 1), QBrush(QColor("red")));
     }
 }
 
 //TODO
 void ModelView::mousePressEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton && m_model != NULL)
-        m_model->getEnvironment()->emitSound(event->x(), event->y(), 0.0, 100.0);
+    if(m_model != NULL){
+        if (event->button() == Qt::LeftButton)
+            m_model->getEnvironment()->emitSound(event->x(), event->y(), 0.0, 100.0);
+        else if (event->button() == Qt::RightButton){
+
+            int env_size = m_model->getEnvironment()->getLength();
+            InfoEntity player(0, EntityType::AGENT, event->x(), event->y(), 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX);
+            player.setEntity(m_model->addEntity(player));
+            m_entities.push_back(player);
+        }
+    }
 }

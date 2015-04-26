@@ -1,5 +1,5 @@
 #include "body.hpp"
-#include "../agent.hpp"
+#include "Model/Entities/Agents/agent.hpp"
 
 //Constructeur
 Body::Body(Environment *env, Agent* agent)
@@ -39,9 +39,7 @@ void Body::moveTo(double x, double z){
 
     m_mutex.lock();
     double dist = sqrt(pow(x - m_agent->getX(), 2) + pow(z - m_agent->getZ(), 2));
-    m_agent->setDX((x - m_agent->getX()) / dist);
-    m_agent->setDZ((z - m_agent->getZ()) / dist);
-
+    m_agent->setDirection((x - m_agent->getX()) / dist, (z - m_agent->getZ()) / dist, 0.0);
     m_agent->setSpeed(1.0);
     m_mutex.unlock();
 }
@@ -77,9 +75,11 @@ void Body::operator ()(){
                 m_mutex.lock();
                 double old_x = m_agent->getX();
                 double old_z = m_agent->getZ();
+                double old_y = m_agent->getY();
 
                 double new_x;
                 double new_z;
+                double new_y = old_y; //TODO
 
                 if(old_x + m_agent->getDX()*m_agent->getSpeed() >= m_environment->getLength())
                     new_x = 0;
@@ -97,10 +97,9 @@ void Body::operator ()(){
                 m_mutex.unlock();
 
 
-                if((old_x != new_x || old_z != new_z) && m_environment->validTravel(old_x, old_z, new_x, new_z)){
+                if((old_x != new_x || old_z != new_z || old_y != new_y) && m_environment->validTravel(old_x, old_z, new_x, new_z)){
                     m_mutex.lock();
-                    m_agent->setX(new_x);
-                    m_agent->setZ(new_z);
+                    m_agent->setCoordinates(new_x, new_z, new_y);
                     m_mutex.unlock();
                 }
 

@@ -1,6 +1,6 @@
 /**
  * File: modelview.h
- * Author: Antoine
+ * Author: Antoine "Azvgui" Richard
  *
  * Created on April 14, 2015, 3:05 PM
  */

@@ -13,9 +13,9 @@
 #include <thread>
 #include <chrono>
 
-#include "../../../../module.hpp"
-#include "../../Brains/brain.hpp"
-#include "../../../../Stimuli/soundstimulus.hpp"
+#include "Model/module.hpp"
+#include "Model/Entities/Agents/Brains/brain.hpp"
+#include "Model/Stimuli/soundstimulus.hpp"
 
 class Brain;
 

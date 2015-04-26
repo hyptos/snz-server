@@ -64,6 +64,7 @@ class Entity {
 
 
 
+
         //Modifie l'ID de l'Entité
         virtual void setId(unsigned long long);
 
@@ -87,6 +88,13 @@ class Entity {
 
         ///Modifie la Coordonnée Y du vecteur direction de l'Entité
         virtual void setDY(double);
+
+        ///Modifie les Coordonnées X, Z et Y de l'entité dans l'environnement
+        virtual void setCoordinates(double, double, double);
+
+        ///Modifie les Coordonnées X, Z et Y du vecteur direction de l'entité
+        virtual void setDirection(double, double, double);
+
 
 
         ///Retourne si deux Entités sont égales ou non

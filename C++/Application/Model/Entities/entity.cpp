@@ -78,45 +78,47 @@ void Entity::setType(EntityType type){
 //Modifie la Coordonnée X de l'Entité dans l'Environnement
 void Entity::setX(double x){
     m_x = x;
-
-    if(m_model != NULL)
-        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie la Coordonnée Z de l'Entité dans l'Environnement
 void Entity::setZ(double z){
     m_z = z;
-
-    if(m_model != NULL)
-        m_model->notifyEntity(m_id, getInfo());
 }
 
 //Modifie la Coordonnée Y de l'Entité dans l'Environnement
 void Entity::setY(double y){
+    m_y = y;
+}
+
+//Modifie la Coordonnée X du vecteur direction de l'Entité
+void Entity::setDX(double dx){
+    m_dx = dx;
+}
+
+//Modifie la Coordonnée Z du vecteur direction de l'Entité
+void Entity::setDZ(double dz){
+    m_dz = dz;
+}
+
+//Modifie la Coordonnée Y du vecteur direction de l'Entité
+void Entity::setDY(double dy){
+    m_dy = dy;
+}
+
+//Modifie les Coordonnées X, Z et Y de l'Entité dans l'Environnement
+void Entity::setCoordinates(double x, double z, double y){
+    m_x = x;
+    m_z = z;
     m_y = y;
 
     if(m_model != NULL)
         m_model->notifyEntity(m_id, getInfo());
 }
 
-//Modifie la Coordonnée X du vecteur direction de l'Entité
-void Entity::setDX(double dx){
+//Modifie les Coordonnées X, Z et Y du vecteur direction de l'Entité
+void Entity::setDirection(double dx, double dz, double dy){
     m_dx = dx;
-
-    if(m_model != NULL)
-        m_model->notifyEntity(m_id, getInfo());
-}
-
-//Modifie la Coordonnée Z du vecteur direction de l'Entité
-void Entity::setDZ(double dz){
     m_dz = dz;
-
-    if(m_model != NULL)
-        m_model->notifyEntity(m_id, getInfo());
-}
-
-//Modifie la Coordonnée Y du vecteur direction de l'Entité
-void Entity::setDY(double dy){
     m_dy = dy;
 
     if(m_model != NULL)

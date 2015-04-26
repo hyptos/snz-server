@@ -7,7 +7,7 @@ SNZ_Model::SNZ_Model(int env_size, int nbZ)
     std::srand(std::time(NULL));
 
     for(int i = 0 ; i < nbZ ; i++){
-        ZAgent *zombie = new ZAgent(m_nbEntities++, m_environment, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, this);
+        ZAgent *zombie = new ZAgent(m_nbEntities++, m_environment, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, this);
 
         m_entities.push_back(zombie);
         m_environment->addEntity(zombie);
@@ -57,5 +57,34 @@ void SNZ_Model::setInfo(InfoEntity info){
 }
 
 //Ajoute une entité au modèle (TODO)
-unsigned long long SNZ_Model::addEntity(InfoEntity){
+unsigned long long SNZ_Model::addEntity(InfoEntity entity){
+    unsigned long long id = m_nbEntities++;
+    int env_size = m_environment->getLength();
+
+    if(entity.getType() == EntityType::PLAYER){
+        Player* player = new Player(id, entity.getX(), entity.getZ(), entity.getY(), entity.getDX(), entity.getDZ(), entity.getDY(), this);
+    
+        m_entities.push_back(player);
+        m_environment->addEntity(player);
+    }
+    else if(entity.getType() == EntityType::AGENT){
+        ZAgent *zombie = new ZAgent(id, m_environment, entity.getX(), entity.getZ(), entity.getY(), entity.getDX(), entity.getDZ(), entity.getDY(), this);
+
+        m_entities.push_back(zombie);
+        m_environment->addEntity(zombie);
+    }
+
+    return id;
+}
+
+//Ajoute un joueur au model
+InfoEntity SNZ_Model::addPlayer(){
+    unsigned long long id = m_nbEntities++;
+    int env_size = m_environment->getLength();
+    Player* player = new Player(id, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, this);
+
+    m_entities.push_back(player);
+    m_environment->addEntity(player);
+
+    return player->getInfo();
 }
