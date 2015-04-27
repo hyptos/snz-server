@@ -12,6 +12,7 @@
 #include <QWidget>
 #include "Model/modelview.hpp"
 #include "Model/model.hpp"
+#include "Model/map_tree.hpp"
 
 #define NB_ZOMBIE   100
 #define ENV_SIZE    500

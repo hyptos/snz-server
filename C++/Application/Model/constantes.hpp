@@ -38,16 +38,11 @@ enum AgentMoveState {
     SNAKE
 };
 
-//Détermine l'état de la "vie" d'un Agent (ou d'un Player)
-enum AgentLifeState {
-    ALIVE,
-    DEAD
-};
-
 //Détermine l'état de "santé" d'un Agent (ou d'un Payer)
 enum AgentHealthState {
     NORMAL,
-    SICK
+    SICK,
+    DEAD
 };
 
 //Détermine le type d'une action (faite par un Agent ou un Player)

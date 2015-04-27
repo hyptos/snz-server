@@ -49,9 +49,6 @@ class Agent : public Entity {
         ///Retourne si l'Agent est "vivant" ou non
         virtual bool isAlive() const;
 
-        ///Retourne l'état de la "vie" de l'Agent
-        virtual AgentLifeState getLife() const;
-
         ///Retourne l'état de "santé" de l'Agent
         virtual AgentHealthState getHealth() const;
 
@@ -68,9 +65,6 @@ class Agent : public Entity {
 
         ///"Tue" l'agent
         virtual void kill();
-
-        ///Modifie l'état de la "vie" de l'agent
-        virtual void setLife(AgentLifeState);
 
         ///Modifie l'état de la "santé"
         virtual void setHealth(AgentHealthState);
@@ -90,8 +84,6 @@ class Agent : public Entity {
         Body* m_body;               ///< Lien vers le Body
 
         Brain* m_brain;             ///< Lien vers le Brain
-
-        AgentLifeState m_life;      ///< Indique si l'agent est toujours "vivant"
 
         AgentHealthState m_health;  ///< Indique l'état de "santé" de l'agent
 

@@ -30,19 +30,13 @@ class Player : public Entity {
 
 
 
-		///Retourne l'état de la "vie" du joueur
-		virtual AgentLifeState getLifeState();
-
 		///Retourne l'état de "santé" du joueur
-		virtual AgentHealthState getHealthState();
+		virtual AgentHealthState getHealthState() const;
 
 		///Retourne l'état du mouvement du joueur
-		virtual AgentMoveState getMoveState();
+		virtual AgentMoveState getMoveState() const;
 
 
-
-		///Modifie l'état de la "vie" du joueur
-		virtual void setLifeState(AgentLifeState);
 
 		///Modifie l'état de la "santé" du joueur
 		virtual void setHealthState(AgentHealthState);
@@ -54,8 +48,6 @@ class Player : public Entity {
 		//TODO : un notify contenant état de santé tout ça.
 
 	protected :
-
-		AgentLifeState m_life;      ///< Indique si le joueur est toujours "vivant"
 
         AgentHealthState m_health;  ///< Indique l'état de "santé" du joueur
 

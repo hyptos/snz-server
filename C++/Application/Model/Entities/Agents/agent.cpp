@@ -2,7 +2,7 @@
 
 //Constructeur
 Agent::Agent(unsigned long long id, AgentType atype, Environment *env, Body *body, Brain *brain, double x, double z, double y, double dx, double dz, double dy, SNZ_Model* model)
-    : Entity(id, EntityType::AGENT, x, z, y, dx, dz, dy, model), m_atype(atype), m_environment(env), m_body(body), m_brain(brain), m_life(AgentLifeState::ALIVE), m_health(AgentHealthState::NORMAL), m_moveState(AgentMoveState::WALK), m_speed(0.0){
+    : Entity(id, EntityType::AGENT, x, z, y, dx, dz, dy, model), m_atype(atype), m_environment(env), m_body(body), m_brain(brain), m_health(AgentHealthState::NORMAL), m_moveState(AgentMoveState::WALK), m_speed(0.0){
 }
 
 //Destructeur
@@ -32,15 +32,10 @@ Brain* Agent::getBrain(){
 //Retourne si l'Agent est toujours "vivant" ou non
 bool Agent::isAlive() const {
 
-    if(m_life == AgentLifeState::DEAD)
+    if(m_health == AgentHealthState::DEAD)
         return false;
 
     return true;
-}
-
-//Retourne l'état de la "vie" de l'agent
-AgentLifeState Agent::getLife() const {
-    return m_life;
 }
 
 //Retourne l'état de "santé" de l'Agent
@@ -60,12 +55,7 @@ double Agent::getSpeed() const {
 
 //"Tue" l'Agent
 void Agent::kill(){
-    m_life = AgentLifeState::DEAD;
-}
-
-//Modifie l'état de la "vie" de l'Agent
-void Agent::setLife(AgentLifeState life){
-    m_life = life;
+    m_health = AgentHealthState::DEAD;
 }
 
 //Modifie l'état de "santé" de l'Agent

@@ -40,7 +40,6 @@ void ModelView::repaint_scene(){
     }
 }
 
-//TODO
 void ModelView::mousePressEvent(QMouseEvent *event)
 {
     if(m_model != NULL){
