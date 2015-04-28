@@ -1,5 +1,8 @@
 #include "infoentity.hpp"
 
+#define MSG_WOPAWOPA 'w'
+#define MSG_WOPAINFO 'u'
+
 //Constructeur par défaut
 InfoEntity::InfoEntity(){
 }
@@ -95,4 +98,26 @@ void InfoEntity::setDZ(double dz){
 //Modifie la coordonnée DY
 void InfoEntity::setDY(double dy){
     m_dy = dy;
+}
+
+
+///
+char InfoEntity::getCode() {
+    return MSG_WOPAINFO;
+}
+
+//Coder
+ByteBuffer* InfoEntity::toByteBuffer() {
+    //Ordre d'encodage de l'infoEntity dans le ByteBuffer
+    ByteBuffer *res = new ByteBuffer();
+    res->append(toBuffer<char>(MSG_WOPAINFO));
+    res->append(toBuffer<int>(this->getEntity()));
+    res->append(toBuffer<int>(this->getType()));
+    res->append(toBuffer<double>(this->getX()));
+    res->append(toBuffer<double>(this->getZ()));
+    res->append(toBuffer<double>(this->getY()));
+    res->append(toBuffer<double>(this->getDX()));
+    res->append(toBuffer<double>(this->getDZ()));
+    res->append(toBuffer<double>(this->getDY()));
+    return res;
 }

@@ -11,13 +11,14 @@
 #include <iostream>
 
 #include "../constante.hpp"
+#include "Server/Message/message.hpp"
 
 //! InfoEntity Class
 /*!
  * La classe InfoEntity contient les données
  * concernant une entité. (à instant t non précisé)
  */
-class InfoEntity{
+class InfoEntity : public IMessage{
     
     public :
 
@@ -86,6 +87,12 @@ class InfoEntity{
 
         ///Modifie la coordonnée DY
         virtual void setDY(double);
+
+        ///Coder to ByteBuffer
+        ByteBuffer *toByteBuffer();
+
+        ///
+        char getCode();
 
     protected :
 

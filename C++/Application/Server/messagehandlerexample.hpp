@@ -20,6 +20,7 @@ public:
         switch(code){
         case 'u':
             InfoEntity tamere;
+            std::cout << "Je passe par le case u" << std::endl;
             decode<InfoEntity>(*(msg->toByteBuffer()), tamere);
             break;
         }

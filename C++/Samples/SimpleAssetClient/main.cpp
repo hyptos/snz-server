@@ -41,6 +41,17 @@ int main ( int argc, char** argv ) {
     wopa.setLen(10);
     wopa.setstr(back_wopa);
 
+    ByteBuffer* bite;
+    InfoEntity inf;
+    inf.setDX(2);
+    inf.setDY(2);
+    inf.setDZ(2);
+    inf.setX(3);
+    inf.setY(3);
+    inf.setZ(4);
+    inf.setType(EntityType::ZOMBIE);
+    bite = inf.toByteBuffer();
+
     if ( client.open() == false ) exit ( -1 );
 
     client.send(*(wopa.toByteBuffer())); std::cout << "Sent : " << message.getLength() << " bytes" << std::endl;
