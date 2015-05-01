@@ -44,5 +44,17 @@ int main ( int argc, char** argv ) {
 
     view.show();
 
+
+    MapTree<int> map_tree(ENV_SIZE, ENV_SIZE, 100, 0);
+
+    int depth = map_tree.getDepth();
+    int nbLeaf = map_tree.getNbLeaf();
+    int length = map_tree.getLength(25.6, 96.1);
+    int width = map_tree.getWidth(25.6, 96.1);
+
+    std::cout << std::endl << "Arbre de profondeur : " << depth << " possédant " << nbLeaf << " feuilles" << std::endl;
+
+    std::cout << std::endl << "Zone du point (25.6, 96.1) Longueur : " << length << " Largeur : " << width << std::endl;    
+
     return app.exec();
 }
