@@ -1,165 +1,120 @@
 #include "body.hpp"
+#include "Model/Entities/Agents/agent.hpp"
 
 //Constructeur
-Body::Body(double x, double z, double y, double dx, double dz, double dy)
-    : m_x(x), m_z(z), m_y(y), m_dx(dx), m_dz(z), m_dy(dy), m_speed(0.0){
+Body::Body(Environment *env, Agent* agent)
+    : Module(), m_environment(env), m_agent(agent), m_brain(NULL), m_ear(new Ear){
 }
 
 //Destructeur
 Body::~Body(){
+
+    //Arrêt des modules
+    m_ear->stop();
+    delete m_ear;
 }
 
-//Retourne la coordonnée X du body
-double Body::getX() const{
-    return m_x;
+Ear* Body::getEar() const {
+    return m_ear;
 }
 
-//Retourne la coordonnée Z du body
-double Body::getZ() const{
-    return m_z;
+//Connecte le body et le brain
+void Body::connect_to_brain(Brain *brain){
+    m_brain = brain;
+    m_ear->setBrain(brain);
 }
 
-//Retourne la coordonnée Y du body
-double Body::getY() const{
-    return m_y;
+//Attrape le son
+void Body::catchSound(SoundStimulus &sound){
+    m_mutex.lock();
+    double dist = sqrt(pow(sound.getX() - m_agent->getX(), 2) + pow(sound.getZ() - m_agent->getZ(), 2));
+    m_mutex.unlock();
+
+    if(dist <= sound.getPower())
+        m_ear->hear(sound);
 }
 
-//Retourne la coordonnée DX du body
-double Body::getDX() const{
-    return m_dx;
+//Modifie la direction de l'agent
+void Body::moveTo(double x, double z){
+
+    m_mutex.lock();
+    double dist = sqrt(pow(x - m_agent->getX(), 2) + pow(z - m_agent->getZ(), 2));
+    m_agent->setDirection((x - m_agent->getX()) / dist, (z - m_agent->getZ()) / dist, 0.0);
+    m_agent->setSpeed(1.0);
+    m_mutex.unlock();
 }
 
-//Retourne la coordonnée DZ du body
-double Body::getDZ() const{
-    return m_dz;
+//Ajoute une action à effectuer par le body
+void Body::addActionTodo(BrainOrderType order, unsigned long long id){
+
+    std::pair<BrainOrderType, unsigned long long> todo(order, id);
+    m_mutex.lock();
+    m_todo.push_back(todo);
+    m_mutex.unlock();
 }
 
-//Retourne la coordonnée DY du body
-double Body::getDY() const{
-    return m_dy;
-}
+//Fait les actions stocké dans la TODO List
+void Body::operator ()(){
 
-//Retourne la vitesse du body
-double Body::getSpeed() const{
-    return m_speed;
-}
+    //On lance les modules
+    std::thread th_ear(Module::run, m_ear);
+    th_ear.detach();
 
-//Modifie la coordonnée X
-void Body::setX(double x){
-    m_x = x;
-    m_speed = 0.0;
+    m_stopped = false;
+    while(!m_stopped){
 
-    emit coordinates(m_x, m_z, m_y);
-    emit speed(m_speed);
-}
+        if(!m_todo.empty()){
 
-//Modifie la coordonnée Z
-void Body::setZ(double z){
-    m_z = z;
-    m_speed = 0.0;
+            m_mutex.lock();
+            std::pair<BrainOrderType, unsigned long long> todo = m_todo.front();
+            m_todo.pop_front();
+            m_mutex.unlock();
 
-    emit coordinates(m_x, m_z, m_y);
-    emit speed(m_speed);
-}
+            if(todo.first == BrainOrderType::MOVE){
 
-//Modifie la coordonnée Y
-void Body::setY(double y){
-    m_y = y;
-    m_speed = 0.0;
+                m_mutex.lock();
+                double old_x = m_agent->getX();
+                double old_z = m_agent->getZ();
+                double old_y = m_agent->getY();
 
-    emit coordinates(m_x, m_z, m_y);
-    emit speed(m_speed);
-}
+                double new_x;
+                double new_z;
+                double new_y = old_y; //TODO
 
-//Modifie la coordonnée DX
-void Body::setDX(double dx){
-    m_dx = dx;
+                if(old_x + m_agent->getDX()*m_agent->getSpeed() >= m_environment->getLength())
+                    new_x = 0;
+                else if(old_x + m_agent->getDX()*m_agent->getSpeed() <= 0)
+                    new_x = m_environment->getLength();
+                else
+                    new_x = old_x + m_agent->getDX()*m_agent->getSpeed();
 
-    emit direction(m_dx, m_dz, m_dy);
-}
+                if(old_z + m_agent->getDZ()*m_agent->getSpeed() >= m_environment->getLength())
+                    new_z = 0;
+                else if(old_z + m_agent->getDZ()*m_agent->getSpeed() <= 0)
+                    new_z = m_environment->getLength();
+                else
+                    new_z = old_z + m_agent->getDZ()*m_agent->getSpeed();
+                m_mutex.unlock();
 
-//Modifie la coordonnée DZ
-void Body::setDZ(double dz){
-    m_dz = dz;
 
-    emit direction(m_dx, m_dz, m_dy);
-}
+                if((old_x != new_x || old_z != new_z || old_y != new_y) && m_environment->validTravel(old_x, old_z, new_x, new_z)){
+                    m_mutex.lock();
+                    m_agent->setCoordinates(new_x, new_z, new_y);
+                    m_mutex.unlock();
+                }
 
-//Modifie la coordonnée DY
-void Body::setDY(double dy){
-    m_dy = dy;
+                //TODO : m_y
+            }
+            else if(todo.first == BrainOrderType::STAY){
 
-    emit direction(m_dx, m_dz, m_dy);
-}
+                m_mutex.lock();
+                m_agent->setSpeed(0.0);
+                m_mutex.unlock();
+            }
 
-//Modifie les coordonnées X, Z et Y du body
-void Body::setCoordinates(double x, double z, double y){
-    m_x = x;
-    m_z = z;
-    m_y = y;
-    m_speed = 0.0;
+        }
 
-    emit coordinates(m_x, m_z, m_y);
-    emit speed(m_speed);
-}
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
 
-//Modifie la direction du body
-void Body::setDirection(double dx, double dz, double dy){
-    m_dx = dx;
-    m_dz = dz;
-    m_dy = dy;
-
-    emit direction(m_dx, m_dz, m_dy);
-}
-
-void Body::setSpeed(double speed){
-    m_speed = speed;
-}
-
-//Fonction senseur appellée lors du déclenchement d'un son dans l'environnement
-void Body::hear(double x, double z, double y, double power){
-
-    //On calcule la distance entre le son et le zombie
-    double dist = sqrt(pow(x - m_x, 2) + pow(z - m_z, 2) + pow(y - m_y, 2));
-
-    //Si la puissance du son est assez forte pour que le zombie
-    //l'entende de la distance calculée
-    if(dist <= power)
-        emit hear_something(x, z, y);
-}
-
-//Fonction moteur qui indique où aller
-void Body::move_to(double x, double z){
-    double dist = sqrt(pow(x - m_x, 2) + pow(z - m_z, 2));
-
-    m_dx = (x - m_x) / dist;
-    m_dz = (z - m_z) / dist;
-
-    m_speed = 1.0;
-
-    emit direction(m_dx, m_dz, m_dy);
-    emit speed(m_speed);
-}
-
-//Fonction moteur qui bouge
-void Body::move(){
-
-    double old_x = m_x;
-    double old_z = m_z;
-    double old_y = m_y;
-
-    m_x += m_dx*m_speed;
-    m_z += m_dz*m_speed;
-    //TODO : gestion de la hauteur
-
-    //Si il y a eu modification des coordonnées
-    if(m_x != old_x || m_z != old_z || m_y != old_y)
-        emit coordinates(m_x, m_z, m_y);
-}
-
-void Body::stop_move(){
-
-    m_speed = 0.0;
-
-    emit speed(m_speed);
 }

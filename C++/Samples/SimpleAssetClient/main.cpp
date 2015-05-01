@@ -49,7 +49,7 @@ int main ( int argc, char** argv ) {
     inf.setX(3);
     inf.setY(3);
     inf.setZ(4);
-    inf.setType(EntityType::ZOMBIE);
+    inf.setType(EntityType::AGENT);
     bite = inf.toByteBuffer();
 
     if ( client.open() == false ) exit ( -1 );

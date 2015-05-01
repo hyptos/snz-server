@@ -1,7 +1,7 @@
 #include "infoaction.hpp"
 
 //Constructeur
-InfoAction::InfoAction(const EntityAction& action, const unsigned long long& entity, const unsigned long long& cible)
+InfoAction::InfoAction(const ActionType& action, const unsigned long long& entity, const unsigned long long& cible)
 	: m_action(action), m_entity(entity), m_cible(cible) {
 }
 
@@ -9,7 +9,7 @@ InfoAction::InfoAction(const EntityAction& action, const unsigned long long& ent
 InfoAction::~InfoAction(){}
 
 //Retourne l'action effectué par l'entité
-EntityAction InfoAction::getAction(){
+ActionType InfoAction::getAction(){
 	return m_action;
 }
 
