@@ -1,6 +1,6 @@
 /**
  * File: infoentity.hpp
- * Author: Antoine
+ * Author: Antoine "Avzgui" Richard
  *
  * Created on April 14, 2015, 3:06 PM
  */
@@ -89,11 +89,14 @@ class InfoEntity : public IMessage{
         ///Modifie la coordonnée DY
         virtual void setDY(double);
 
+
+        
+
         ///Coder to ByteBuffer
-        ByteBuffer *toByteBuffer();
+        virtual ByteBuffer *toByteBuffer();
 
         ///
-        char getCode();
+        virtual char getCode();
 
     protected :
 

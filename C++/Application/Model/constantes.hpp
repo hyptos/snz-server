@@ -1,6 +1,6 @@
 /**
  * File: constante.h
- * Author: Antoine
+ * Author: Antoine "Avzgui" Richard
  *
  * Created on April 14, 2015, 3:07 PM
  */
@@ -27,8 +27,10 @@ enum AgentType {
 
 //Détermine le type d'un Objet
 enum ObjectType {
-    MOVABLE = 9,
-    STATIC = 10
+    CHAIR = 9,
+    SWORD = 10,
+    BUILDING = 30,
+    HOUSE = 31
 };
 
 //Détermine l'état du mouvement d'un Agent (ou d'un Player)
