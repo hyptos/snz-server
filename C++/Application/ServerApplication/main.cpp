@@ -49,8 +49,8 @@ int main ( int argc, char** argv ) {
 
     int depth = map_tree.getDepth();
     int nbLeaf = map_tree.getNbLeaf();
-    int length = map_tree.getLength(25.6, 96.1);
-    int width = map_tree.getWidth(25.6, 96.1);
+    double length = map_tree.getLength(25.6, 96.1);
+    double width = map_tree.getWidth(25.6, 96.1);
 
     std::cout << std::endl << "Arbre de profondeur : " << depth << " possédant " << nbLeaf << " feuilles" << std::endl;
 

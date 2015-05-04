@@ -9,7 +9,7 @@
 #define CONSTANTE_HPP
 
 //Détermine le type d'une Entité
-enum EntityType {
+enum EntityType {   
     AGENT = 0,
     OBJECT = 1,
     PLAYER = 2
