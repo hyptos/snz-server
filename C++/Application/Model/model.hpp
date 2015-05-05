@@ -20,6 +20,7 @@
 #include "environment.hpp"
 #include "constantes.hpp"
 #include "Info/infoentity.hpp"
+ #include "Info/infoagent.hpp"
 #include "Model/modelview.hpp"
 
 class ModelView;
@@ -37,8 +38,8 @@ class SNZ_Model {
         ///Connection à la "vue"
         void connect_to_view(ModelView*);
 
-        ///Notifie un changement d'une entité à la "vue"
-        void notifyEntity(unsigned long long, InfoEntity);
+        ///Notifie un changement d'une entité à la "vue" ou à l'environnement
+        void notifyEntity(InfoEntity);
 
         ///Retourne le lien vers l'Environnement
         virtual Environment* getEnvironment();
@@ -46,28 +47,13 @@ class SNZ_Model {
         ///Retourne le nombre d'Entités présentes dans l'environnement
         virtual unsigned long long getNbEntities();
 
-        ///Retourne des informations sur une entité
-        virtual InfoEntity getInfo(unsigned long long);
-
-        ///Retourne une liste d'informations (A améliorer)
-        virtual std::vector<InfoEntity> getInfos();
-
-        ///Modifie les données d'une entité
-        virtual void setInfo(InfoEntity);
-
         ///Ajoute une Entité au modèle
         /*!
          * \return l'ID que le modèle a donné à l'entité ajouté
          */
         virtual unsigned long long addEntity(InfoEntity);
 
-        ///Ajoute un joueur au modèle
-        /*!
-         * \return l'ID que le modèle a donné à l'entité ajouté
-         */
-        virtual InfoEntity addPlayer();
-
-        //TODO setAction
+        //TODO notifyAction
 
     protected :
 

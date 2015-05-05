@@ -12,6 +12,8 @@
 
 #include "Model/constantes.hpp"
 #include "entity.hpp"
+#include "Bodies/body.hpp"
+#include "Model/Environment"
 
 //! Player Class
 /*!
@@ -23,7 +25,7 @@ class Player : public Entity {
 	public :
 
 		///Constructeur
-		Player(unsigned long long, double, double, double, double, double, double, SNZ_Model*);
+		Player(unsigned long long, Environment*, double, double, double, double, double, double, SNZ_Model*);
 
 		///Destructeur
 		virtual ~Player();

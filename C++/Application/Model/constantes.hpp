@@ -72,5 +72,11 @@ enum StimulusType {
     VISUAL = 29
 };
 
+//Détermine le type d'un senseur
+enum SensorType {
+    REFLEX = 32,
+    BRAINIAC = 33
+};
+
 #endif // CONSTANTE_HPP
 

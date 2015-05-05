@@ -13,11 +13,9 @@
 #include <list>
 #include <climits>
 
-#include "Entities/entity.hpp"
+#include "Entities/Bodies/body.hpp"
 #include "Stimuli/soundstimulus.hpp"
-#include "Info/infoentity.hpp"
-
-class Entity;
+#include "Model/constantes.hpp"
 
 //! Environment Class
 /*!
@@ -43,9 +41,6 @@ class Environment {
         ///Retourne la hauteur de l'environnement
         int getHeight();
 
-        ///Retourne une liste d'informations sur les Entités d'une zone à un instant t
-        std::vector<InfoEntity> getEntities();
-
         ///Retourne si un déplacement entre un point (x1,z1) et un point (x2,z2) est valide ou non
         bool validTravel(double,double,double,double);
 
@@ -53,7 +48,7 @@ class Environment {
         void getArea(double,double);
 
         ///Ajoute un lien vers un agent dans l'environnement
-        void addEntity(Entity*);
+        void addEntity(EntityType, Body*);
 
         ///Emet un stimulus sonore à un point (x,z,y) dans l'environnement
         void emitSound(double,double,double,double);
@@ -64,7 +59,7 @@ class Environment {
         const int m_width;          ///< Largeur de l'environnement (Axe Z)
         const int m_height;         ///< Hauteur de l'environnement (Axe Y)
 
-        std::list<Entity *> m_entities; ///< Liste des agents reliés à l'environnement
+        std::list<Body*> m_bodies;  ///< Liste des agents reliés à l'environnement
 };
 
 #endif // ENVIRONMENT_HPP

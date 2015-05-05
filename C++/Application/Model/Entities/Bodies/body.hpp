@@ -15,20 +15,14 @@
 #include <thread>
 #include <chrono>
 
-#include "Model/Entities/Agents/Brains/brain.hpp"
 #include "Model/constantes.hpp"
-#include "Model/module.hpp"
-#include "SensorModules/ear.hpp"
-#include "Model/Stimuli/soundstimulus.hpp"
 #include "Model/environment.hpp"
-
-class Brain;
-
-class Ear;
+#include "Model/Entities/entity.hpp"
+#include "Model/Info/infoaction.hpp"
 
 class Environment;
 
-class Agent;
+class Entity;
 
 
 //! Body Class
@@ -45,7 +39,7 @@ class Body {
         /*!
          * Initialise les données d'un corps dans l'environment
          */
-        Body(Environment*, double, double, double, double, double, double, Agent*);
+        Body(Environment*, double, double, double, double, double, double, Entity*);
 
         ///Destructeur
         virtual ~Body();
@@ -99,6 +93,10 @@ class Body {
         ///Modifie les Coordonnées X, Z et Y du vecteur direction de l'entité
         virtual void setDirection(double, double, double);
 
+
+        ///Indique au corps une action faite sur lui
+        virtual void operator<<(InfoAction);
+
     protected :
 
         Environment* m_environment;     ///< Lien vers l'Environnement de déplacement du Body
@@ -111,7 +109,7 @@ class Body {
         double m_dz;                    ///< Coordonnée Z du vecteur direction de l'entité
         double m_dy;                    ///< Coordonnée Y du vecteur direction de l'entité
 
-        Agent*  m_agent;                 ///< Lien vers l'Agent
+        Entity*  m_entity;              ///< Lien vers l'Agent
 };
 
 #endif // BODY_HPP

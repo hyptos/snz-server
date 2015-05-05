@@ -41,7 +41,7 @@ class ModelView : public QWidget{
 
         void connect_to_model(SNZ_Model*);
 
-        void setEntity(unsigned long long, InfoEntity);
+        void setEntity(InfoEntity);
 
     public slots :
 

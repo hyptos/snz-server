@@ -26,17 +26,6 @@ int Environment::getHeight(){
     return m_height;
 }
 
-//Retourne une liste d'InfoEntité (A améliorer pour ne retourner que les entités autour d'un seul points, voir différencier objets de zombies)
-std::vector<InfoEntity> Environment::getEntities(){
-
-    std::vector<InfoEntity> infos;
-
-    for(std::list<Entity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++)
-        infos.push_back((*it)->getInfo());
-
-    return infos;
-}
-
 //Retourne si un déplacement est valide ou non (TODO)
 bool Environment::validTravel(double old_x, double old_z, double new_x, double new_z){
     return true;
@@ -48,8 +37,8 @@ void Environment::getArea(double x, double z){
 }
 
 //Ajoute un lien vers un agent dans l'environnement
-void Environment::addEntity(Entity *entity){
-    m_entities.push_back(entity);
+void Environment::addEntity(EntityType type, Body* body){
+    m_bodies.push_back(body);
 }
 
 //Emet un son à un point (x,z,y)
@@ -62,5 +51,4 @@ void Environment::emitSound(double x, double z, double y, double power){
             agent->getBody()->catchSound(sound);
         }
     }
-
 }

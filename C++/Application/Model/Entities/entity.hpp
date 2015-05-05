@@ -13,10 +13,12 @@
 
 #include "Model/constantes.hpp"
 #include "Model/Info/infoentity.hpp"
+#include "Model/Info/infoaction.hpp"
+#include "Bodies/body.hpp"
+#include "Model/model.hpp"
 
 class SNZ_Model;
 
-class Agent;
 
 //! Entity Class
 /*!
@@ -30,27 +32,37 @@ class Entity {
     public :
 
         ///Constructeur
-        Entity(unsigned long long, EntityType, Body*, SNZ_Model*);
+        Entity(InfoEntity*, Body*, SNZ_Model*);
 
         ///Destructeur
         virtual ~Entity() = 0;
 
-        ///Retourne l'ID de l'Entité
-        virtual unsigned long long getId() const;
 
-        ///Retourne le Type de l'Entité
-        virtual EntityType getType() const;
 
         ///Retourne les informations concernant l'Entité
         virtual InfoEntity getInfo() const;
 
+        ///Retourne un pointeur sur le corps de l'entité
+        virtual Body* getBody() const;
 
 
-        //Modifie l'ID de l'Entité
-        virtual void setId(unsigned long long);
 
-        //Modifie le Type de l'Entité
-        virtual void setType(EntityType);
+        ///Modifie les Infos de l'Entité
+        virtual void setInfo(InfoEntity*);
+
+        ///Modifie le pointeur sur le corps de l'entité
+        virtual void setBody(Body *);
+
+
+
+        ///Indique un action extérieur sur l'entité
+        virtual void notifyAction(InfoAction);
+
+        ///Indique une modification des coordonnées du corps à l'entité
+        virtual void notifyCoordinates(double, double, double);
+
+        ///Indique une modification de la direction du corps à l'entité
+        virtual void notifyDirection(double, double, double);
 
 
 
@@ -62,9 +74,7 @@ class Entity {
 
     protected :
 
-        unsigned long long m_id;  ///< Id de l'entité
-
-        EntityType m_type;        ///< Type de l'entité
+        InfoEntity *m_info;       ///< Informations sur l'entité
 
         Body *m_body;             ///< Corps de l'entité dans l'environnement
 

@@ -1,12 +1,14 @@
 #include "player.hpp"
 
 //Constructeur
-Player::Player(unsigned long long id, double x, double z, double y, double dx, double dz, double dy, SNZ_Model* model) 
-	: Entity(id, EntityType::PLAYER, x, z, y, dx, dz, dy, model), m_health(AgentHealthState::NORMAL), m_moveState(AgentMoveState::WALK){
+Player::Player(unsigned long long id, Environment* env, double x, double z, double y, double dx, double dz, double dy, SNZ_Model* model) 
+	: Entity(new InfoEntity(id, EntityType::PLAYER, x, z, y, dx, dz, dy), new Body(env, x, z, y, dx, dz, dy, this), model), m_health(AgentHealthState::NORMAL), m_moveState(AgentMoveState::WALK){
 }
 
 //Destructeur
 Player::~Player(){
+	delete m_info;
+	delete m_body;
 }
 
 

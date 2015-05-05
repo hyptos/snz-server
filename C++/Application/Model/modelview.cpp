@@ -19,12 +19,11 @@ ModelView::~ModelView(){
 
 void ModelView::connect_to_model(SNZ_Model* model){
     m_model = model;
-    m_entities = model->getInfos();
 }
 
-void ModelView::setEntity(unsigned long long id, InfoEntity info){
-    if(m_entities.size() > id)
-        m_entities[id] = info;
+void ModelView::setEntity(InfoEntity info){
+    if(m_entities.size() > info.getId())
+        m_entities[info.getId()] = info;
 }
 
 void ModelView::repaint_scene(){
