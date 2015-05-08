@@ -13,15 +13,21 @@
 #include "Model/constantes.hpp"
 #include "infoentity.hpp"
 
+
+//! InfoAgent Class
+/*!
+ * La classe InfoAgent contient les données
+ * concernant un agent. (à instant t non précisé)
+ */
 class InfoAgent : public InfoEntity{
 
-	public :
+    public :
 
-		///Constructeur par défaut
-		InfoAgent();
+    	///Constructeur par défaut
+    	InfoAgent();
 
-		///Constructeur avec paramètres
-        InfoAgent(unsigned long long, AgentType, AgentMoveState, AgentHealthState, double, double, double, double, double, double);
+    	///Constructeur avec paramètres
+        InfoAgent(unsigned long long, AgentType, double, double, double, double, double, double, AgentMoveState, AgentHealthState);
 
         ///Constructeur par copie
         InfoAgent(const InfoAgent&);
@@ -48,13 +54,13 @@ class InfoAgent : public InfoEntity{
         virtual void setHealth(AgentHealthState health);
 
 
-	protected :
+    protected :
 
-		AgentType m_atype;				///< Type de l'agent
+    	AgentType m_atype;            ///< Type de l'agent
 
-		AgentMoveState m_moveState; 	///< Etat du mouvement de l'agent
+    	AgentMoveState m_moveState;   ///< Etat du mouvement de l'agent
 
-		AgentHealthState m_health;		///< Etat de "santé" de l'agent
+    	AgentHealthState m_health;    ///< Etat de "santé" de l'agent
 };
 
 #endif // INFO_AGENT_HPP

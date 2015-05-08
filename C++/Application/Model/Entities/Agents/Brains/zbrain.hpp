@@ -15,7 +15,7 @@
 
 //! ZBrain Class
 /*!
- * \brief La classe ZBrain implémente
+ * La classe ZBrain implémente
  * le comportement d'un agent "Zombie".
  */
 class ZBrain : public Brain {

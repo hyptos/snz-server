@@ -14,6 +14,7 @@
 #include "entity.hpp"
 #include "Bodies/body.hpp"
 #include "Model/Environment"
+#include "Model/Info/infoplayer.hpp"
 
 //! Player Class
 /*!

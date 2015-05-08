@@ -13,6 +13,12 @@
 #include "Model/constantes.hpp"
 #include "infoentity.hpp"
 
+
+//! InfoObject Class
+/*!
+ * La classe InfoObject contient les données
+ * concernant un objet. (à instant t non précisé)
+ */
 class InfoObject : public InfoEntity {
 
 	public : 

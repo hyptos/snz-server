@@ -97,6 +97,7 @@ void Body::setDirection(double dx, double dz, double dy){
 }
 
 
+
 //Indique au corps une action faite sur lui (TODO)
 void Body::operator<<(InfoAction action){
 }

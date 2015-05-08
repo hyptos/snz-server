@@ -6,7 +6,7 @@ InfoAgent::InfoAgent() : InfoEntity() {
 }
 
 //Constructeur avec paramètres
-InfoAgent::InfoAgent(unsigned long long id, AgentType atype, AgentMoveState moveState, AgentHealthState health, double x, double z, double y, double dx, double dz, double dy) 
+InfoAgent::InfoAgent(unsigned long long id, AgentType atype, double x, double z, double y, double dx, double dz, double dy, AgentMoveState moveState, AgentHealthState health) 
 	: InfoEntity(id, EntityType::AGENT, x, z, y, dx, dz, dy), m_atype(atype), m_moveState(moveState), m_health(health) {
 }
 

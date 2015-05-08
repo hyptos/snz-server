@@ -40,7 +40,7 @@ void Entity::setBody(Body* body){
 
 ///Indique un action extérieur sur l'entité
 void notifyAction(InfoAction action){
-    //*m_body << action; 
+    m_body << action; 
 }
 
 ///Indique une modification des coordonnées du corps à l'entité
