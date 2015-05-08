@@ -88,7 +88,7 @@ public :
 
     ByteBuffer *toByteBuffer() {
         ByteBuffer *res = new ByteBuffer();
-        res->append(toBuffer<char>(MSG_WOPAINFO));
+        res->append(toBuffer<char>(MSG_WOPAWOPA));
         for(int i = 0; i < mLen; i++) {
             res->append(toBuffer<char>(mStr[i]));
         }

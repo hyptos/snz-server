@@ -54,12 +54,19 @@ int main ( int argc, char** argv ) {
 
     if ( client.open() == false ) exit ( -1 );
 
-    client.send(*(wopa.toByteBuffer())); std::cout << "Sent : " << message.getLength() << " bytes" << std::endl;
+    ByteBuffer *wops, *info;
+    wops = wopa.toByteBuffer();
+    info = inf.toByteBuffer();
+    client.send(*wops); std::cout << "Sent : " << wops->getLength() << " bytes" << std::endl;
+    //client.send(*info); std::cout << "Sent : " << info->getLength() << " bytes" << std::endl;
+
     ByteBuffer msg;
 
     ReceiveMessage rec_msg;
     StringMessage str_msg;
-    client.receive(msg); std::cout << "Recv : " << msg.getLength() << " bytes" << std::endl;
+
+
+    /*client.receive(msg); std::cout << "Recv : " << msg.getLength() << " bytes" << std::endl;
     decode<ReceiveMessage>(msg, rec_msg);
     decode<StringMessage>(*(rec_msg.toByteBuffer()), str_msg);
     char * str = str_msg.getStr();
@@ -69,6 +76,6 @@ int main ( int argc, char** argv ) {
         std::cout<< str[i];
     }
     std::cout << " \n ";
-    client.close ();
+    client.close ();*/
     return 0;
 }

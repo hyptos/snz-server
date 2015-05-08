@@ -100,6 +100,19 @@ void InfoEntity::setDY(double dy){
     m_dy = dy;
 }
 
+// affichage
+void InfoEntity::affiche(){
+    std::cout << " affichage de l'entite " << std::endl;
+    std::cout << "m_id:" << this->getEntity() << std::endl;
+    std::cout << "m_type:" << this->getType() << std::endl;
+    std::cout << "m_dx:" << this->getDX() << std::endl;
+    std::cout << "m_dz:" << this->getDZ() << std::endl;
+    std::cout << "m_dy:" << this->getDY() << std::endl;
+    std::cout << "m_x:" << this->getX() << std::endl;
+    std::cout << "m_z:" << this->getZ() << std::endl;
+    std::cout << "m_y:" << this->getY() << std::endl;
+}
+
 
 ///
 char InfoEntity::getCode() {

@@ -62,7 +62,7 @@ template < class InnerType > unsigned long long toBuffer ( ByteBuffer& buffer, u
     return index + length * sizeof ( InnerType );
 }
 
-template < class InnerType > unsigned long long fromBuffer ( const ByteBuffer& buffer, unsigned long long index, InnerType* value, const unsigned long long length )
+template < class InnerType > unsigned long long fromBuffer ( const ByteBuffer& buffer, unsigned long long const index, InnerType* value, const unsigned long long length )
 {
     memcpy ( (void*) value, buffer.getData() + index, length * sizeof ( InnerType ) );
     return index + length * sizeof ( InnerType );

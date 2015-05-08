@@ -13,6 +13,7 @@ int main ( int argc, char** argv ) {
     implMessageDispatcher dispatcher;
     MessageHandlerExample msgH(&s);
     dispatcher.registerMessageHandler('u', (IMessageHandler*) &msgH);
+    dispatcher.registerMessageHandler('w', (IMessageHandler*) &msgH);
     s.setMessageDispatcher(&dispatcher);
     s.start();
     while(s.isRunning()) {

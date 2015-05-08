@@ -17,23 +17,31 @@ public:
 
     void onOutPutMessage(IMessage *msg) {
         char code = msg->getCode();
+        std::cout << "reçu : " << code << std::endl;
         switch(code){
-        case 'u':
+        case 'u':{
             InfoEntity tamere;
             std::cout << "Je passe par le case u" << std::endl;
             decode<InfoEntity>(*(msg->toByteBuffer()), tamere);
             break;
         }
-
-        StringMessage res;
-        decode<StringMessage>(*(msg->toByteBuffer()), res);
-        char * str = res.getStr();
-        std::cout<< "recu : ";
-        for(int i = 0; i < res.getLen(); i++) {
-            std::cout<< str[i];
+        case 'w':{
+            std::cout << "Je passe par le case w" << std::endl;
+            StringMessage res;
+            decode<StringMessage>(*(msg->toByteBuffer()), res);
+            char * str = res.getStr();
+            std::cout<< "recu : ";
+            for(int i = 0; i < res.getLen(); i++) {
+                std::cout<< str[i];
+            }
+            int nb_client = com->sendBroadCast(&res);
+            std::cout<< "  message envoyé à "<< nb_client <<"\n";
+            break;
         }
-        int nb_client = com->sendBroadCast(&res);
-        std::cout<< "  message envoyé à "<< nb_client <<"\n";
+        default:
+            std::cout<<"Error" << std::endl;
+            break;
+        }
     }
 
     ICommunicationServer *com;
