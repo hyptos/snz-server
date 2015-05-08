@@ -1,42 +1,32 @@
 /**
- * File: zagent.hpp
- * Author: Antoine
+ * File: agent.hpp
+ * Author: Antoine "Avzgui" Richard
  *
- * Created on April 13, 2015, 2:24 PM
+ * Created on April 22, 2015, 11:18 AM
  */
 
 #ifndef ZAGENT_HPP
 #define ZAGENT_HPP
 
-#include <QObject>
-
 #include <iostream>
-#include <cstdlib>
 #include <thread>
-#include <chrono>
 
-#include "agent.hpp"
+#include "Model/module.hpp"
 #include "Brains/zbrain.hpp"
+#include "Model/environment.hpp"
+#include "Bodies/body.hpp"
+#include "agent.hpp"
 
-//! ZAgent Class
-/*!
- * La classe ZAgent est l'entité contenant, implémentant
- * et connectant le différentes parties de l'agent (body, brain).
- * Ce sont des objets ZAgent qui seront créés dans le modèle, les
- * objets ZAgent gérant eux même la création de leurs parties.
- */
+class Environment;
+
+class Body;
+
 class ZAgent : public Agent{
 
     public :
 
-        ///Constructeur
-        /*!
-         * Initialise les différents attributs de l'agent.
-         * Connecte le body et le brain entre eux.
-         */
-        ZAgent(unsigned long long, double, double, double, double, double, double);
+        ZAgent(unsigned long long, Environment*, double, double, double, double, double, double, SNZ_Model*);
 
-        ///Destructeur
         ~ZAgent();
 };
 

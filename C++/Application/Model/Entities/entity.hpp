@@ -1,141 +1,124 @@
 /**
  * File: entity.hpp
- * Author: Antoine
+ * Author: Antoine "Avzgui" Richard
  *
- * Created on April 14, 2015, 3:06 PM
+ * Created on April 21, 2015, 5:09 PM
  */
 
 #ifndef ENTITY_HPP
 #define ENTITY_HPP
 
 #include <iostream>
+#include <thread>
 
-#include <QObject>
+#include "Model/constantes.hpp"
+#include "Model/Info/infoentity.hpp"
 
-#include "../constante.hpp"
-#include "../Info/infoentity.hpp"
+class SNZ_Model;
 
+class Agent;
 
 //! Entity Class
 /*!
- * La classe Entity est la classe générique
- * dont vont hériter toutes les entités du
- * model (joueurs, agents, objets).
- *
- * Elle contient les attributs nécessaires
- * à toutes les entités.
- *
- * Hérite de QObject, puisque les entités
- * peuvent possiblement instancier des
- * signaux et des slots.
+ * \brief La classe Entity regroupe les
+ * attributs et méthodes de toutes entitées
+ * faisant parties du modèle (agents, objets,
+ * joueurs, etc..)
  */
-class Entity : public QObject
-{
-
-    Q_OBJECT
+class Entity {
 
     public :
 
         ///Constructeur
-        Entity(unsigned long long, EntityType, EntityState, double, double, double, double, double, double);
+        Entity(unsigned long long, EntityType, double, double, double, double, double, double, SNZ_Model*);
 
         ///Destructeur
-        /*!
-         * Le destructeur de Entity est
-         * virtuelle pur pour ne pas pouvoir
-         * instancier d'objet Entity
-         */
         virtual ~Entity() = 0;
 
-        ///Retourne id de l'entité
+        ///Retourne l'ID de l'Entité
         virtual unsigned long long getId() const;
 
-        ///Retourne le type de l'entité
+        ///Retourne le Type de l'Entité
         virtual EntityType getType() const;
 
-        ///Retourne l'état de l'entité
-        virtual EntityState getState() const;
-
-        ///Retourne la coordonnée X de l'entité dans l'environnement
+        ///Retourne la Coordonnée X de l'Entité dans l'Environnement
         virtual double getX() const;
 
-        ///Retourne la coordonnée Z de l'entité dans l'environnement
+        ///Retourne la Coordonnée Z de l'Entité dans l'Environnement
         virtual double getZ() const;
 
-        ///Retourne la coordonnée Y de l'entité dans l'environnement
+        ///Retourne la Coordonnée Y de l'Entité dans l'Environnement
         virtual double getY() const;
 
-        ///Retourne la coordonnée X du vecteur direction de l'entité
+        ///Retourne la Coordonnée X du vecteur direction de l'Entité
         virtual double getDX() const;
 
-        ///Retourne la coordonnée Z du vecteur direction de l'entité
+        ///Retourne la Coordonnée Z du vecteur direction de l'Entité
         virtual double getDZ() const;
 
-        ///Retourne la coordonnée Z du vecteur direction de l'entité
+        ///Retourne la Coordonnée Y du vecteur direction de l'Entité
         virtual double getDY() const;
 
-    public slots :
+        ///Retourne les informations concernant l'Entité
+        virtual InfoEntity getInfo() const;
 
-        ///Modifie la valeur de l'id de l'entité
+
+
+
+        //Modifie l'ID de l'Entité
         virtual void setId(unsigned long long);
 
-        ///Modife l'état de l'entité
-        virtual void setState(EntityState);
+        //Modifie le Type de l'Entité
+        virtual void setType(EntityType);
 
-        ///Modifie la coordonnée X de l'entité
+        ///Modifie la Coordonnée X de l'Entité dans l'Environnement
         virtual void setX(double);
 
-        ///Modifie la coordonnée Z de l'entité
+        ///Modifie la Coordonnée Z de l'Entité dans l'Environnement
         virtual void setZ(double);
 
-        ///Modifie la coordonnée Y de l'entité
+        ///Modifie la Coordonnée Y de l'Entité dans l'Environnement
         virtual void setY(double);
 
-        ///Modife la coordonnée X du vecteur direction de l'entité
+        ///Modifie la Coordonnée X du vecteur direction de l'Entité
         virtual void setDX(double);
 
-        ///Modife la coordonnée Z du vecteur direction de l'entité
+        ///Modifie la Coordonnée Z du vecteur direction de l'Entité
         virtual void setDZ(double);
 
-        ///Modife la coordonnée Y du vecteur direction de l'entité
+        ///Modifie la Coordonnée Y du vecteur direction de l'Entité
         virtual void setDY(double);
 
-        ///Modifie les coordonnées X, Z et Y de l'entité
+        ///Modifie les Coordonnées X, Z et Y de l'entité dans l'environnement
         virtual void setCoordinates(double, double, double);
 
-        ///Modifie le vecteur direction de l'entité
+        ///Modifie les Coordonnées X, Z et Y du vecteur direction de l'entité
         virtual void setDirection(double, double, double);
 
-        //Génére et émet les infos concernant l'entité
-        virtual void emitInfo();
 
-    signals :
 
-        ///Emet les coordonnées X, Z et Y de l'entité dans l'environnement
-        void coordinates(double, double, double);
-
-        ///Emet les coordonnées X, Z et Y du vecteur direction de l'entité
-        void direction(double, double, double);
-
-        //Emet l'état de l'entité
-        void actualState(EntityState);
-
-        //Emet l'id de l'entité ainsi que les info le concernant
-        void info(InfoEntity);
+        ///Retourne si deux Entités sont égales ou non
+        /*!
+         * Le test se fait juste sur l'ID
+         */
+        virtual bool operator ==(const Entity&);
 
     protected :
 
-        unsigned long long m_id;         ///< Id de l'entité
+        unsigned long long m_id;  ///< Id de l'entité
 
-        EntityType m_type;    ///< Type de l'entité (constant)
-        EntityState m_state;        ///< Etat de l'entité
+        EntityType m_type;        ///< Type de l'entité
 
-        double m_x;                 ///< Coordonnée X de l'entité dans l'environnement
-        double m_z;                 ///< Coordonnée Z de l'entité dans l'environnement
-        double m_y;                 ///< Coordonnée Y de l'entité dans l'environnement
-        double m_dx;                ///< Coordonnée X du vecteur direction de l'entité
-        double m_dz;                ///< Coordonnée Z du vecteur direction de l'entité
-        double m_dy;                ///< Coordonnée Y du vecteur direction de l'entité
+        double m_x;                     ///< Coordonnée X de l'entité dans l'environnement
+        double m_z;                     ///< Coordonnée Z de l'entité dans l'environnement
+        double m_y;                     ///< Coordonnée Y de l'entité dans l'environnement
+
+        double m_dx;                    ///< Coordonnée X du vecteur direction de l'entité
+        double m_dz;                    ///< Coordonnée Z du vecteur direction de l'entité
+        double m_dy;                    ///< Coordonnée Y du vecteur direction de l'entité
+
+
+        SNZ_Model *m_model;                ///< Lien vers le modèle pour notifier des changements
 };
 
 #endif // ENTITY_HPP

@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-#include "../constante.hpp"
+#include "Model/constantes.hpp"
 
 //! InfoAction Class
 /*!
@@ -23,13 +23,13 @@ class InfoAction
 	public :
 		
 		///Constructeur
-        InfoAction(const EntityAction&, const unsigned long long&, const unsigned long long&);
+        InfoAction(const ActionType&, const unsigned long long&, const unsigned long long&);
 		
 		///Destructeur
 		virtual ~InfoAction();
 
 		///Retourne l'action de l'entité
-		EntityAction getAction();
+		ActionType getAction();
 
 		///Retourne l'id de l'entité faisant l'action
         unsigned long long getEntity();
@@ -39,7 +39,7 @@ class InfoAction
 
 	private :
 
-		const EntityAction m_action;	///< Action faite par une entité
+		const ActionType m_action;	///< Action faite par une entité
 
         const unsigned long long m_entity;	///< Entité faisant l'action
         const unsigned long long m_cible;	///< Entité ciblé par l'action

@@ -1,82 +1,84 @@
 /**
  * File: model.hpp
- * Author: Antoine
+ * Author: Antoine "Avzgui" Richard
  *
- * Created on April 13, 2015, 2:24 PM
+ * Created on April 21, 2015, 8:10 PM
  */
 
 #ifndef MODEL_HPP
 #define MODEL_HPP
 
-#include <QObject>
-
 #include <iostream>
+#include <list>
 #include <vector>
 #include <cstdlib>
 #include <ctime>
-#include <thread>
-#include <chrono>
 #include <climits>
 
-#include "environment.hpp"
-#include "Entities/entity.hpp"
-#include "Entities/Agents/agent.hpp"
 #include "Entities/Agents/zagent.hpp"
+#include "Entities/player.hpp"
+#include "environment.hpp"
+#include "constantes.hpp"
 #include "Info/infoentity.hpp"
-#include "Info/infoaction.hpp"
+#include "Model/modelview.hpp"
 
+class ModelView;
 
-//! SNZ_Model Class
-/*!
- * La classe SNZ_Model implémente le model de l'application
- * contenant les informations sur les agents, l'environnement,
- * les users, et les données à envoyer.
- */
-class SNZ_Model : public QObject{
-
-    //Macro pour signaux et slots
-    Q_OBJECT
+class SNZ_Model {
 
     public :
 
-        ///Conctructeur
-        SNZ_Model(int, int);
+        ///Constructeur
+        SNZ_Model(int,int);
 
         ///Destructeur
-        ~SNZ_Model();
+        virtual ~SNZ_Model();
 
-    public slots :
+        ///Connection à la "vue"
+        void connect_to_view(ModelView*);
 
-        ///Function de reception d'une action faite par une entité
-        void entity_action(InfoAction);
+        ///Notifie un changement d'une entité à la "vue"
+        void notifyEntity(unsigned long long, InfoEntity);
 
-        ///Function de reception d'une modification d'une entité (position, état...)
-        void entity_maj(InfoEntity);
+        ///Retourne le lien vers l'Environnement
+        virtual Environment* getEnvironment();
 
-        ///Function pour demander au model d'envoyer l'état de ses entités
-        void ask_maj();
+        ///Retourne le nombre d'Entités présentes dans l'environnement
+        virtual unsigned long long getNbEntities();
 
-        ///Déclenche un son
-        void do_sound(double, double);
+        ///Retourne des informations sur une entité
+        virtual InfoEntity getInfo(unsigned long long);
 
-    signals :
+        ///Retourne une liste d'informations (A améliorer)
+        virtual std::vector<InfoEntity> getInfos();
 
-        ///Signal du son
-        void sound(double,double,double,double);
+        ///Modifie les données d'une entité
+        virtual void setInfo(InfoEntity);
 
-        ///Signal envoyé pour indiquer un changement pour une entité (position, état...)
-        void maj_entity(InfoEntity);
+        ///Ajoute une Entité au modèle
+        /*!
+         * \return l'ID que le modèle a donné à l'entité ajouté
+         */
+        virtual unsigned long long addEntity(InfoEntity);
 
-        ///Signal envoyé pour indiquer une action faite par une entité
-        void maj_action(InfoAction);
+        ///Ajoute un joueur au modèle
+        /*!
+         * \return l'ID que le modèle a donné à l'entité ajouté
+         */
+        virtual InfoEntity addPlayer();
 
-    private :
+        //TODO setAction
 
-        std::vector<Entity*> m_entities;    ///< Liste des entités
-        unsigned long long m_nbEntities;    ///< Nombres d'entités présent dans le modèle
+    protected :
 
-        Environment *m_environment;          //< Environnement de déplacement des entités
+        Environment* m_environment;         ///< Pointeur sur l'environnement des entités
 
+        std::vector<Entity*> m_entities;    ///< Vecteur de liens vers les entités
+
+        unsigned long long m_nbEntities;    ///< Nombre d'entités présentes dans le modèle
+
+
+        ModelView* m_view;                    ///< lien vers le model
 };
 
 #endif // MODEL_HPP

@@ -10,8 +10,9 @@
 
 #include <iostream>
 
-#include "../constante.hpp"
 #include "Server/Message/message.hpp"
+#include "Model/constantes.hpp"
+
 
 //! InfoEntity Class
 /*!
@@ -26,7 +27,7 @@ class InfoEntity : public IMessage{
         InfoEntity();
 
         ///Constructeur avec paramètres
-        InfoEntity(unsigned long long&, EntityType&, double&, double&, double&, double&, double&, double&);
+        InfoEntity(unsigned long long, EntityType, double, double, double, double, double, double);
 
         ///Constructeur par copie
         InfoEntity(const InfoEntity&);

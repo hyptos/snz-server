@@ -1,68 +1,74 @@
 #include "agent.hpp"
 
-
 //Constructeur
-Agent::Agent(unsigned long long id, EntityType type, EntityState state, double x, double z, double y, double dx, double dz, double dy, Body* body, Brain* brain)
-    : Entity(id, type, state, x, z, y, dx, dz, dy), m_speed(0.0), m_body(body), m_brain(brain){
-
-    //Connections Body->Brain
-    QObject::connect(m_body, SIGNAL(hear_something(double,double,double)), m_brain, SLOT(something_heard(double,double,double)));
-
-    //Connections Brain->Body
-    QObject::connect(m_brain, SIGNAL(move_body_move()), m_body, SLOT(move()));
-    QObject::connect(m_brain, SIGNAL(lets_go_to(double,double)), m_body, SLOT(move_to(double,double)));
-
-    //Connection Body->Agent
-    QObject::connect(body, SIGNAL(coordinates(double,double,double)), this, SLOT(setCoordinates(double,double,double)));
-    QObject::connect(body, SIGNAL(direction(double,double,double)), this, SLOT(setDirection(double,double,double)));
-    QObject::connect(body, SIGNAL(speed(double)), this, SLOT(setSpeed(double)));
+Agent::Agent(unsigned long long id, AgentType atype, Environment *env, Body *body, Brain *brain, double x, double z, double y, double dx, double dz, double dy, SNZ_Model* model)
+    : Entity(id, EntityType::AGENT, x, z, y, dx, dz, dy, model), m_atype(atype), m_environment(env), m_body(body), m_brain(brain), m_health(AgentHealthState::NORMAL), m_moveState(AgentMoveState::WALK), m_speed(0.0){
 }
 
 //Destructeur
 Agent::~Agent(){
 }
 
-//Modifie la coordonnée X de l'agent dans l'environnement (et met la vitesse à 0)
-void Agent::setX(double x){
-    m_body->setX(x);
+//Retourne le Type de l'Agent
+AgentType Agent::getAgentType(){
+    return m_atype;
 }
 
-//Modifie la coordonnée Z de l'agent dans l'environnement (et met la vitesse à 0)
-void Agent::setZ(double z){
-    m_body->setZ(z);
+//Retourne le lien vers l'environnement
+Environment* Agent::getEnvironment(){
+    return m_environment;
 }
 
-//Modifie la coordonnée Y de l'agent dans l'environnement (et met la vitesse à 0)
-void Agent::setY(double y){
-    m_body->setY(y);
-}
-
-//Modifie les coordonnées X, Z et Y de l'agent dans l'environnement (et met la vitesse à 0)
-void Agent::setCoordinates(double x, double z, double y){
-    m_x = x;
-    m_z = z;
-    m_y = y;
-
-    emitInfo();
-}
-
-//Retourne la vitesse
-double Agent::getSpeed() const{
-    return m_speed;
-}
-
-//Retourne le pointeur sur le Body de l'agent
+//Retourne le lien vers le Body de l'Agent
 Body* Agent::getBody(){
     return m_body;
 }
 
-//Retourne le pointeur sur le Brain de l'agent
+//Retourne le lien vers le Brain de l'Agent
 Brain* Agent::getBrain(){
     return m_brain;
 }
 
+//Retourne si l'Agent est toujours "vivant" ou non
+bool Agent::isAlive() const {
+
+    if(m_health == AgentHealthState::DEAD)
+        return false;
+
+    return true;
+}
+
+//Retourne l'état de "santé" de l'Agent
+AgentHealthState Agent::getHealth() const {
+    return m_health;
+}
+
+//Retourne l'état du mouvement de l'Agent
+AgentMoveState Agent::getMoveState() const {
+    return m_moveState;
+}
+
+//Retourne la vitesse actuelle de l'Agent
+double Agent::getSpeed() const {
+    return m_speed;
+}
+
+//"Tue" l'Agent
+void Agent::kill(){
+    m_health = AgentHealthState::DEAD;
+}
+
+//Modifie l'état de "santé" de l'Agent
+void Agent::setHealth(AgentHealthState health){
+    m_health = health;
+}
+
+//Modifie l'état du mouvement de l'Agent
+void Agent::setMoveState(AgentMoveState moveState){
+   m_moveState = moveState;
+}
+
+//Modifie la vitesse actuelle de l'Agent
 void Agent::setSpeed(double speed){
     m_speed = speed;
-
-    emitInfo();
 }

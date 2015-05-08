@@ -60,7 +60,7 @@ template<> void decode(ByteBuffer &buff, InfoEntity &res) {
     if(type == 1){
        res.setType(EntityType::PLAYER);
     } else {
-        res.setType(EntityType::ZOMBIE);
+        res.setType(EntityType::AGENT);
     }
 
     res.setEntity(entity);

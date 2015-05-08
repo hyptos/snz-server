@@ -2,22 +2,30 @@
 
 //Constructeur
 ZBrain::ZBrain() : Brain(){
-    QTimer* timer = new QTimer();
-    timer->connect(timer, SIGNAL(timeout()), this, SLOT(actions()));
-    timer->start(100);
 }
 
 //Destructeur
 ZBrain::~ZBrain(){
+    m_stopped = true;
 }
 
-//Slot Something Heard
-void ZBrain::something_heard(double x, double z, double y){
+//Implémente les actions déclenchés par le Brain lorsque le Body indique un Son
+void ZBrain::addSoundStimulus(SoundStimulus &sound){
 
-    emit lets_go_to(x, z);
+    if(m_body != NULL)
+        m_body->moveTo(sound.getX(), sound.getZ());
 }
 
-//Actions faite par l'agent
-void ZBrain::actions(){
-    emit move_body_move();
+//Implémente la boucle d'action de l'agent
+void ZBrain::operator ()(){
+    m_stopped = false;
+
+    while(!m_stopped){
+
+        m_body->addActionTodo(BrainOrderType::MOVE);
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
 }
+
+
