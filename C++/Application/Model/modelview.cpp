@@ -12,7 +12,6 @@ ModelView::ModelView(int w, int h)
 }
 
 ModelView::~ModelView(){
-
     delete m_view;
     delete m_scene;
 }
@@ -40,8 +39,7 @@ void ModelView::repaint_scene(){
     }
 }
 
-void ModelView::mousePressEvent(QMouseEvent *event)
-{
+void ModelView::mousePressEvent(QMouseEvent *event){
     if(m_model != NULL){
         if (event->button() == Qt::LeftButton)
             m_model->getEnvironment()->emitSound(event->x(), event->y(), 0.0, 100.0);

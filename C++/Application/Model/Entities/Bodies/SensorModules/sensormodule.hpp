@@ -44,7 +44,7 @@ class SensorModule : public Module {
 		virtual void setAcuity(double);
 
 		///Surcharge de l'opérateur << récupérant des objets Stimulus
-		virtual void operator<<(Stimulus);
+		virtual void operator<<(Stimulus*);
 
 	protected :
 
@@ -52,7 +52,7 @@ class SensorModule : public Module {
 
 		double m_acuity;				///< Acuité du senseur (1.0 par défaut)
 
-		std::list<Stimulus> m_stimuli;	///< file de stimuli captés par le senseur
+		std::list<Stimulus*> m_stimuli;	///< file de stimuli captés par le senseur
 
 		Body* m_body;					///< Pointeur sur le corps de l'agent
 };

@@ -15,8 +15,9 @@ Leg::~Leg(){
 }
 
 //Surchage de l'opérateur <<
-void Leg::operator<<(Order order){
-	if(order.getType() == OrderType::STAY || order.getType() == OrderType::MOVE){
+void Leg::operator<<(Order* order){
+	std::cout << "Leg::operator<<" << std::endl;
+	if(order->getType() == OrderType::STAY || order->getType() == OrderType::MOVE){
 		m_mutex.lock();
 		m_orders.push_back(order);
 		m_mutex.unlock();
@@ -26,6 +27,8 @@ void Leg::operator<<(Order order){
 //Surchage de l'opérateur ()
 void Leg::operator()(){
 
+	std::cout << "Leg::operator()" << std::endl;
+
 	m_stopped = false;
 
 	while(!m_stopped){
@@ -33,19 +36,18 @@ void Leg::operator()(){
 		//Si leg à des ordres à exécuter
 		if(!m_orders.empty()){
 			m_mutex.lock();
-			Order order = m_orders.front();
+			Order *order = m_orders.front();
 			m_orders.pop_front();
 			m_mutex.unlock();
 
 			//Si c'est un ordre d'arret
-			if(order.getType() == OrderType::STAY){
+			if(order->getType() == OrderType::STAY){
 				m_body->lock();
 				m_body->setSpeed(0.0);
 				m_body->unlock();
 			}
-			else if(order.getType() == OrderType::MOVE){
-				Order *tmp = &order;
-				MoveOrder *morder = dynamic_cast<MoveOrder*>(tmp);
+			else if(order->getType() == OrderType::MOVE){
+				MoveOrder *morder = dynamic_cast<MoveOrder*>(order);
 
 				//On récupère les coordonnées actuelles
 				m_body->lock();
@@ -55,12 +57,14 @@ void Leg::operator()(){
 
 				//On calcule la direction à prendre
 				double dist = std::sqrt(std::pow(morder->getX() - x, 2.0) + std::pow(morder->getZ() - z, 2.0));
-				double dx = morder->getX() - x / dist;
-				double dz = morder->getZ() - z / dist;
+				double dx = (morder->getX() - x) / dist;
+				double dz = (morder->getZ() - z) / dist;
 
 				//On indique la nouvelle direction et qu'on se déplace
 				m_body->lock();
 				m_body->setDirection(dx, dz, 0.0);
+				m_body->unlock();
+				m_body->lock();
 				m_body->setSpeed(1.0);
 				m_body->unlock();
 			}

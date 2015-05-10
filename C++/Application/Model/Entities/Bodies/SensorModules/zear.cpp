@@ -10,8 +10,8 @@ ZEar::~ZEar(){
 }
 
 //Surchage de l'opérateur <<
-void ZEar::operator<<(Stimulus stimulus){
-	if(stimulus.getType() == StimulusType::SOUND){
+void ZEar::operator<<(Stimulus* stimulus){
+	if(stimulus->getType() == StimulusType::SOUND){
 		m_mutex.lock();
 		m_stimuli.push_back(stimulus);
 		m_mutex.unlock();
@@ -26,10 +26,9 @@ void ZEar::operator()(){
 	while(!m_stopped){
 
 		if(!m_stimuli.empty()){
-			
 			//On récupère le son capté par ZEar
 			m_mutex.lock();
-			Stimulus *stimulus = &(m_stimuli.front());
+			Stimulus *stimulus = m_stimuli.front();
 			m_stimuli.pop_front();
 			m_mutex.unlock();
 
@@ -44,10 +43,10 @@ void ZEar::operator()(){
 
 			//On calcule la distance entre le corps et l'épicentre du son
 			double dist = std::sqrt(std::pow(sound->getX() - x, 2.0) + std::pow(sound->getZ() - z, 2.0) + std::pow(sound->getY() - y, 2.0));
-		
+			
 			//Ici l'acuité permet d'entendre un son de plus ou moins loin
 			if(dist < sound->getPower()*m_acuity){
-				MoveOrder order(x, z);
+				MoveOrder *order = new MoveOrder(x, z);
 
 				for(std::vector<MotorModule*>::iterator it = m_motors.begin() ; it != m_motors.end() ; it++)
 					*(*it) << order;

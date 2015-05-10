@@ -2,7 +2,7 @@
 
 //Constructeur
 SensorModule::SensorModule(SensorType type, Body* body) 
-	: Module(), m_type(type), m_body(body) {
+	: Module(), m_type(type), m_acuity(1.0), m_body(body) {
 }
 
 //Destructeur
@@ -25,7 +25,7 @@ void SensorModule::setAcuity(double acuity){
 }
 
 //Surchage opérateur 
-void SensorModule::operator<<(Stimulus stimulus){
+void SensorModule::operator<<(Stimulus* stimulus){
 	m_mutex.lock();
 	m_stimuli.push_back(stimulus);
 	m_mutex.unlock();

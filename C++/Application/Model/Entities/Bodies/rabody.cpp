@@ -48,9 +48,9 @@ void RABody::setSpeed(double speed){
 }
 
 //Surcharge de l'opérateur <<
-void RABody::operator<<(Stimulus stimulus){
+void RABody::operator<<(Stimulus* stimulus){
 	//For each sensor
-	for(std::vector<ReflexSensor*>::iterator it = m_reflexes.begin() ; it != m_reflexes.begin() ; it++)
+	for(std::vector<ReflexSensor*>::iterator it = m_reflexes.begin() ; it != m_reflexes.end() ; it++)
 		*(*it) << stimulus;
 }
 

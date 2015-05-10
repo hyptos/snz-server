@@ -42,7 +42,7 @@ class Leg : public MotorModule {
 		 * La classe Leg ne récupère que les ordres
 		 * de type MOVE ou STAY.
 		 */
-		virtual void operator<<(Order);
+		virtual void operator<<(Order*);
 
 		///Surchage de l'opérateur ()
 		/*!

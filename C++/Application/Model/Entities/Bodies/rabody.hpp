@@ -47,7 +47,7 @@ class RABody : public Body {
 		virtual void setSpeed(double);
 
 		///Surcharge de l'opérateur <<
-		virtual void operator<<(Stimulus);
+		virtual void operator<<(Stimulus*);
 
 	protected :
 

@@ -41,7 +41,7 @@ class ZEar : public ReflexSensor {
 		/*!
 		 * ZEar ne reçoit que les stimuli de type Sonore
 		 */
-		virtual void operator<<(Stimulus);
+		virtual void operator<<(Stimulus*);
 
 		///Surchage de l'opérateur(), boucle d'actions de ZEar
 		virtual void operator()();

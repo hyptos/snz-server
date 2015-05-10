@@ -50,7 +50,8 @@ void Environment::addEntity(EntityType type, Body* body){
 
 //Emet un son à un point (x,z,y)
 void Environment::emitSound(double x, double z, double y, double power){
-    SoundStimulus sound(x, z, y, power);
+
+    SoundStimulus *sound = new SoundStimulus(x, z, y, power);
 
     for(std::list<RABody*>::iterator it = m_agents.begin(); it != m_agents.end(); it++)
             *(*it) << sound;

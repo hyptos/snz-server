@@ -33,13 +33,13 @@ class MotorModule : public Module {
 		virtual ~MotorModule() = 0;
 
 		///Surchage operateur <<
-		virtual void operator<<(Order);
+		virtual void operator<<(Order*);
 
 	protected :
 
 		RABody* m_body;				///< Pointeur sur le corps de l'agent
 
-		std::list<Order> m_orders; 	///< FIFO d'ordre à effectuer par le moteur
+		std::list<Order*> m_orders; 	///< FIFO d'ordre à effectuer par le moteur
 };
 
 #endif // MOTOR_MODULE_HPP
