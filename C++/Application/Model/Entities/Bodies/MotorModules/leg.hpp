@@ -16,6 +16,7 @@
 #include "motormodule.hpp"
 #include "Model/constantes.hpp"
 #include "Model/Entities/Orders/order.hpp"
+#include "Model/Entities/Orders/moveorder.hpp"
 #include "Model/environment.hpp"
 
 //! Leg Class

@@ -1,5 +1,7 @@
 #include "environment.hpp"
-#include "Entities/Agents/agent.hpp"
+
+#include "Entities/Bodies/body.hpp"
+#include "Entities/Bodies/rabody.hpp"
 
 //Constructeur
 Environment::Environment(const int &length, const int &width)
@@ -8,7 +10,8 @@ Environment::Environment(const int &length, const int &width)
 
 //Destructeur
 Environment::~Environment(){
-    m_entities.clear();
+    m_bodies.clear();
+    m_agents.clear();
 }
 
 //Retourne la longueur de l'environnement
@@ -38,17 +41,17 @@ void Environment::getArea(double x, double z){
 
 //Ajoute un lien vers un agent dans l'environnement
 void Environment::addEntity(EntityType type, Body* body){
-    m_bodies.push_back(body);
+
+    if(type == EntityType::PLAYER)
+        m_bodies.push_back(body);
+    else if(type == EntityType::AGENT)
+        m_agents.push_back(dynamic_cast<RABody*>(body));
 }
 
 //Emet un son à un point (x,z,y)
 void Environment::emitSound(double x, double z, double y, double power){
     SoundStimulus sound(x, z, y, power);
 
-    for(std::list<Entity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++){
-        if((*it)->getType() == EntityType::AGENT){
-            Agent *agent = dynamic_cast<Agent*>(*it);
-            agent->getBody()->catchSound(sound);
-        }
-    }
+    for(std::list<RABody*>::iterator it = m_agents.begin(); it != m_agents.end(); it++)
+            *(*it) << sound;
 }

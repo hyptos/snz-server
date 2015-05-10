@@ -14,11 +14,9 @@
 #include "Model/constantes.hpp"
 #include "Model/Info/infoentity.hpp"
 #include "Model/Info/infoaction.hpp"
-#include "Bodies/body.hpp"
-#include "Model/model.hpp"
 
 class SNZ_Model;
-
+class Body;
 
 //! Entity Class
 /*!

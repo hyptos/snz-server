@@ -12,7 +12,10 @@
 #include <vector>
 
 #include "sensormodule.hpp"
-#include "Model/Bodies/MotorModules/motormodule.hpp"
+#include "Model/Entities/Bodies/MotorModules/motormodule.hpp"
+#include "Model/Entities/Bodies/rabody.hpp"
+
+class RABody;
 
 ///! ReflexSensor class
 /*!
@@ -26,10 +29,10 @@ class ReflexSensor : public SensorModule {
 	public :
 
 		///Constructeur par défaut
-		ReflexSensor();
+		ReflexSensor(RABody*);
 
 		///Constructeur avec paramètres
-		ReflexSensor(std::vector<MotorModule*>);
+		ReflexSensor(std::vector<MotorModule*>, RABody*);
 
 		///Destructeur
 		virtual ~ReflexSensor() = 0;

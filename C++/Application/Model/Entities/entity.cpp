@@ -1,12 +1,17 @@
 #include "entity.hpp"
 
+#include "Bodies/body.hpp"
+#include "Model/model.hpp"
+
 //Constructeur
 Entity::Entity(InfoEntity* info, Body* body, SNZ_Model* model)
-    : m_info(info), m_body(body) m_model(model){
+    : m_info(info), m_body(body), m_model(model){
 }
 
 //Destructeur
 Entity::~Entity(){
+    delete m_info;
+    delete m_body;
 }
 
 
@@ -39,8 +44,8 @@ void Entity::setBody(Body* body){
 
 
 ///Indique un action extérieur sur l'entité
-void notifyAction(InfoAction action){
-    m_body << action; 
+void Entity::notifyAction(InfoAction action){
+    *m_body << action;
 }
 
 ///Indique une modification des coordonnées du corps à l'entité
@@ -65,5 +70,5 @@ void Entity::notifyDirection(double dx, double dz, double dy){
 
 //Vérifie l'égalité entre deux Entités
 bool Entity::operator ==(const Entity& entity){
-    return (m_info->getId() == entity.getInfo().getId());
+    return (m_info->getEntity() == entity.getInfo().getEntity());
 }

@@ -36,6 +36,6 @@ void InfoPlayer::setMoveState(AgentMoveState moveState){
 }
 
 //Modifie l'état de santé du joueur
-void InfoPlayer::setHealth(AgentHealthState){
+void InfoPlayer::setHealth(AgentHealthState health){
 	m_health = health;
 }

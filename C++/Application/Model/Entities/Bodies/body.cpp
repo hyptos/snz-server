@@ -1,5 +1,8 @@
 #include "body.hpp"
 
+#include "Model/environment.hpp"
+#include "Model/Entities/entity.hpp"
+
 //Constructeur
 Body::Body(Environment *env, double x, double z, double y, double dx, double dz, double dy, Entity* entity)
     : m_environment(env), m_x(x), m_z(z), m_y(y), m_dx(dx), m_dz(dz), m_dy(dy), m_entity(entity){

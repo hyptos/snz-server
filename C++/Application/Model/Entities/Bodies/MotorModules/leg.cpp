@@ -34,6 +34,7 @@ void Leg::operator()(){
 		if(!m_orders.empty()){
 			m_mutex.lock();
 			Order order = m_orders.front();
+			m_orders.pop_front();
 			m_mutex.unlock();
 
 			//Si c'est un ordre d'arret
@@ -43,7 +44,8 @@ void Leg::operator()(){
 				m_body->unlock();
 			}
 			else if(order.getType() == OrderType::MOVE){
-				MoveOrder morder = dynamic_cast<MoveOrder> order;
+				Order *tmp = &order;
+				MoveOrder *morder = dynamic_cast<MoveOrder*>(tmp);
 
 				//On récupère les coordonnées actuelles
 				m_body->lock();
@@ -52,9 +54,9 @@ void Leg::operator()(){
 				m_body->unlock();
 
 				//On calcule la direction à prendre
-				double dist = std::sqrt(std::pow(morder.getX() - x, 2.0) + std::pow(morder.getZ() - z, 2.0));
-				double dx = morder.getX() - x / dist;
-				double dz = morder.getZ() - z / dist;
+				double dist = std::sqrt(std::pow(morder->getX() - x, 2.0) + std::pow(morder->getZ() - z, 2.0));
+				double dx = morder->getX() - x / dist;
+				double dz = morder->getZ() - z / dist;
 
 				//On indique la nouvelle direction et qu'on se déplace
 				m_body->lock();

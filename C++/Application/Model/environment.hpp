@@ -13,9 +13,11 @@
 #include <list>
 #include <climits>
 
-#include "Entities/Bodies/body.hpp"
 #include "Stimuli/soundstimulus.hpp"
-#include "Model/constantes.hpp"
+#include "constantes.hpp"
+
+class Body;
+class RABody;
 
 //! Environment Class
 /*!
@@ -59,7 +61,8 @@ class Environment {
         const int m_width;          ///< Largeur de l'environnement (Axe Z)
         const int m_height;         ///< Hauteur de l'environnement (Axe Y)
 
-        std::list<Body*> m_bodies;  ///< Liste des agents reliés à l'environnement
+        std::list<Body*> m_bodies;  ///< Liste des bodies simple reliés à l'environnement
+        std::list<RABody*> m_agents;    ///< Liste des corps des agents
 };
 
 #endif // ENVIRONMENT_HPP

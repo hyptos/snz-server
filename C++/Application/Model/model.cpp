@@ -7,8 +7,8 @@ SNZ_Model::SNZ_Model(int env_size, int nbZ)
     std::srand(std::time(NULL));
 
     for(int i = 0 ; i < nbZ ; i++){
-        InfoAgent info(0, AgentType::ZOMBIE, AgentMoveState::WALK, AgentHealthState::NORMAL, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX);
-        addEntity(info);
+        InfoAgent info(0, AgentType::ZOMBIE, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, AgentMoveState::WALK, AgentHealthState::NORMAL);
+        addEntity(&info);
     }
 }
 
@@ -16,7 +16,10 @@ SNZ_Model::SNZ_Model(int env_size, int nbZ)
 SNZ_Model::~SNZ_Model(){
     delete m_environment;
 
-    m_entities.clear();
+    while(!m_entities.empty()){
+        delete m_entities.back();
+        m_entities.pop_back();
+    }
 }
 
 //Connecte à la "vue"
@@ -24,7 +27,7 @@ void SNZ_Model::connect_to_view(ModelView* view){
     m_view = view;
 
     for(std::vector<Entity*>::iterator it = m_entities.begin() ; it != m_entities.end() ; it++)
-        m_view->setEntity(it->getInfo());
+        m_view->setEntity((*it)->getInfo());
 }
 
 //Notifie la vue d'un changement chez une entitée
@@ -44,21 +47,23 @@ unsigned long long SNZ_Model::getNbEntities(){
 }
 
 //Ajoute une entité au modèle (TODO)
-unsigned long long SNZ_Model::addEntity(InfoEntity entity){
+unsigned long long SNZ_Model::addEntity(InfoEntity *entity){
     unsigned long long id = m_nbEntities++;
     int env_size = m_environment->getLength();
 
-    if(entity.getType() == EntityType::PLAYER){
-        Player* player = new Player(id, entity.getX(), entity.getZ(), entity.getY(), entity.getDX(), entity.getDZ(), entity.getDY(), this);
+    if(entity->getType() == EntityType::PLAYER){
+        InfoPlayer *info = dynamic_cast<InfoPlayer*>(entity);
+        Player* player = new Player(id, m_environment, info->getX(), info->getZ(), info->getY(), info->getDX(), info->getDZ(), info->getDY(), info->getMoveState(), info->getHealth(), this);
     
         m_entities.push_back(player);
-        m_environment->addEntity(player->getBody());
+        m_environment->addEntity(EntityType::PLAYER, player->getBody());
     }
-    else if(entity.getType() == EntityType::AGENT){
-        ZAgent *zombie = new ZAgent(id, m_environment, entity.getX(), entity.getZ(), entity.getY(), entity.getDX(), entity.getDZ(), entity.getDY(), this);
+    else if(entity->getType() == EntityType::AGENT){
+        InfoAgent *info = dynamic_cast<InfoAgent*>(entity);
 
+        Zombie *zombie = new Zombie(id, m_environment, info->getX(), info->getZ(), info->getY(), info->getDX(), info->getDZ(), info->getDY(), info->getMoveState(), info->getHealth(), this);
         m_entities.push_back(zombie);
-        m_environment->addEntity(zombie->getBody());
+        m_environment->addEntity(EntityType::AGENT, zombie->getBody());
     }
 
     return id;

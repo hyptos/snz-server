@@ -1,7 +1,7 @@
 #include "motormodule.hpp"
 
 //Constructeur
-MotorModule::MotorModule(Body* body) 
+MotorModule::MotorModule(RABody* body) 
 	: Module(), m_body(body) {
 }
 

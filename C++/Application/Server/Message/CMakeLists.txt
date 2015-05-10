@@ -6,4 +6,5 @@ add_library(Message SHARED ${SRC})
 
 target_link_libraries(Message Qt5::Core)
 target_link_libraries(Message Qt5::Gui)
+target_link_libraries(Message Qt5::Widgets)
 target_link_libraries(Message Utility)

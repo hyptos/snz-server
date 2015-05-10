@@ -12,10 +12,10 @@
 
 #include "Model/constantes.hpp"
 #include "Model/module.hpp"
-#include "Model/Bodies/rabody.hpp"
+#include "Model/Entities/Bodies/rabody.hpp"
 #include "Model/Entities/Orders/order.hpp"
 
-class Body;
+class RABody;
 
 //! MotorModule class
 /*!

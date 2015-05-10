@@ -16,7 +16,7 @@ InfoObject::InfoObject(const InfoObject& info)
 }
 
 //Destructeur
-virtual InfoObject::~InfoObject(){
+InfoObject::~InfoObject(){
 }
 
 //Retourne le type de l'object

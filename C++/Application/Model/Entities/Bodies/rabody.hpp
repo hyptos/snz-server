@@ -12,11 +12,12 @@
 #include <vector>
 
 #include "body.hpp"
-#include "Model/Entities/Agents/reactiveagent.hpp"
-#include "Sensor/reflexsensor.hpp"
-#include "Motor/motormodule.hpp"
+#include "Model/Stimuli/stimulus.hpp"
 
 class ReactiveAgent;
+class SensorModule;
+class ReflexSensor;
+class MotorModule;
 
 //! RABody class
 /*!

@@ -15,15 +15,16 @@
 #include <ctime>
 #include <climits>
 
-#include "Entities/Agents/zagent.hpp"
+#include "Entities/Agents/zombie.hpp"
 #include "Entities/player.hpp"
 #include "environment.hpp"
 #include "constantes.hpp"
 #include "Info/infoentity.hpp"
- #include "Info/infoagent.hpp"
+#include "Info/infoagent.hpp"
 #include "Model/modelview.hpp"
 
 class ModelView;
+class Entity;
 
 class SNZ_Model {
 
@@ -51,7 +52,7 @@ class SNZ_Model {
         /*!
          * \return l'ID que le modèle a donné à l'entité ajouté
          */
-        virtual unsigned long long addEntity(InfoEntity);
+        virtual unsigned long long addEntity(InfoEntity*);
 
         //TODO notifyAction
 

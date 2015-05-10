@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-#include <Model/constantes.hp>
+#include <Model/constantes.hpp>
 
 //! Order class
 /*!
@@ -28,13 +28,13 @@ class Order{
 		Order(OrderType);
 
 		///Constructeur par copie
-		Oder(const Order&);
+		Order(const Order&);
 
 		///Destructeur
 		virtual ~Order();
 
 		///Retourne le type de l'ordre
-		virtual OrderType getType();
+		virtual OrderType getType() const;
 
 	protected :
 

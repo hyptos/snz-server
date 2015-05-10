@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "Model/Entities/entity.hpp"
+#include "Model/Info/infoagent.hpp"
 #include "Model/Entities/Bodies/rabody.hpp"
 
 class RABody;

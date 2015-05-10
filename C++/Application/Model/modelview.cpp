@@ -19,11 +19,12 @@ ModelView::~ModelView(){
 
 void ModelView::connect_to_model(SNZ_Model* model){
     m_model = model;
+    m_entities.resize(m_model->getNbEntities());
 }
 
 void ModelView::setEntity(InfoEntity info){
-    if(m_entities.size() > info.getId())
-        m_entities[info.getId()] = info;
+    if(m_entities.size() > info.getEntity())
+        m_entities[info.getEntity()] = info;
 }
 
 void ModelView::repaint_scene(){
@@ -47,8 +48,8 @@ void ModelView::mousePressEvent(QMouseEvent *event)
         else if (event->button() == Qt::RightButton){
 
             int env_size = m_model->getEnvironment()->getLength();
-            InfoEntity player(0, EntityType::AGENT, event->x(), event->y(), 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX);
-            player.setEntity(m_model->addEntity(player));
+            InfoPlayer player(0, event->x(), event->y(), 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, AgentMoveState::WALK, AgentHealthState::NORMAL);
+            player.setEntity(m_model->addEntity(&player));
             m_entities.push_back(player);
         }
     }

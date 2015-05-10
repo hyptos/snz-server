@@ -15,13 +15,11 @@
 #include <thread>
 #include <chrono>
 
+#include "Model/module.hpp"
 #include "Model/constantes.hpp"
-#include "Model/environment.hpp"
-#include "Model/Entities/entity.hpp"
 #include "Model/Info/infoaction.hpp"
 
 class Environment;
-
 class Entity;
 
 
@@ -31,7 +29,7 @@ class Entity;
  * et méthodes communs aux Body des différents
  * Agents du SMA.
  */
-class Body : Module {
+class Body : public Module {
 
     public :
 

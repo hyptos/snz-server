@@ -1,12 +1,17 @@
 #include "sensormodule.hpp"
 
 //Constructeur
-SensorModule::SensorModule() 
-	: Module() {
+SensorModule::SensorModule(SensorType type, Body* body) 
+	: Module(), m_type(type), m_body(body) {
 }
 
 //Destructeur
 SensorModule::~SensorModule(){
+}
+
+//Retourne le type du senseur
+SensorType SensorModule::getType() const{
+	return m_type;
 }
 
 //Retourne l'acuité du senseur

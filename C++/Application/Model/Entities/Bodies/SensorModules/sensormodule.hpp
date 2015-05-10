@@ -12,7 +12,11 @@
 #include <list>
 
 #include "Model/module.hpp"
+#include "Model/constantes.hpp"
 #include "Model/Stimuli/stimulus.hpp"
+#include "Model/Entities/Bodies/body.hpp"
+
+class Body;
 
 //! SensorModule class
 /*!
@@ -25,10 +29,13 @@ class SensorModule : public Module {
 	public : 
 
 		///Constructeur
-		SensorModule();
+		SensorModule(SensorType, Body*);
 
 		///Destructeur
 		virtual ~SensorModule() = 0;
+
+		///Retourne le type du senseur
+		virtual SensorType getType() const;
 
 		///Retourne l'acuité du senseur
 		virtual double getAcuity() const;
@@ -41,9 +48,13 @@ class SensorModule : public Module {
 
 	protected :
 
+		SensorType m_type;				///< Type de senseur
+
 		double m_acuity;				///< Acuité du senseur (1.0 par défaut)
 
 		std::list<Stimulus> m_stimuli;	///< file de stimuli captés par le senseur
+
+		Body* m_body;					///< Pointeur sur le corps de l'agent
 };
 
 #endif	//SENSOR_MODULE_HPP

@@ -38,10 +38,10 @@ class MoveOrder : public Order {
 		virtual ~MoveOrder();
 
 		///Retourne la coordonnée x du point à atteindre
-		virtual double getX();
+		virtual double getX() const;
 
 		///Retourne la coordonnée z du point à atteindre
-		virtual double getZ();		
+		virtual double getZ() const;		
 
 	protected :
 

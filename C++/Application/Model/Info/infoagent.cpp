@@ -16,7 +16,7 @@ InfoAgent::InfoAgent(const InfoAgent& info)
 }
 
 //Destructeur
-virtual InfoAgent::~InfoAgent(){
+InfoAgent::~InfoAgent(){
 }
 
 //Retourne le type de l'agent

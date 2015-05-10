@@ -20,11 +20,11 @@ MoveOrder::~MoveOrder(){
 }
 
 //Retourne coordonnée x
-double MoveOrder::getX(){
+double MoveOrder::getX() const{
 	return m_x;
 }
 
 //Retourne coordonnée z
-double MoveOrder::getZ(){
+double MoveOrder::getZ() const{
 	return m_z;
 }
