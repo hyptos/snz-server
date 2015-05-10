@@ -31,6 +31,9 @@ class MoveOrder : public Order {
 		 */
 		MoveOrder(double, double);
 
+		///Constructeur par copie
+		MoveOrder(const MoveOrder&);
+
 		///Destructeur
 		virtual ~MoveOrder();
 

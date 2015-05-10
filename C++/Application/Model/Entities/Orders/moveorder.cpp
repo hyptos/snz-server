@@ -10,6 +10,11 @@ MoveOrder::MoveOrder(double x, double z)
 	: Order(OrderType::MOVE), m_x(x), m_z(z){
 }
 
+//Constructeur par copie
+MoveOrder::MoveOrder(const MoveOrder& order) 
+	: Order(order.getType()), m_x(order.getX()), m_z(order.getZ()){	
+}
+
 //Destructeur
 MoveOrder::~MoveOrder(){
 }

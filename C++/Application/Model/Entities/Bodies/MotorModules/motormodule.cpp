@@ -2,7 +2,7 @@
 
 //Constructeur
 MotorModule::MotorModule(Body* body) 
-	: m_body(body) {
+	: Module(), m_body(body) {
 }
 
 //Destructeur

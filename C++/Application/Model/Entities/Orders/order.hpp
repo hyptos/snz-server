@@ -27,6 +27,9 @@ class Order{
 		///Constructeur
 		Order(OrderType);
 
+		///Constructeur par copie
+		Oder(const Order&);
+
 		///Destructeur
 		virtual ~Order();
 

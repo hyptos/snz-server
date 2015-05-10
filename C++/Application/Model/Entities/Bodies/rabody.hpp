@@ -39,6 +39,12 @@ class RABody : public Body {
 		///Ajoute un module senseur au corps
 		virtual void addSensor(SensorModule*);
 
+		///Retourne la vitesse actuelle du corps
+		virtual double getSpeed();
+
+		///Modifie la vitesse actuelle du corps
+		virtual void setSpeed(double);
+
 		///Surcharge de l'opérateur <<
 		virtual void operator<<(Stimulus);
 
@@ -47,6 +53,8 @@ class RABody : public Body {
 		std::vector<MotorModule*> m_motors;		///< List des modules moteur du body
 
 		std::vector<ReflexSensor*> m_reflexes;	///< List des modules senseur/reflexes
+
+		double m_speed;							///< vitesse de déplacement de l'agent
 };
 
 #endif //RA_BOBY_HPP

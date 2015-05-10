@@ -20,18 +20,28 @@ RABody::~RABody(){
 	}
 }
 
-///Ajoute un module moteur au corps
+//Ajoute un module moteur au corps
 void RABody::addMotor(MotorModule* motor){
 	m_motors.push_back(motor);
 }
 
-///Ajoute un module senseur au corps
+//Ajoute un module senseur au corps
 void RABody::addSensor(SensorModule* sensor){
 	if(sensor->getType() == SensorType::REFLEX)
 		m_reflexes.push_back(sensor);
 }
 
-///Surcharge de l'opérateur <<
+//Retourne la vitesse de l'agent
+double RABody::getSpeed(){
+	return m_speed;
+}
+
+//Modifie la vitesse de l'agent
+void RABody::setSpeed(double speed){
+	m_speed = speed;
+}
+
+//Surcharge de l'opérateur <<
 void RABody::operator<<(Stimulus stimulus){
 	//For each sensor
 	for(std::vector<ReflexSensor*>::iterator it = m_reflexes.begin() ; it != m_reflexes.begin() ; it++)

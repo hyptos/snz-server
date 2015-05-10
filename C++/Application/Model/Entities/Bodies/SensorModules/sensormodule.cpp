@@ -1,7 +1,8 @@
 #include "sensormodule.hpp"
 
 //Constructeur
-SensorModule::SensorModule(){
+SensorModule::SensorModule() 
+	: Module() {
 }
 
 //Destructeur

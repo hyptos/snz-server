@@ -101,3 +101,16 @@ void Body::setDirection(double dx, double dz, double dy){
 //Indique au corps une action faite sur lui (TODO)
 void Body::operator<<(InfoAction action){
 }
+
+//Surcharge de l'opérateur()
+void Body::operator()(){}
+
+//Vérouille le mutex du body
+void Body::lock(){
+    m_mutex.lock();
+}
+
+//Dévérouille le mutex du body
+void Body::unlock(){
+    m_mutex.unlock();
+}

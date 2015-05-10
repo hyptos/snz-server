@@ -31,7 +31,7 @@ class Entity;
  * et méthodes communs aux Body des différents
  * Agents du SMA.
  */
-class Body {
+class Body : Module {
 
     public :
 
@@ -96,6 +96,19 @@ class Body {
 
         ///Indique au corps une action faite sur lui
         virtual void operator<<(InfoAction);
+
+        ///Surchage de l'operateur ()
+        /*!
+         * par défaut ne fait rien.
+         */
+        virtual void operator()();
+
+
+        ///Vérouille le mutex du body
+        virtual void lock();
+
+        ///Dévérouille le mutex du body
+        virtual void unlock();
 
     protected :
 
