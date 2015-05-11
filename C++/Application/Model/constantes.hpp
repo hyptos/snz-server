@@ -1,6 +1,6 @@
 /**
- * File: constante.h
- * Author: Antoine
+ * File: constantes.hpp
+ * Author: Antoine "Avzgui" Richard
  *
  * Created on April 14, 2015, 3:07 PM
  */
@@ -27,8 +27,10 @@ enum AgentType {
 
 //Détermine le type d'un Objet
 enum ObjectType {
-    MOVABLE = 9,
-    STATIC = 10
+    CHAIR = 9,
+    SWORD = 10,
+    BUILDING = 30,
+    HOUSE = 31
 };
 
 //Détermine l'état du mouvement d'un Agent (ou d'un Player)
@@ -56,7 +58,7 @@ enum ActionType {
 };
 
 //Détermine le type d'ordre donné par le Brain d'un Agent sur son Body
-enum BrainOrderType {
+enum OrderType {
     MOVE = 23,
     STAY = 24,
     ATTACK = 25,
@@ -68,6 +70,12 @@ enum BrainOrderType {
 enum StimulusType {
     SOUND = 28,
     VISUAL = 29
+};
+
+//Détermine le type d'un senseur
+enum SensorType {
+    REFLEX = 32,
+    COGNITIVE = 33
 };
 
 #endif // CONSTANTE_HPP

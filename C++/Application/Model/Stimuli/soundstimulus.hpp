@@ -13,6 +13,13 @@
 #include "stimulus.hpp"
 #include "Model/constantes.hpp"
 
+
+//! SoundStimulus class
+/*!
+ * La classe SoundStimulus contient les informations
+ * concernant un son propagé dans l'envrionnement et
+ * capté par un ou plusieurs corps.
+ */
 class SoundStimulus : public Stimulus {
 
     public :

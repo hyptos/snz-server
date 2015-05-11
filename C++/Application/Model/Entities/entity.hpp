@@ -13,10 +13,10 @@
 
 #include "Model/constantes.hpp"
 #include "Model/Info/infoentity.hpp"
+#include "Model/Info/infoaction.hpp"
 
 class SNZ_Model;
-
-class Agent;
+class Body;
 
 //! Entity Class
 /*!
@@ -30,70 +30,37 @@ class Entity {
     public :
 
         ///Constructeur
-        Entity(unsigned long long, EntityType, double, double, double, double, double, double, SNZ_Model*);
+        Entity(InfoEntity*, Body*, SNZ_Model*);
 
         ///Destructeur
         virtual ~Entity() = 0;
 
-        ///Retourne l'ID de l'Entité
-        virtual unsigned long long getId() const;
 
-        ///Retourne le Type de l'Entité
-        virtual EntityType getType() const;
-
-        ///Retourne la Coordonnée X de l'Entité dans l'Environnement
-        virtual double getX() const;
-
-        ///Retourne la Coordonnée Z de l'Entité dans l'Environnement
-        virtual double getZ() const;
-
-        ///Retourne la Coordonnée Y de l'Entité dans l'Environnement
-        virtual double getY() const;
-
-        ///Retourne la Coordonnée X du vecteur direction de l'Entité
-        virtual double getDX() const;
-
-        ///Retourne la Coordonnée Z du vecteur direction de l'Entité
-        virtual double getDZ() const;
-
-        ///Retourne la Coordonnée Y du vecteur direction de l'Entité
-        virtual double getDY() const;
 
         ///Retourne les informations concernant l'Entité
-        virtual InfoEntity getInfo() const;
+        virtual InfoEntity* getInfo() const;
+
+        ///Retourne un pointeur sur le corps de l'entité
+        virtual Body* getBody();
 
 
 
+        ///Modifie les Infos de l'Entité
+        virtual void setInfo(InfoEntity*);
 
-        //Modifie l'ID de l'Entité
-        virtual void setId(unsigned long long);
+        ///Modifie le pointeur sur le corps de l'entité
+        virtual void setBody(Body *);
 
-        //Modifie le Type de l'Entité
-        virtual void setType(EntityType);
 
-        ///Modifie la Coordonnée X de l'Entité dans l'Environnement
-        virtual void setX(double);
 
-        ///Modifie la Coordonnée Z de l'Entité dans l'Environnement
-        virtual void setZ(double);
+        ///Indique un action extérieur sur l'entité
+        virtual void notifyAction(InfoAction);
 
-        ///Modifie la Coordonnée Y de l'Entité dans l'Environnement
-        virtual void setY(double);
+        ///Indique une modification des coordonnées du corps à l'entité
+        virtual void notifyCoordinates(double, double, double);
 
-        ///Modifie la Coordonnée X du vecteur direction de l'Entité
-        virtual void setDX(double);
-
-        ///Modifie la Coordonnée Z du vecteur direction de l'Entité
-        virtual void setDZ(double);
-
-        ///Modifie la Coordonnée Y du vecteur direction de l'Entité
-        virtual void setDY(double);
-
-        ///Modifie les Coordonnées X, Z et Y de l'entité dans l'environnement
-        virtual void setCoordinates(double, double, double);
-
-        ///Modifie les Coordonnées X, Z et Y du vecteur direction de l'entité
-        virtual void setDirection(double, double, double);
+        ///Indique une modification de la direction du corps à l'entité
+        virtual void notifyDirection(double, double, double);
 
 
 
@@ -105,20 +72,11 @@ class Entity {
 
     protected :
 
-        unsigned long long m_id;  ///< Id de l'entité
+        InfoEntity *m_info;       ///< Informations sur l'entité
 
-        EntityType m_type;        ///< Type de l'entité
+        Body *m_body;             ///< Corps de l'entité dans l'environnement
 
-        double m_x;                     ///< Coordonnée X de l'entité dans l'environnement
-        double m_z;                     ///< Coordonnée Z de l'entité dans l'environnement
-        double m_y;                     ///< Coordonnée Y de l'entité dans l'environnement
-
-        double m_dx;                    ///< Coordonnée X du vecteur direction de l'entité
-        double m_dz;                    ///< Coordonnée Z du vecteur direction de l'entité
-        double m_dy;                    ///< Coordonnée Y du vecteur direction de l'entité
-
-
-        SNZ_Model *m_model;                ///< Lien vers le modèle pour notifier des changements
+        SNZ_Model *m_model;       ///< Lien vers le modèle pour notifier des changements
 };
 
 #endif // ENTITY_HPP

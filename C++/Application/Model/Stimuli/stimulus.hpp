@@ -26,11 +26,14 @@ class Stimulus {
         ///Constructeur
         Stimulus(StimulusType);
 
+        ///Constructeur par copie
+        Stimulus(const Stimulus&);
+
         ///Destructeur
-        virtual ~Stimulus() = 0;
+        virtual ~Stimulus();
 
         ///Retourne le type du Stimulus
-        virtual StimulusType getType();
+        virtual StimulusType getType() const;
 
     protected :
 
