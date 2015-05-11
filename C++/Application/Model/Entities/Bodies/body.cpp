@@ -83,6 +83,7 @@ void Body::setDY(double dy){
 
 //Modifie les Coordonnées X, Z et Y de l'entité dans l'environnement
 void Body::setCoordinates(double x, double z, double y){
+
     m_x = x;
     m_z = z;
     m_y = y;
@@ -92,6 +93,7 @@ void Body::setCoordinates(double x, double z, double y){
 
 //Modifie les Coordonnées X, Z et Y du vecteur direction de l'entité
 void Body::setDirection(double dx, double dz, double dy){
+
     m_dx = dx;
     m_dz = dz;
     m_dy = dy;

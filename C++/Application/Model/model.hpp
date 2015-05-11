@@ -40,7 +40,7 @@ class SNZ_Model {
         void connect_to_view(ModelView*);
 
         ///Notifie un changement d'une entité à la "vue" ou à l'environnement
-        void notifyEntity(InfoEntity);
+        void notifyEntity(InfoEntity*);
 
         ///Retourne le lien vers l'Environnement
         virtual Environment* getEnvironment();

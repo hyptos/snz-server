@@ -11,9 +11,13 @@ ZEar::~ZEar(){
 
 //Surchage de l'opérateur <<
 void ZEar::operator<<(Stimulus* stimulus){
+
 	if(stimulus->getType() == StimulusType::SOUND){
+
+		SoundStimulus *cpy = new SoundStimulus(*(dynamic_cast<SoundStimulus*>(stimulus)));
+
 		m_mutex.lock();
-		m_stimuli.push_back(stimulus);
+		m_stimuli.push_back(cpy);
 		m_mutex.unlock();
 	}
 }
@@ -38,19 +42,25 @@ void ZEar::operator()(){
 			m_body->lock();
 			double x = m_body->getX();
 			double z = m_body->getZ();
-			double y = m_body->getY();	
+			double y = m_body->getY();
 			m_body->unlock();
 
 			//On calcule la distance entre le corps et l'épicentre du son
 			double dist = std::sqrt(std::pow(sound->getX() - x, 2.0) + std::pow(sound->getZ() - z, 2.0) + std::pow(sound->getY() - y, 2.0));
-			
+
+
 			//Ici l'acuité permet d'entendre un son de plus ou moins loin
-			if(dist < sound->getPower()*m_acuity){
-				MoveOrder *order = new MoveOrder(x, z);
+			if(dist < sound->getPower() * m_acuity){
+
+				MoveOrder *order = new MoveOrder(sound->getX(), sound->getZ());
 
 				for(std::vector<MotorModule*>::iterator it = m_motors.begin() ; it != m_motors.end() ; it++)
 					*(*it) << order;
+
+				delete order;
 			}
+
+			delete stimulus;
 		}
 
 		//On attends un dixième de seconde

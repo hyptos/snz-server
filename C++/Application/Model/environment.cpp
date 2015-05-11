@@ -41,7 +41,6 @@ void Environment::getArea(double x, double z){
 
 //Ajoute un lien vers un agent dans l'environnement
 void Environment::addEntity(EntityType type, Body* body){
-
     if(type == EntityType::PLAYER)
         m_bodies.push_back(body);
     else if(type == EntityType::AGENT)
@@ -50,9 +49,11 @@ void Environment::addEntity(EntityType type, Body* body){
 
 //Emet un son à un point (x,z,y)
 void Environment::emitSound(double x, double z, double y, double power){
-
+    
     SoundStimulus *sound = new SoundStimulus(x, z, y, power);
 
     for(std::list<RABody*>::iterator it = m_agents.begin(); it != m_agents.end(); it++)
             *(*it) << sound;
+
+    delete sound;
 }

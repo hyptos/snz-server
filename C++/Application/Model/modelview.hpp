@@ -41,7 +41,7 @@ class ModelView : public QWidget{
 
         void connect_to_model(SNZ_Model*);
 
-        void setEntity(InfoEntity);
+        void setEntity(InfoEntity*);
 
     public slots :
 
@@ -58,7 +58,7 @@ class ModelView : public QWidget{
         QGraphicsScene* m_scene;
         QGraphicsView*  m_view;
 
-        std::vector<InfoEntity> m_entities;
+        std::vector<InfoEntity*> m_entities;
 };
 
 #endif // SERVERVIEW_H

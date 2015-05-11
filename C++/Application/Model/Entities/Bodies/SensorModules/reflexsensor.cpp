@@ -21,13 +21,5 @@ ReflexSensor::~ReflexSensor(){
 
 //Ajoute un module moteur
 void ReflexSensor::addMotor(MotorModule* module){
-	bool ok = true;
-
-	for(std::vector<MotorModule*>::iterator it = m_motors.begin() ; it != m_motors.end() && ok ; it++){
-		if(*it == module)
-			ok = false;
-	}
-
-	if(ok)
-		m_motors.push_back(module);
+	m_motors.push_back(module);
 }

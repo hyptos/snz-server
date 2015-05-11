@@ -7,8 +7,9 @@ SNZ_Model::SNZ_Model(int env_size, int nbZ)
     std::srand(std::time(NULL));
 
     for(int i = 0 ; i < nbZ ; i++){
-        InfoAgent info(0, AgentType::ZOMBIE, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, AgentMoveState::WALK, AgentHealthState::NORMAL);
-        addEntity(&info);
+        InfoAgent *info = new InfoAgent(0, AgentType::ZOMBIE, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
+        addEntity(info);
+        delete info;
     }
 }
 
@@ -31,7 +32,8 @@ void SNZ_Model::connect_to_view(ModelView* view){
 }
 
 //Notifie la vue d'un changement chez une entitée
-void SNZ_Model::notifyEntity(InfoEntity info){
+void SNZ_Model::notifyEntity(InfoEntity* info){
+
     if(m_view != NULL)
         m_view->setEntity(info);
 }

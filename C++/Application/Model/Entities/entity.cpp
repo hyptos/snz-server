@@ -17,12 +17,12 @@ Entity::~Entity(){
 
 
 //Retourne les informations sur l'Entité (TODO)
-InfoEntity Entity::getInfo() const {
-    return *m_info;
+InfoEntity* Entity::getInfo() const{
+    return m_info;
 }
 
 //Retourne un pointeur sur le corps de l'entité
-Body* Entity::getBody() const{
+Body* Entity::getBody(){
     return m_body;
 }
 
@@ -50,25 +50,27 @@ void Entity::notifyAction(InfoAction action){
 
 ///Indique une modification des coordonnées du corps à l'entité
 void Entity::notifyCoordinates(double x, double z, double y){
+
     m_info->setX(x);
     m_info->setZ(z);
     m_info->setY(y);
 
-    m_model->notifyEntity(*m_info);
+    m_model->notifyEntity(m_info);
 }
 
 ///Indique une modification de la direction du corps à l'entité
 void Entity::notifyDirection(double dx, double dz, double dy){
+
     m_info->setDX(dx);
     m_info->setDZ(dz);
     m_info->setDY(dy);
 
-    m_model->notifyEntity(*m_info);
+    m_model->notifyEntity(m_info);
 }
 
 
 
 //Vérifie l'égalité entre deux Entités
 bool Entity::operator ==(const Entity& entity){
-    return (m_info->getEntity() == entity.getInfo().getEntity());
+    return (m_info->getEntity() == entity.getInfo()->getEntity());
 }

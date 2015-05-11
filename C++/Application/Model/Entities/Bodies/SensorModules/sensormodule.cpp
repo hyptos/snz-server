@@ -26,7 +26,10 @@ void SensorModule::setAcuity(double acuity){
 
 //Surchage opérateur 
 void SensorModule::operator<<(Stimulus* stimulus){
+
+	Stimulus *cpy = new Stimulus(*stimulus);
+
 	m_mutex.lock();
-	m_stimuli.push_back(stimulus);
+	m_stimuli.push_back(cpy);
 	m_mutex.unlock();
 }

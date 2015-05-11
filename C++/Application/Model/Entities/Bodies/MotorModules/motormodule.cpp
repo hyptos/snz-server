@@ -11,7 +11,10 @@ MotorModule::~MotorModule(){
 
 //Surchage opérateur <<
 void MotorModule::operator<<(Order* order){
+
+	Order *cpy = new Order(*order);
+
 	m_mutex.lock();
-	m_orders.push_back(order);
+	m_orders.push_back(cpy);
 	m_mutex.unlock();
 }

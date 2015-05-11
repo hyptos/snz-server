@@ -38,10 +38,10 @@ class Entity {
 
 
         ///Retourne les informations concernant l'Entité
-        virtual InfoEntity getInfo() const;
+        virtual InfoEntity* getInfo() const;
 
         ///Retourne un pointeur sur le corps de l'entité
-        virtual Body* getBody() const;
+        virtual Body* getBody();
 
 
 
