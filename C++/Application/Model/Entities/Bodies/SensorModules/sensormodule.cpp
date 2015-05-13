@@ -7,6 +7,10 @@ SensorModule::SensorModule(SensorType type, Body* body)
 
 //Destructeur
 SensorModule::~SensorModule(){
+	while(!m_stimuli.empty()){
+		delete m_stimuli.back();
+		m_stimuli.pop_back();
+	}
 }
 
 //Retourne le type du senseur

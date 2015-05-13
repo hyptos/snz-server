@@ -1,5 +1,5 @@
 build/
-C++/CMakeLists.txt
+C++/conf.cmake
 CMakeLists.txt.user
 *.creator.user
 *.files

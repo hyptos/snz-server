@@ -14,6 +14,11 @@ ModelView::ModelView(int w, int h)
 ModelView::~ModelView(){
     delete m_view;
     delete m_scene;
+
+    while(!m_entities.empty()){
+        delete m_entities.back();
+        m_entities.pop_back();
+    }
 }
 
 void ModelView::connect_to_model(SNZ_Model* model){

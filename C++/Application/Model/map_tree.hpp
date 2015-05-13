@@ -31,13 +31,15 @@ class MapTree{
 		/*!
 		 * \param length : longueur de la zone
 		 * \param width : largeur de la zone
+		 * \param x : coordonnée x de la zone
+		 * \param z : coordonnée z de la zone
 		 * \param max : taille maximum d'une zone (length et width <= max)
 		 * \param detph : profondeur du noeud dans l'arbre
 		 */
-		MapTree(double length, double width, double max, int depth) 
-			: m_depth(depth), m_length(length), m_width(width), m_right(NULL), m_left(NULL), m_element(NULL){
+		MapTree(double length, double width, double x, double z, double max, int depth)
+			: m_depth(depth), m_length(length), m_width(width), m_x(x), m_z(z), m_right(NULL), m_left(NULL), m_element(NULL){
 
-			std::cout << "MapTree Constructeur, depth : " << m_depth << " size : (" << m_length << ", " << m_width << ")" << std::endl;
+			std::cout << "MapTree Constructeur, depth : " << m_depth << " size : (" << m_length << ", " << m_width << ")   pos : (" << m_x << ", " << m_z << ")" << std::endl;
 
 			//Si on a atteint la taille minimum
 			if(m_length <= max && m_width <= max){
@@ -50,13 +52,13 @@ class MapTree{
 				//Si profondeur est impair, on divise la largeur
 				if(m_depth % 2){
 					//Si impair, le fils gauche aura une largeur plus grande
-					m_left = new MapTree<T>(m_length, m_width / 2.0, max, m_depth+1);
-					m_right = new MapTree<T>(m_length, m_width / 2.0, max, m_depth+1);
+					m_left = new MapTree<T>(m_length, m_width / 2.0, m_x, m_z + m_width / 2.0, max, m_depth+1);
+					m_right = new MapTree<T>(m_length, m_width / 2.0, m_x, m_z, max, m_depth+1);
 				}
 				else // Sinon, on divise la longueur
 				{
-					m_left = new MapTree<T>(m_length / 2.0, m_width, max, m_depth+1);
-					m_right = new MapTree<T>(m_length / 2.0, m_width, max, m_depth+1);
+					m_left = new MapTree<T>(m_length / 2.0, m_width, m_x, m_z, max, m_depth+1);
+					m_right = new MapTree<T>(m_length / 2.0, m_width, m_x + m_length / 2.0, m_z, max, m_depth+1);
 				}
 			}
 		}
@@ -83,7 +85,6 @@ class MapTree{
 
 			int rdepth = 0;
 			int ldepth = 0;
-		
 
 			if(m_right != NULL)
 				rdepth = m_right->getDepth();
@@ -135,18 +136,20 @@ class MapTree{
 					std::cout << "Fils de droite" << std::endl;
 					return m_right->getLength(x, z);
 				}
+
+				std::cout << "Fils de gauche" << std::endl;
+				return m_left->getLength(x, z);
 			}
 			else{ // Sinon c'est la longueur qui a été divisé
 				//Fils de droite si X <= Length / 2
 				if(x <= m_length / 2.0){
-					std::cout << "Fils de droite" << std::endl;
-					return m_right->getLength(x, z);
+					std::cout << "Fils de gauche" << std::endl;
+					return m_left->getLength(x, z);
 				}
-			}
 
-			//Fils de gauche sinon
-			std::cout << "Fils de gauche" << std::endl;
-			return m_left->getLength(x, z);
+				std::cout << "Fils de droite" << std::endl;
+				return m_right->getLength(x, z);
+			}
 		}
 
 		///Retourne la largeur de la zone
@@ -170,18 +173,94 @@ class MapTree{
 					std::cout << "Fils de droite" << std::endl;
 					return m_right->getWidth(x, z);
 				}
+
+				std::cout << "Fils de gauche" << std::endl;
+				return m_left->getWidth(x, z);
 			}
 			else{ // Sinon c'est la longueur qui a été divisé
 				//Fils de droite si X <= Length / 2
 				if(x <= m_length / 2.0){
-					std::cout << "Fils de droite" << std::endl;
-					return m_right->getWidth(x, z);
+					std::cout << "Fils de gauche" << std::endl;
+					return m_left->getWidth(x, z);
 				}
+
+				std::cout << "Fils de droite" << std::endl;
+				return m_right->getWidth(x, z);
 			}
+		}
+
+		///Retourne la coordonnée X de la zone
+		virtual double getX(double x, double z) const{
+			std::cout << "MapTree getX, depth : " << m_depth << std::endl;
+
+			//Si l'élément n'est pas NULL, on est arrivé
+			if(m_element != NULL){
+
+				std::cout << "Zone trouvée, x : " << m_x << std::endl;
+				return m_x;
+			}
+
+			//Sinon on recherche chez les noeuds fils en fonction de la profondeur
 			
-			//Fils de gauche sinon
-			std::cout << "Fils de gauche" << std::endl;
-			return m_left->getWidth(x, z);
+			//Si la profondeur est impair celà veut dire que c'est la largeur qui a été divisé
+			if(m_depth % 2)
+			{
+				//Fils de droite si Z <= Width / 2
+				if(z <= m_width / 2.0){
+					std::cout << "Fils de droite" << std::endl;
+					return m_right->getX(x, z);
+				}
+
+				std::cout << "Fils de gauche" << std::endl;
+				return m_left->getX(x, z);
+			}
+			else{ // Sinon c'est la longueur qui a été divisé
+				//Fils de droite si X <= Length / 2
+				if(x <= m_length / 2.0){
+					std::cout << "Fils de gauche" << std::endl;
+					return m_left->getX(x, z);
+				}
+
+				std::cout << "Fils de droite" << std::endl;
+				return m_right->getX(x, z);
+			}
+		}
+
+		///Retourne la coordonnée X de la zone
+		virtual double getZ(double x, double z) const{
+			std::cout << "MapTree getZ, depth : " << m_depth << std::endl;
+
+			//Si l'élément n'est pas NULL, on est arrivé
+			if(m_element != NULL){
+
+				std::cout << "Zone trouvée, z : " << m_z << std::endl;
+				return m_z;
+			}
+
+			//Sinon on recherche chez les noeuds fils en fonction de la profondeur
+			
+			//Si la profondeur est impair celà veut dire que c'est la largeur qui a été divisé
+			if(m_depth % 2)
+			{
+				//Fils de droite si Z <= Width / 2
+				if(z <= m_width / 2.0){
+					std::cout << "Fils de droite" << std::endl;
+					return m_right->getZ(x, z);
+				}
+
+				std::cout << "Fils de gauche" << std::endl;
+				return m_left->getZ(x, z);
+			}
+			else{ // Sinon c'est la longueur qui a été divisé
+				//Fils de droite si X <= Length / 2
+				if(x <= m_length / 2.0){
+					std::cout << "Fils de gauche" << std::endl;
+					return m_left->getZ(x, z);
+				}
+
+				std::cout << "Fils de droite" << std::endl;
+				return m_right->getZ(x, z);
+			}
 		}
 
 		///Retourne le noeuds fils de droite
@@ -213,21 +292,24 @@ class MapTree{
 			{
 				//Fils de droite si Z <= Width / 2
 				if(z <= m_width / 2.0){
-					std::cout << "Element dans la zone de droite" << std::endl;
+					std::cout << "Fils de droite" << std::endl;
 					return m_right->getElement(x, z);
 				}
+
+				std::cout << "Fils de gauche" << std::endl;
+				return m_left->getElement(x, z);
 			}
 			else{ // Sinon c'est la longueur qui a été divisé
+				
 				//Fils de droite si X <= Length / 2
 				if(x <= m_length / 2.0){
-					std::cout << "Element dans la zone de droite" << std::endl;
-					return m_right->getElement(x, z);
+					std::cout << "Fils de gauche" << std::endl;
+					return m_left->getElement(x, z);
 				}
+
+				std::cout << "Fils de droite" << std::endl;
+				return m_right->getElement(x, z);
 			}
-			
-			//Fils de gauche sinon
-			std::cout << "Element dans la zone de gauche" << std::endl;
-			return m_left->getElement(x, z);
 		}
 
 
@@ -237,7 +319,6 @@ class MapTree{
 			
 			//Si l'élément n'est pas NULL, on est arrivé
 			if(m_element != NULL){
-
 				std::cout << "Element trouvé" << std::endl;
 				*m_element = element; //On recopie la valeur
 			}
@@ -261,12 +342,12 @@ class MapTree{
 				//Fils de droite si X <= Length / 2
 				if(x <= m_length / 2.0){
 					std::cout << "Element dans la zone de droite" << std::endl;
-					return m_right->setElement(element, x, z);
+					return m_left->setElement(element, x, z);
 				}
 
 				//Fils de gauche sinon
 				std::cout << "Element dans la zone de gauche" << std::endl;
-				return m_left->setElement(element, x, z);
+				return m_right->setElement(element, x, z);
 			}
 		}
 
@@ -277,6 +358,10 @@ class MapTree{
 		double m_length;		///< Longueur de la zone (X).
 
 		double m_width;			///< Largeur de la zone (Z).
+
+		double m_x;				///< Coordonnée X de la zone
+
+		double m_z;				///< Coordonnée Z de la zone
 
 		MapTree<T>* m_right; 	///< Noeud pour la zone <= size / 2
 

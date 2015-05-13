@@ -7,6 +7,12 @@ ZEar::ZEar(RABody* body)
 
 //Destructeur
 ZEar::~ZEar(){
+	stop();
+
+	while(!m_stimuli.empty()){
+		delete m_stimuli.back();
+		m_stimuli.pop_back();
+	}
 }
 
 //Surchage de l'opérateur <<

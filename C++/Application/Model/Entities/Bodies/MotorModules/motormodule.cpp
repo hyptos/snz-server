@@ -7,6 +7,12 @@ MotorModule::MotorModule(RABody* body)
 
 //Destructeur
 MotorModule::~MotorModule(){
+	stop();
+
+	while(!m_orders.empty()){
+		delete m_orders.back();
+		m_orders.pop_back();
+	}
 }
 
 //Surchage opérateur <<

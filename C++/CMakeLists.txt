@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 2.8)
 
+include(conf.cmake)
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g")
 
 project ( Mif39 CXX )
 
-list ( APPEND CMAKE_PREFIX_PATH "/home/avzgui/Qt/5.4/gcc_64/lib/cmake")
+list ( APPEND CMAKE_PREFIX_PATH ${QT_PATH})
 find_package(Qt5Core)
 find_package(Qt5Gui)
 FIND_PACKAGE(Qt5Widgets)

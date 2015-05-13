@@ -7,11 +7,12 @@ Leg::Leg(RABody* body)
 
 //Destructeur
 Leg::~Leg(){
-	//On arrète la thread
 	stop();
 
-	//On clear les ordres reçut
-	m_orders.clear();
+	while(!m_orders.empty()){
+		delete m_orders.back();
+		m_orders.pop_back();
+	}
 }
 
 //Surchage de l'opérateur <<

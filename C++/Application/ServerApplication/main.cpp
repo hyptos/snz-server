@@ -14,13 +14,14 @@
 #include "Model/model.hpp"
 #include "Model/map_tree.hpp"
 
-#define NB_ZOMBIE   100
+#define NB_ZOMBIE   10
 #define ENV_SIZE    500
 
 int main ( int argc, char** argv ) {
     
     //Main Server
-    /*SNZ_Server s;
+    /*
+    SNZ_Server s;
     implMessageDispatcher dispatcher;
     MessageHandlerExample msgH(&s);
     dispatcher.registerMessageHandler('u', (IMessageHandler*) &msgH);
@@ -30,9 +31,11 @@ int main ( int argc, char** argv ) {
     while(s.isRunning()) {
         pthread_yield();
     }
-    return 0;*/
+    return 0;
+    //*/
 
     //Main IA
+    //*
     QApplication app(argc, argv);
 
     SNZ_Model model(ENV_SIZE, NB_ZOMBIE);
@@ -45,17 +48,27 @@ int main ( int argc, char** argv ) {
 
     view.show();
 
+    return app.exec();
+    //*/
 
-    /*MapTree<int> map_tree(ENV_SIZE, ENV_SIZE, 100, 0);
+    /*
+    MapTree<int> map_tree(ENV_SIZE, ENV_SIZE, 0, 0, 100, 0);
 
     int depth = map_tree.getDepth();
     int nbLeaf = map_tree.getNbLeaf();
-    double length = map_tree.getLength(25.6, 96.1);
-    double width = map_tree.getWidth(25.6, 96.1);
+    double length = map_tree.getLength(12, 12);
+    double width = map_tree.getWidth(12, 12);
+    double x = map_tree.getX(12, 12);
+    double z = map_tree.getZ(12, 12);
 
     std::cout << std::endl << "Arbre de profondeur : " << depth << " possédant " << nbLeaf << " feuilles" << std::endl;
 
-    std::cout << std::endl << "Zone du point (25.6, 96.1) Longueur : " << length << " Largeur : " << width << std::endl;*/    
+    std::cout << std::endl << "Zone du point (12, 12) Longueur : " << length << " Largeur : " << width << std::endl;
+
+    std::cout << std::endl << "Coordonnée de la zone du point (12, 12) x : " << x << " z : " << z << std::endl;
+    ///
 
     return app.exec();
+
+    //*/
 }
