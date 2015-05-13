@@ -36,29 +36,33 @@ template<> void decode(ByteBuffer &buff, InfoEntity &res) {
     char code;
     unsigned long long entity;
     int type;
-    float x = 0,y =0,z =0,dx=0,dy=0,dz=0;
+    double x = 0,y =0,z =0,dx=0,dy=0,dz=0;
     unsigned long long test = 0;
 
     index = fromBuffer<unsigned long long>(buff,index,&entity,1); //8
 
     index = fromBuffer<int>(buff,index,&type,1); //4
 
-    index = fromBuffer<float>(buff,index,&dx,1); //4
+    index = fromBuffer<double>(buff,index,&x,1); //4
 
-    index = fromBuffer<float>(buff,index,&dz,1); //4
+    index = fromBuffer<double>(buff,index,&z,1); //4
 
-    index = fromBuffer<float>(buff,index,&dy,1); //4
+    index = fromBuffer<double>(buff,index,&y,1); //4
 
-    index = fromBuffer<float>(buff,index,&x,1); //4
+    index = fromBuffer<double>(buff,index,&dx,1); //4
 
-    index = fromBuffer<float>(buff,index,&z,1); //4
+    index = fromBuffer<double>(buff,index,&dz,1); //4
 
-    index = fromBuffer<float>(buff,index,&y,1); //4
+    index = fromBuffer<double>(buff,index,&dy,1); //4
 
-    std::cout << "x" << x << " y" << y << " type" << type << std::endl  ;
 
-    if(type == 1){
+    std::cout << "x" << x << " z" << z << " type" << type << std::endl  ;
+
+    if(type == 2){
        res.setType(EntityType::PLAYER);
+    } 
+    else if(type == 1){
+       res.setType(EntityType::OBJECT);  
     } else {
         res.setType(EntityType::AGENT);
     }

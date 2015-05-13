@@ -4,6 +4,7 @@ project ( ServeurApplication CXX )
 file ( GLOB_RECURSE SRC *.?pp )
 add_executable(ServeurApplication ${SRC})
 
+target_link_libraries(ServeurApplication Model)
 target_link_libraries(ServeurApplication Server)
 target_link_libraries(ServeurApplication Qt5::Core)
 target_link_libraries(ServeurApplication Qt5::Widgets)

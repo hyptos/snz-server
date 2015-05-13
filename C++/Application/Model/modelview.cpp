@@ -1,14 +1,14 @@
 #include "modelview.hpp"
 
 ModelView::ModelView(int w, int h)
-    : m_model(NULL), m_scene(new QGraphicsScene), m_view(new QGraphicsView(m_scene, this)){
+    : m_model(NULL), m_server(NULL), m_scene(new QGraphicsScene), m_view(new QGraphicsView(m_scene, this)){
 
     setFixedSize(w, h);
     m_scene->addRect(QRectF(0, 0, width(), height()), QPen(QColor("green"), 1), QBrush(QColor("green")));
 
     QTimer* timer = new QTimer();
     timer->connect(timer, SIGNAL(timeout()), this, SLOT(repaint_scene()));
-    timer->start(17);
+    timer->start(1000);
 }
 
 ModelView::~ModelView(){
@@ -26,6 +26,10 @@ void ModelView::connect_to_model(SNZ_Model* model){
     m_entities.resize(m_model->getNbEntities(), NULL);
 }
 
+void ModelView::connect_to_server(ICommunicationServer* server){
+    m_server = server;
+}
+
 void ModelView::setEntity(InfoEntity* info){
 
     InfoEntity* cpy = new InfoEntity(*info);
@@ -38,6 +42,15 @@ void ModelView::setEntity(InfoEntity* info){
 }
 
 void ModelView::repaint_scene(){
+
+    if(m_server != NULL){
+        for(std::vector<InfoEntity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++){
+            InfoEntity* cpy = new InfoEntity(*(*it));
+            m_server->sendBroadCast(cpy);
+            delete cpy;
+        }
+    }
+
     m_scene->addRect(QRectF(0, 0, width(), height()), QPen(QColor("green"), 1), QBrush(QColor("green")));
 
     for(std::vector<InfoEntity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++){

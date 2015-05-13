@@ -16,6 +16,11 @@ InfoPlayer::InfoPlayer(const InfoPlayer& info)
 	: InfoEntity(info.getEntity(), info.getType(), info.getX(), info.getZ(), info.getY(), info.getDX(), info.getDZ(), info.getDY()), m_moveState(info.getMoveState()), m_health(info.getHealth()){	
 }
 
+//Constructeur par copie
+InfoPlayer::InfoPlayer(const InfoEntity& info) 
+	: InfoEntity(info), m_moveState(AgentMoveState::WALK), m_health(AgentHealthState::NORMAL){	
+}
+
 //Destructeur
 InfoPlayer::~InfoPlayer(){
 }

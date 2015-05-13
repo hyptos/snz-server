@@ -114,7 +114,7 @@ void InfoEntity::affiche(){
 }
 
 
-///
+//
 char InfoEntity::getCode() {
     return MSG_WOPAINFO;
 }
@@ -124,7 +124,7 @@ ByteBuffer* InfoEntity::toByteBuffer() {
     //Ordre d'encodage de l'infoEntity dans le ByteBuffer
     ByteBuffer *res = new ByteBuffer();
     res->append(toBuffer<char>(MSG_WOPAINFO));
-    res->append(toBuffer<int>(this->getEntity()));
+    res->append(toBuffer<unsigned long long>(this->getEntity()));
     res->append(toBuffer<int>(this->getType()));
     res->append(toBuffer<double>(this->getX()));
     res->append(toBuffer<double>(this->getZ()));

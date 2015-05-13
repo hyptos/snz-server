@@ -32,6 +32,9 @@ class InfoPlayer : public InfoEntity
 		///Constructeur par copie
 		InfoPlayer(const InfoPlayer&);
 
+		///Constructeur par copie
+		InfoPlayer(const InfoEntity&); 
+
 		///Destructeur
 		virtual ~InfoPlayer();
 

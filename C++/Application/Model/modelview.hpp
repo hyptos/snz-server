@@ -1,5 +1,5 @@
 /**
- * File: modelview.h
+ * File: modelview.hpp
  * Author: Antoine "Azvgui" Richard
  *
  * Created on April 14, 2015, 3:05 PM
@@ -24,9 +24,9 @@
 
 #include "model.hpp"
 #include "Info/infoentity.hpp"
+#include "Server/communicationserver.hpp"
 
- class SNZ_Model;
-
+class SNZ_Model;
 
 class ModelView : public QWidget{
 
@@ -41,6 +41,8 @@ class ModelView : public QWidget{
 
         void connect_to_model(SNZ_Model*);
 
+        void connect_to_server(ICommunicationServer*);
+
         void setEntity(InfoEntity*);
 
     public slots :
@@ -54,6 +56,7 @@ class ModelView : public QWidget{
     private :
 
         SNZ_Model* m_model;
+        ICommunicationServer* m_server;
 
         QGraphicsScene* m_scene;
         QGraphicsView*  m_view;

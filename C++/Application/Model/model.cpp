@@ -34,7 +34,7 @@ void SNZ_Model::connect_to_view(ModelView* view){
 //Notifie la vue d'un changement chez une entitée
 void SNZ_Model::notifyEntity(InfoEntity* info){
 
-    if(info->getType() == EntityType::AGENT){  
+    if(info->getType() == EntityType::AGENT){ 
         if(m_view != NULL)
             m_view->setEntity(info);
     }
