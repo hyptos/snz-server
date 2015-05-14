@@ -9,8 +9,8 @@
 #define MODEL_HPP
 
 #include <iostream>
-#include <list>
-#include <vector>
+#include <map>
+#include <utility>
 #include <cstdlib>
 #include <ctime>
 #include <climits>
@@ -54,18 +54,21 @@ class SNZ_Model {
          */
         virtual unsigned long long addEntity(InfoEntity*);
 
+        ///Supprime une Entité du modèle
+        virtual void removeEntity(unsigned long long);
+
         //TODO notifyAction
 
     protected :
 
         Environment* m_environment;         ///< Pointeur sur l'environnement des entités
 
-        std::vector<Entity*> m_entities;    ///< Vecteur de liens vers les entités
+        std::map<unsigned long long, Entity*> m_entities;    ///< Map de liens vers les entités
 
         unsigned long long m_nbEntities;    ///< Nombre d'entités présentes dans le modèle
 
 
-        ModelView* m_view;                    ///< lien vers le model
+        ModelView* m_view;                  ///< lien vers le model
 };
 
 #endif // MODEL_HPP

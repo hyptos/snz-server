@@ -15,13 +15,13 @@
 #include "Model/map_tree.hpp"
 #include "Model/controler.hpp"
 
-#define NB_ZOMBIE   1
+#define NB_ZOMBIE   10
 #define ENV_SIZE    500
 
-int main ( int argc, char** argv ) {
+int main(int argc, char** argv){
     
     //Main Server
-    //*
+    /*
     SNZ_Server s;
 
     Controler control;
@@ -47,13 +47,13 @@ int main ( int argc, char** argv ) {
 
     ModelView view(ENV_SIZE, ENV_SIZE);
 
-    control.connect_to_model(&model);
+    //control.connect_to_model(&model);
 
     view.connect_to_model(&model);
 
     model.connect_to_view(&view);
 
-    view.connect_to_server(&s);
+    //view.connect_to_server(&s);
 
     view.show();
 

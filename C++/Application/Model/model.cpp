@@ -17,31 +17,34 @@ SNZ_Model::SNZ_Model(int env_size, int nbZ)
 SNZ_Model::~SNZ_Model(){
     delete m_environment;
 
-    while(!m_entities.empty()){
-        delete m_entities.back();
-        m_entities.pop_back();
-    }
+    //Désallocation des entités
+    for (auto& x: m_entities)
+        delete x.second;
+
+    //Clear la map
+    m_entities.clear();
 }
 
 //Connecte à la "vue"
 void SNZ_Model::connect_to_view(ModelView* view){
     m_view = view;
 
-    for(std::vector<Entity*>::iterator it = m_entities.begin() ; it != m_entities.end() ; it++)
-        m_view->setEntity((*it)->getInfo());
+    if(view != NULL){
+        for (auto& x: m_entities)
+            view->addEntity(x.second->getInfo());
+    }
 }
 
 //Notifie la vue d'un changement chez une entitée
 void SNZ_Model::notifyEntity(InfoEntity* info){
 
-    if(info->getType() == EntityType::AGENT){ 
+    if(info->getType() == EntityType::AGENT){
         if(m_view != NULL)
             m_view->setEntity(info);
     }
     else if(info->getType() == EntityType::PLAYER){
-        if(info->getEntity() < m_nbEntities){
-            m_entities[info->getEntity()]->setInfo(info);
-        }
+        if(m_entities.find(info->getEntity()) != m_entities.end())
+            m_entities.find(info->getEntity())->second->setInfo(info);
     }
 }
 
@@ -64,16 +67,30 @@ unsigned long long SNZ_Model::addEntity(InfoEntity *entity){
         InfoPlayer *info = dynamic_cast<InfoPlayer*>(entity);
         Player* player = new Player(id, m_environment, info->getX(), info->getZ(), info->getY(), info->getDX(), info->getDZ(), info->getDY(), info->getMoveState(), info->getHealth(), this);
     
-        m_entities.push_back(player);
+        m_entities.insert(std::pair<unsigned long long, Entity*>(id, player));
         m_environment->addEntity(EntityType::PLAYER, player->getBody());
     }
     else if(entity->getType() == EntityType::AGENT){
         InfoAgent *info = dynamic_cast<InfoAgent*>(entity);
 
         Zombie *zombie = new Zombie(id, m_environment, info->getX(), info->getZ(), info->getY(), info->getDX(), info->getDZ(), info->getDY(), info->getMoveState(), info->getHealth(), this);
-        m_entities.push_back(zombie);
+        
+        m_entities.insert(std::pair<unsigned long long, Entity*>(id, zombie));
         m_environment->addEntity(EntityType::AGENT, zombie->getBody());
     }
 
+    if(m_view != NULL){
+        entity->setEntity(id);
+        m_view->addEntity(entity);
+    }
+
     return id;
+}
+
+//Supprime une entité selon son id
+void SNZ_Model::removeEntity(unsigned long long entity){
+    if(m_entities.find(entity) != m_entities.end()){
+        delete m_entities.find(entity)->second;
+        m_entities.erase(m_entities.find(entity));
+    }
 }

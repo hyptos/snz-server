@@ -2,4 +2,4 @@
 
 # -- Configuration -- #
 create file conf.cmake in directory C++
-write set(QT_PATH "path to qt cmake") in conf.cmake
+and write set(QT_PATH "ur path to qt cmake") in conf.cmake

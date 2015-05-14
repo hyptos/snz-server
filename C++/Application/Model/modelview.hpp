@@ -9,8 +9,8 @@
 #define SERVERVIEW_H
 
 #include <iostream>
-#include <vector>
-#include <list>
+#include <map>
+#include <utility>
 #include <cmath>
 #include <cstdlib>
 #include <thread>
@@ -45,9 +45,15 @@ class ModelView : public QWidget{
 
         void setEntity(InfoEntity*);
 
+        void addEntity(InfoEntity*);
+
+        void removeEntity(unsigned long long);
+
     public slots :
 
         void repaint_scene();
+
+        void notifyServer();
 
     protected :
 
@@ -61,7 +67,7 @@ class ModelView : public QWidget{
         QGraphicsScene* m_scene;
         QGraphicsView*  m_view;
 
-        std::vector<InfoEntity*> m_entities;
+        std::map<unsigned long long, InfoEntity*> m_entities;
 };
 
 #endif // SERVERVIEW_H

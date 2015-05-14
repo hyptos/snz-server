@@ -6,24 +6,29 @@ ModelView::ModelView(int w, int h)
     setFixedSize(w, h);
     m_scene->addRect(QRectF(0, 0, width(), height()), QPen(QColor("green"), 1), QBrush(QColor("green")));
 
-    QTimer* timer = new QTimer();
-    timer->connect(timer, SIGNAL(timeout()), this, SLOT(repaint_scene()));
-    timer->start(1000);
+    QTimer* timerView = new QTimer();
+    timerView->connect(timerView, SIGNAL(timeout()), this, SLOT(repaint_scene()));
+    timerView->start(100);
+
+    QTimer* timerServ = new QTimer();
+    timerServ->connect(timerServ, SIGNAL(timeout()), this, SLOT(notifyServer()));
+    timerServ->start(1000);
 }
 
 ModelView::~ModelView(){
     delete m_view;
     delete m_scene;
 
-    while(!m_entities.empty()){
-        delete m_entities.back();
-        m_entities.pop_back();
-    }
+    //Désallocation des entités
+    for (auto& x: m_entities)
+        delete x.second;
+
+    //Clear la map
+    m_entities.clear();
 }
 
 void ModelView::connect_to_model(SNZ_Model* model){
     m_model = model;
-    m_entities.resize(m_model->getNbEntities(), NULL);
 }
 
 void ModelView::connect_to_server(ICommunicationServer* server){
@@ -34,34 +39,48 @@ void ModelView::setEntity(InfoEntity* info){
 
     InfoEntity* cpy = new InfoEntity(*info);
 
-    if(m_entities.size() > cpy->getEntity()){
+    if(m_entities.find(info->getEntity()) != m_entities.end()){
         InfoEntity* tmp = m_entities[cpy->getEntity()];
         m_entities[cpy->getEntity()] = cpy;
         delete tmp;
     }
 }
 
-void ModelView::repaint_scene(){
+void ModelView::addEntity(InfoEntity* info){
 
-    if(m_server != NULL){
-        for(std::vector<InfoEntity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++){
-            InfoEntity* cpy = new InfoEntity(*(*it));
-            m_server->sendBroadCast(cpy);
-            delete cpy;
-        }
+    if(m_entities.find(info->getEntity()) == m_entities.end()){
+        InfoEntity* cpy = new InfoEntity(*info);
+        m_entities.insert(std::pair<unsigned long long, InfoEntity*>(cpy->getEntity(), cpy));
     }
+}
+
+void ModelView::removeEntity(unsigned long long entity){
+    if(m_entities.find(entity) != m_entities.end()){
+        delete m_entities.find(entity)->second;
+        m_entities.erase(m_entities.find(entity));
+    }
+}
+
+void ModelView::repaint_scene(){
 
     m_scene->addRect(QRectF(0, 0, width(), height()), QPen(QColor("green"), 1), QBrush(QColor("green")));
 
-    for(std::vector<InfoEntity*>::iterator it = m_entities.begin(); it != m_entities.end(); it++){
-        
-        if(*it != NULL){
-            InfoEntity entity = *(*it);
+    for (auto& x: m_entities){
+        InfoEntity entity = *(x.second);
 
-            if(entity.getType() == EntityType::PLAYER)
-                m_scene->addEllipse(entity.getX(), entity.getZ(), 5, 5, QPen(QColor("yellow"), 1), QBrush(QColor("yellow")));
-            else
-                m_scene->addEllipse(entity.getX(), entity.getZ(), 5, 5, QPen(QColor("red"), 1), QBrush(QColor("red")));
+        if(entity.getType() == EntityType::PLAYER)
+            m_scene->addEllipse(entity.getX(), entity.getZ(), 5, 5, QPen(QColor("yellow"), 1), QBrush(QColor("yellow")));
+        else
+            m_scene->addEllipse(entity.getX(), entity.getZ(), 5, 5, QPen(QColor("red"), 1), QBrush(QColor("red")));
+    }
+}
+
+void ModelView::notifyServer(){
+    if(m_server != NULL){
+        for (auto& x: m_entities){
+            InfoEntity* cpy = new InfoEntity(*(x.second));
+            m_server->sendBroadCast(cpy);
+            delete cpy;
         }
     }
 }
@@ -74,8 +93,8 @@ void ModelView::mousePressEvent(QMouseEvent *event){
         else if (event->button() == Qt::RightButton){
             int env_size = m_model->getEnvironment()->getLength();
             InfoPlayer *player = new InfoPlayer(0, event->x(), event->y(), 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, AgentMoveState::WALK, AgentHealthState::NORMAL);
-            player->setEntity(m_model->addEntity(player));
-            m_entities.push_back(player);
+            m_model->addEntity(player);
+            delete player;
         }
     }
 }
