@@ -57,3 +57,36 @@ void Environment::emitSound(double x, double z, double y, double power){
 
     delete sound;
 }
+
+// Retourne les info sur les entités présentes dans un cone de vision
+std::list<InfoEntity> Environment::getInfosInArea(double x, double z, double distance, double alpha, double beta){
+    
+    std::list<InfoEntity> infos;
+
+    for(std::list<Body*>::iterator it = m_bodies.begin(); it != m_bodies.end(); it++){
+
+        (*it)->lock();
+
+        //On commence par regarder ceux dans la bonne distance
+        double dist = std::sqrt(std::pow((*it)->getX() - x, 2.0) + std::pow((*it)->getZ() - z, 2.0));
+
+        if(dist <= distance){
+
+            //On calcul son angle par rapport à la position (x, z)
+            double x2 = ((*it)->getX() - x) / dist;
+            double z2 = ((*it)->getZ() - x) / dist;
+            double gamma = atan(z2 / x2);
+
+            //On regarde si l'entité se trouve dans le cone
+            if(gamma > beta - alpha || gamma < beta + alpha){
+                InfoEntity info(0, EntityType::PLAYER, (*it)->getX(), (*it)->getZ(), (*it)->getY(), (*it)->getDX(), (*it)->getDZ(), (*it)->getDY());
+            
+                infos.push_back(info);
+            }
+        }
+
+        (*it)->unlock();
+    }
+
+    return infos;
+}

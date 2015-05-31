@@ -12,9 +12,11 @@
 #include <vector>
 #include <list>
 #include <climits>
+#include <cmath>
 
 #include "Stimuli/soundstimulus.hpp"
 #include "constantes.hpp"
+#include "Info/infoentity.hpp"
 
 class Body;
 class RABody;
@@ -54,6 +56,9 @@ class Environment {
 
         ///Emet un stimulus sonore à un point (x,z,y) dans l'environnement
         void emitSound(double,double,double,double);
+
+        ///Retourne une liste d'info sur les corps présent dans un cone de vision
+        std::list<InfoEntity> getInfosInArea(double,double,double,double,double);
 
     private :
 
