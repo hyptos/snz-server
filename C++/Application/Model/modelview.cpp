@@ -70,6 +70,8 @@ void ModelView::repaint_scene(){
 
         // Angle de rotation
         double alpha = atan(entity.getDX() / entity.getDZ());
+        if(entity.getDZ() < 0)
+            alpha += M_PI;
 
         //Création du triangle
         QPolygonF triangle;
@@ -77,11 +79,17 @@ void ModelView::repaint_scene(){
             << QPointF(entity.getX() + sin(alpha + 3.0*M_PI_4)*5, entity.getZ() + cos(alpha + 3.0*M_PI_4)*5)
             << QPointF(entity.getX() + sin(alpha + 5.0*M_PI_4)*5, entity.getZ() + cos(alpha + 5.0*M_PI_4)*5);
 
+        QPolygonF cone;
+        cone << QPointF(entity.getX(), entity.getZ())
+            << QPointF(entity.getX() + sin(alpha + M_PI_4)*50, entity.getZ() + cos(alpha + M_PI_4)*50)
+            << QPointF(entity.getX() + sin(alpha - M_PI_4)*50, entity.getZ() + cos(alpha - M_PI_4)*50);
 
         if(entity.getType() == EntityType::PLAYER)
             m_scene->addPolygon(triangle, QPen(QColor("yellow"), 1), QBrush(QColor("yellow")));
-        else
+        else{
+            m_scene->addPolygon(cone, QPen(QColor("orange"), 1), Qt::NoBrush);
             m_scene->addPolygon(triangle, QPen(QColor("red"), 1), QBrush(QColor("red")));
+        }
     }
 }
 
