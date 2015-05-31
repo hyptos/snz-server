@@ -73,9 +73,9 @@ void ModelView::repaint_scene(){
 
         //Création du triangle
         QPolygonF triangle;
-        triangle << QPointF(entity.getX() + sin(alpha)*10, entity.getZ() + cos(alpha)*10)
-            << QPointF(entity.getX() + sin(alpha + M_PI/3.0)*10, entity.getZ() + cos(alpha + M_PI/3.0)*10)
-            << QPointF(entity.getX() + sin(alpha + 2.0*M_PI/3.0)*10, entity.getZ() + cos(alpha + 2.0*M_PI/3.0)*10);
+        triangle << QPointF(entity.getX() + sin(alpha)*5, entity.getZ() + cos(alpha)*5)
+            << QPointF(entity.getX() + sin(alpha + 3.0*M_PI_4)*5, entity.getZ() + cos(alpha + 3.0*M_PI_4)*5)
+            << QPointF(entity.getX() + sin(alpha + 5.0*M_PI_4)*5, entity.getZ() + cos(alpha + 5.0*M_PI_4)*5);
 
 
         if(entity.getType() == EntityType::PLAYER)
