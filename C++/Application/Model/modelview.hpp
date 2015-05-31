@@ -7,6 +7,7 @@
 
 #ifndef SERVERVIEW_H
 #define SERVERVIEW_H
+#define _USE_MATH_DEFINES
 
 #include <iostream>
 #include <map>
@@ -21,6 +22,9 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QMouseEvent>
+#include <QPolygonF>
+#include <QPointF>
+ #include <QTransform>
 
 #include "model.hpp"
 #include "Info/infoentity.hpp"
