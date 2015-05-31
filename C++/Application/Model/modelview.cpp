@@ -69,13 +69,13 @@ void ModelView::repaint_scene(){
         InfoEntity entity = *(x.second);
 
         // Angle de rotation
-        double alpha = atan(entity.getDZ() / entity.getDX());
+        double alpha = atan(entity.getDX() / entity.getDZ());
 
         //Création du triangle
         QPolygonF triangle;
-        triangle << QPointF(entity.getX() - 6*cos(alpha), entity.getZ() + 6*sin(alpha))
-            << QPointF(entity.getX() - 5*cos(alpha+M_PI/3), entity.getZ() + 5*sin(alpha+M_PI/3))
-            << QPointF(entity.getX() - 5*cos(alpha+2*M_PI/3), entity.getZ() + 5*sin(alpha+2*M_PI/3));
+        triangle << QPointF(entity.getX() + sin(alpha)*10, entity.getZ() + cos(alpha)*10)
+            << QPointF(entity.getX() + sin(alpha + M_PI/3.0)*10, entity.getZ() + cos(alpha + M_PI/3.0)*10)
+            << QPointF(entity.getX() + sin(alpha + 2.0*M_PI/3.0)*10, entity.getZ() + cos(alpha + 2.0*M_PI/3.0)*10);
 
 
         if(entity.getType() == EntityType::PLAYER)
