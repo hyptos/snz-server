@@ -58,35 +58,36 @@ void Environment::emitSound(double x, double z, double y, double power){
     delete sound;
 }
 
-// Retourne les info sur les entités présentes dans un cone de vision
-std::list<InfoEntity> Environment::getInfosInArea(double x, double z, double distance, double alpha, double beta){
+// Retourne le stimulus visuel correspondant à une zone de l'environnement
+VisualStimulus Environment::getVisualStimulus(double x, double z, double distance, double alpha, double beta){
     
-    std::list<InfoEntity> infos;
+    VisualStimulus stimulus;
 
     for(std::list<Body*>::iterator it = m_bodies.begin(); it != m_bodies.end(); it++){
 
         (*it)->lock();
+        std::pair<double,double> pos;
+        pos.first = (*it)->getX();
+        pos.second = (*it)->getZ();
+        (*it)->unlock();
 
         //On commence par regarder ceux dans la bonne distance
-        double dist = std::sqrt(std::pow((*it)->getX() - x, 2.0) + std::pow((*it)->getZ() - z, 2.0));
+        double dist = std::sqrt(std::pow(pos.first - x, 2.0) + std::pow(pos.second - z, 2.0));
 
         if(dist <= distance){
 
             //On calcul son angle par rapport à la position (x, z)
-            double x2 = ((*it)->getX() - x) / dist;
-            double z2 = ((*it)->getZ() - x) / dist;
-            double gamma = atan(z2 / x2);
+            double x2 = (pos.first - x) / dist;
+            double z2 = (pos.second - x) / dist;
+            double gamma = atan(x2 / z2);
+            if(z2 < 0)
+                gamma += M_PI;
 
             //On regarde si l'entité se trouve dans le cone
-            if(gamma > beta - alpha || gamma < beta + alpha){
-                InfoEntity info(0, EntityType::PLAYER, (*it)->getX(), (*it)->getZ(), (*it)->getY(), (*it)->getDX(), (*it)->getDZ(), (*it)->getDY());
-            
-                infos.push_back(info);
-            }
+            /*if(gamma > beta - alpha || gamma < beta + alpha)
+                stimulus.insertData(EntityType::PLAYER, pos);*/
         }
-
-        (*it)->unlock();
     }
 
-    return infos;
+    return stimulus;
 }
