@@ -14,7 +14,7 @@
 #include "Model/modelview.hpp"
 #include "Model/controler.hpp"
 
-#define NB_ZOMBIE   10
+#define NB_ZOMBIE   1
 #define ENV_SIZE    500
 
 int main(int argc, char** argv){

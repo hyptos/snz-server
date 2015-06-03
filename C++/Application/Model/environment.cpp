@@ -61,7 +61,7 @@ void Environment::emitSound(double x, double z, double y, double power){
 // Retourne le stimulus visuel correspondant à une zone de l'environnement
 VisualStimulus Environment::getVisualStimulus(double x, double z, double distance, double alpha, double beta){
     
-    VisualStimulus stimulus;
+    std::map<EntityType, std::pair<double, double>> datum;
 
     for(std::list<Body*>::iterator it = m_bodies.begin(); it != m_bodies.end(); it++){
 
@@ -84,10 +84,12 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
                 gamma += M_PI;
 
             //On regarde si l'entité se trouve dans le cone
-            /*if(gamma > beta - alpha || gamma < beta + alpha)
-                stimulus.insertData(EntityType::PLAYER, pos);*/
+            if(gamma > beta - alpha || gamma < beta + alpha)
+                datum.insert(EntityType::PLAYER, pos);
         }
     }
+
+    VisualStimulus stimulus(datum);
 
     return stimulus;
 }
