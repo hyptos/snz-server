@@ -13,14 +13,13 @@
 #include <iostream>
 #include <vector>
 #include <list>
-#include <utility>
 #include <climits>
 #include <cmath>
 
-#include "constantes.hpp"
- 
-#include "Stimuli/visualstimulus.hpp"
 #include "Stimuli/soundstimulus.hpp"
+#include "Stimuli/visualstimulus.hpp"
+#include "constantes.hpp"
+#include "Info/infoentity.hpp"
 
 class Body;
 class RABody;
@@ -61,8 +60,8 @@ class Environment {
         ///Emet un stimulus sonore à un point (x,z,y) dans l'environnement
         void emitSound(double,double,double,double);
 
-        ///Retourne le stimulus visuel correspondant à une zone de l'environnement         
-        VisualStimulus getVisualStimulus(double,double,double,double,double);
+        ///Retourne une liste d'info sur les corps présent dans un cone de vision
+        std::list<InfoEntity> getInfosInArea(double,double,double,double,double);
 
     private :
 

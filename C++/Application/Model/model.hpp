@@ -15,10 +15,10 @@
 #include <ctime>
 #include <climits>
 
-#include "constantes.hpp"
-#include "environment.hpp"
 #include "Entities/Agents/zombie.hpp"
 #include "Entities/player.hpp"
+#include "environment.hpp"
+#include "constantes.hpp"
 #include "Info/infoentity.hpp"
 #include "Info/infoagent.hpp"
 #include "Model/modelview.hpp"

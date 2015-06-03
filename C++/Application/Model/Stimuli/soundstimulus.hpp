@@ -31,22 +31,22 @@ class SoundStimulus : public Stimulus {
         SoundStimulus(const SoundStimulus&);
 
         ///Destructeur
-        ~SoundStimulus();
+        virtual ~SoundStimulus();
 
         ///Retourne la coordonnée X du Son dans l'Environnment
-        double getX() const;
+        virtual double getX() const;
 
         ///Retourne la coordonnée Z du Son dans l'Environnment
-        double getZ() const;
+        virtual double getZ() const;
 
         ///Retourne la coordonnée Y du Son dans l'Environnment
-        double getY() const;
+        virtual double getY() const;
 
         ///Retourne la Puissance du Son
         /*!
          * Plus un son a de puissance, plus il a de chance de s'entendre de loin.
          */
-        double getPower() const;
+        virtual double getPower() const;
 
     protected :
 

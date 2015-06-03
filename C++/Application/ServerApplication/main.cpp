@@ -10,8 +10,9 @@
 
 #include <QApplication>
 #include <QWidget>
-#include "Model/model.hpp"
 #include "Model/modelview.hpp"
+#include "Model/model.hpp"
+#include "Model/map_tree.hpp"
 #include "Model/controler.hpp"
 
 #define NB_ZOMBIE   1

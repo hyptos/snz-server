@@ -9,7 +9,7 @@
 #define VISUAL_STIMULUS_HPP
 
 #include <iostream>
-#include <map>
+#include <list>
 #include <utility>
 
 #include "stimulus.hpp"
@@ -31,25 +31,26 @@ class VisualStimulus : public Stimulus {
 		VisualStimulus(const VisualStimulus&);
 
 		/// Constructeur avec Paramètres
-		VisualStimulus(std::map<EntityType, std::pair<double, double>>);
+		VisualStimulus(std::list<std::pair<EntityType, std::pair<double, double>>>);
 
+		/// Destructeur
+		virtual ~VisualStimulus();
 
 
 		/// Retourne la listes des positions
-		std::map<EntityType, std::pair<double, double>>	getDatum() const;
+		virtual std::list<std::pair<EntityType, std::pair<double, double>>>	getDatum() const;
 
 		/// Retourne le nombre de positions stockées
-		int getSize() const;
-
+		virtual int getSize() const;
 
 
 		//Ajoute un élement à la liste
-		void insertData(EntityType, std::pair<double, double>);
+		virtual void pushData(EntityType, std::pair<double, double>);
 
 	private :
 
-		std::map<EntityType, 
-			std::pair<double, double>> m_datum;	///< Liste de positions
+		std::list<std:pair<EntityType, 
+			std::pair<double, double>>> m_datum;	///< Liste de positions
 
 };
 
