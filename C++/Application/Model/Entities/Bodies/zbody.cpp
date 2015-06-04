@@ -2,6 +2,7 @@
 
 #include "MotorModules/leg.hpp"
 #include "SensorModules/zear.hpp"
+#include "SensorModules/zeye.hpp"
 #include "Model/environment.hpp"
 #include "Model/Entities/Agents/reactiveagent.hpp"
 
@@ -18,12 +19,20 @@ ZBody::ZBody(Environment* env, double x, double z, double y, double dx, double d
 		ear->addMotor(leg);
 		addSensor(ear);
 
+		//Création du module ZEye
+		ZEye *eye = new ZEye(this);
+		eye->addMotor(leg);
+		addSensor(eye);
+
 		//Lancement des threads
 		std::thread th_leg(Module::run, leg);
 		th_leg.detach();
 		
 		std::thread th_ear(Module::run, ear);
 		th_ear.detach();
+
+		std::thread th_eye(Module::run, eye);
+		th_eye.detach();
 }
 
 ZBody::~ZBody(){
