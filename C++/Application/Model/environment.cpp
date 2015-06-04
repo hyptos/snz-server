@@ -72,13 +72,13 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
         (*it)->unlock();
 
         //On commence par regarder ceux dans la bonne distance
-        double dist = std::sqrt(std::pow(pos.first - x, 2.0) + std::pow(pos.second - z, 2.0));
+        double dist = std::sqrt(std::pow(x - pos.first, 2.0) + std::pow(z - pos.second, 2.0));
 
-        if(dist <= distance){
+        if(dist <= distance && dist != 0){
 
             //On calcul son angle par rapport à la position (x, z)
             double x2 = (pos.first - x) / dist;
-            double z2 = (pos.second - x) / dist;
+            double z2 = (pos.second - z) / dist;
             double gamma = atan(x2 / z2);
             if(z2 < 0)
                 gamma += M_PI;
@@ -99,20 +99,19 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
         (*it)->unlock();
 
         //On commence par regarder ceux dans la bonne distance
-        double dist = std::sqrt(std::pow(pos.first - x, 2.0) + std::pow(pos.second - z, 2.0));
+        double dist = std::sqrt(std::pow(x - pos.first, 2.0) + std::pow(z - pos.second, 2.0));
 
-        if(dist <= distance){
-
+        if(dist <= distance && dist != 0){
             //On calcul son angle par rapport à la position (x, z)
             double x2 = (pos.first - x) / dist;
-            double z2 = (pos.second - x) / dist;
+            double z2 = (pos.second - z) / dist;
             double gamma = atan(x2 / z2);
             if(z2 < 0)
                 gamma += M_PI;
 
             //On regarde si l'entité se trouve dans le cone
             if(gamma > beta - alpha || gamma < beta + alpha)
-                stimulus.pushData(EntityType::PLAYER, pos);
+                stimulus.pushData(EntityType::AGENT, pos);
         }
     }
 

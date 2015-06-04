@@ -42,7 +42,8 @@ void ZEye::operator()(){
 		m_body->lock();
 		double x = m_body->getX();
 		double z = m_body->getZ();
-		double y = m_body->getY();
+		double dx = m_body->getDX();
+		double dz = m_body->getDZ();
 		m_body->unlock();
 
 		if(!m_stimuli.empty()){
@@ -55,13 +56,13 @@ void ZEye::operator()(){
 			v_stimulus = dynamic_cast<VisualStimulus*>(stimulus);
 		}
 		else{
-			double beta = atan(x / z);
-			if(z < 0)
+			double beta = atan(dx / dz);
+			if(dz < 0)
 				beta += M_PI;
 
 			v_stimulus = new VisualStimulus(
 				m_body->getEnvironment()->getVisualStimulus(
-					x, z, 50.0*m_acuity, M_PI_4, beta));
+					x, z, 50.0, M_PI_4, beta));
 		}
 
 		// On Récupère les données et on les parcourt
