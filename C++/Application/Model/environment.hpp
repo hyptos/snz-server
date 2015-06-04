@@ -61,7 +61,7 @@ class Environment {
         void emitSound(double,double,double,double);
 
         ///Retourne une liste d'info sur les corps présent dans un cone de vision
-        std::list<InfoEntity> getInfosInArea(double,double,double,double,double);
+        VisualStimulus getVisualStimulus(double,double,double,double,double);
 
     private :
 

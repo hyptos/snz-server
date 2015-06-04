@@ -29,13 +29,13 @@ class InfoAction
 		virtual ~InfoAction();
 
 		///Retourne l'action de l'entité
-		ActionType getAction();
+		ActionType getAction() const;
 
 		///Retourne l'id de l'entité faisant l'action
-        unsigned long long getEntity();
+        unsigned long long getEntity() const;
 
 		///Retourne l'id de l'entité cible (si l'action en a une)
-        unsigned long long getCible();
+        unsigned long long getCible() const;
 
 	private :
 

@@ -18,6 +18,7 @@ VisualStimulus::VisualStimulus(
 
 // Destructeur
 VisualStimulus::~VisualStimulus(){
+	m_datum.clear();
 }
 
 
@@ -35,5 +36,10 @@ int VisualStimulus::getSize() const {
 
 
 // Ajoute une donnée à la liste de donnée
-void VisualStimulus::pushData(EntityType, std::pair<double, double>){
+void VisualStimulus::pushData(EntityType type, std::pair<double, double> pos){
+	std::pair<EntityType, std::pair<double, double>> data;
+	data.first = type;
+	data.second.first = pos.first;
+	data.second.second = pos.second;
+	m_datum.push_back(data);
 }

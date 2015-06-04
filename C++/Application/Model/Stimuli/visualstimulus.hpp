@@ -49,8 +49,8 @@ class VisualStimulus : public Stimulus {
 
 	private :
 
-		std::list<std:pair<EntityType, 
-			std::pair<double, double>>> m_datum;	///< Liste de positions
+		std::list<std::pair<EntityType, 
+			std::pair<double, double>>> m_datum; ///< Liste de positions
 
 };
 

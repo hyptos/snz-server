@@ -59,7 +59,7 @@ void Environment::emitSound(double x, double z, double y, double power){
 }
 
 // Retourne les info sur les entités présentes dans un cone de vision
-std::list<InfoEntity> Environment::getInfosInArea(double x, double z, double distance, double alpha, double beta){
+VisualStimulus Environment::getVisualStimulus(double x, double z, double distance, double alpha, double beta){
     
     VisualStimulus stimulus;
 
@@ -80,10 +80,12 @@ std::list<InfoEntity> Environment::getInfosInArea(double x, double z, double dis
             double x2 = (pos.first - x) / dist;
             double z2 = (pos.second - x) / dist;
             double gamma = atan(x2 / z2);
+            if(z2 < 0)
+                gamma += M_PI;
 
             //On regarde si l'entité se trouve dans le cone
-            /*if(gamma > beta - alpha || gamma < beta + alpha)
-                stimulus.insertData(EntityType::PLAYER, pos);*/
+            if(gamma > beta - alpha || gamma < beta + alpha)
+                stimulus.pushData(EntityType::PLAYER, pos);
         }
     }
 
