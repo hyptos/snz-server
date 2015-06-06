@@ -101,7 +101,10 @@ void Body::setDirection(double dx, double dz, double dy){
     m_entity->notifyDirection(m_dx, m_dz, m_dy);
 }
 
-
+// Retourne si un corps n'est pas le mien
+bool Body::isNotMe(const Body& body){
+    return m_entity->getInfo()->getEntity() != body.m_entity->getInfo()->getEntity();
+}
 
 //Indique au corps une action faite sur lui (TODO)
 void Body::operator<<(InfoAction action){

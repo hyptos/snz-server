@@ -91,6 +91,9 @@ class Body : public Module {
         ///Modifie les Coordonnées X, Z et Y du vecteur direction de l'entité
         virtual void setDirection(double, double, double);
 
+        ///Retourne si un body est moi ou non
+        virtual bool isNotMe(const Body&);
+
 
         ///Indique au corps une action faite sur lui
         virtual void operator<<(InfoAction);

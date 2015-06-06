@@ -18,7 +18,6 @@ Leg::~Leg(){
 //Surchage de l'opérateur <<
 void Leg::operator<<(Order* order){
 	if(order->getType() == OrderType::STAY){
-
 		Order *cpy = new Order(*order);
 
 		m_mutex.lock();

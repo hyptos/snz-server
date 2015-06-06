@@ -57,12 +57,16 @@ void ZEye::operator()(){
 		}
 		else{
 			double beta = atan(dx / dz);
-			if(dz < 0)
-				beta += M_PI;
+			if(dz < 0){
+                if(dx > 0)
+                    beta += M_PI;
+                else 
+                    beta -= M_PI;
+            }
 
 			v_stimulus = new VisualStimulus(
 				m_body->getEnvironment()->getVisualStimulus(
-					x, z, 50.0, M_PI_4, beta));
+					x, z, 50.0, M_PI_4, beta, m_body));
 		}
 
 		// On Récupère les données et on les parcourt

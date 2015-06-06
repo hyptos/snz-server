@@ -59,7 +59,7 @@ void Environment::emitSound(double x, double z, double y, double power){
 }
 
 // Retourne les info sur les entités présentes dans un cone de vision
-VisualStimulus Environment::getVisualStimulus(double x, double z, double distance, double alpha, double beta){
+VisualStimulus Environment::getVisualStimulus(double x, double z, double distance, double alpha, double beta, Body* body){
     
     VisualStimulus stimulus;
 
@@ -74,17 +74,27 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
         //On commence par regarder ceux dans la bonne distance
         double dist = std::sqrt(std::pow(x - pos.first, 2.0) + std::pow(z - pos.second, 2.0));
 
-        if(dist <= distance && dist != 0){
+        if(dist <= distance && body->isNotMe(*(*it))){
 
             //On calcul son angle par rapport à la position (x, z)
             double x2 = (pos.first - x) / dist;
             double z2 = (pos.second - z) / dist;
             double gamma = atan(x2 / z2);
-            if(z2 < 0)
-                gamma += M_PI;
+            if(z2 < 0){
+                if(x2 > 0)
+                    gamma += M_PI;
+                else 
+                    gamma -= M_PI;
+            }
+            
+            double diff = gamma - beta;
+            while(diff < -180) diff += 360;
+            while(diff > 180) diff -= 360;
 
+            std::cout << "Diff : " << std::abs(diff) << " Alpha : " << alpha << std::endl;
+            
             //On regarde si l'entité se trouve dans le cone
-            if(gamma > beta - alpha || gamma < beta + alpha)
+            if(std::abs(diff) <= alpha)
                 stimulus.pushData(EntityType::PLAYER, pos);
         }
     }
@@ -101,16 +111,26 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
         //On commence par regarder ceux dans la bonne distance
         double dist = std::sqrt(std::pow(x - pos.first, 2.0) + std::pow(z - pos.second, 2.0));
 
-        if(dist <= distance && dist != 0){
+        if(dist <= distance && body->isNotMe(*(*it))){
             //On calcul son angle par rapport à la position (x, z)
             double x2 = (pos.first - x) / dist;
             double z2 = (pos.second - z) / dist;
             double gamma = atan(x2 / z2);
-            if(z2 < 0)
-                gamma += M_PI;
+            if(z2 < 0){
+                if(x2 > 0)
+                    gamma += M_PI;
+                else 
+                    gamma -= M_PI;
+            }
 
+            double diff = gamma - beta;
+            while(diff < -180) diff += 360;
+            while(diff > 180) diff -= 360;
+
+            //std::cout << "Diff : " << std::abs(diff) << " Alpha : " << alpha << std::endl;
+            
             //On regarde si l'entité se trouve dans le cone
-            if(gamma > beta - alpha || gamma < beta + alpha)
+            if(std::abs(diff) <= alpha)
                 stimulus.pushData(EntityType::AGENT, pos);
         }
     }
