@@ -88,10 +88,8 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
             }
             
             double diff = gamma - beta;
-            while(diff < -180) diff += 360;
-            while(diff > 180) diff -= 360;
-
-            std::cout << "Diff : " << std::abs(diff) << " Alpha : " << alpha << std::endl;
+            while(diff < -M_PI) diff += 2*M_PI;
+            while(diff > M_PI) diff -= 2*M_PI;
             
             //On regarde si l'entité se trouve dans le cone
             if(std::abs(diff) <= alpha)
@@ -124,10 +122,8 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
             }
 
             double diff = gamma - beta;
-            while(diff < -180) diff += 360;
-            while(diff > 180) diff -= 360;
-
-            //std::cout << "Diff : " << std::abs(diff) << " Alpha : " << alpha << std::endl;
+            while(diff < -M_PI) diff += 2*M_PI;
+            while(diff > M_PI) diff -= 2*M_PI;
             
             //On regarde si l'entité se trouve dans le cone
             if(std::abs(diff) <= alpha)
