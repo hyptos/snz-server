@@ -126,7 +126,7 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
             while(diff > M_PI) diff -= 2*M_PI;
             
             //On regarde si l'entité se trouve dans le cone
-            if(std::abs(diff) <= alpha)
+            //if(std::abs(diff) <= alpha)
                 stimulus.pushData(EntityType::AGENT, pos);
         }
     }

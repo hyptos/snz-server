@@ -94,9 +94,9 @@ void ZEye::operator()(){
 			}
 
 			Order *order;
-			if(	min_dist < 10 )
-				order = new Order(OrderType::STAY);
-			else
+			//if(	min_dist < 10 )
+				//order = new Order(OrderType::STAY);
+			//else
 				order = new MoveOrder(pos.first, pos.second);
 
 			for(std::vector<MotorModule*>::iterator it = m_motors.begin() ; it != m_motors.end() ; it++)
