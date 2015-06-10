@@ -76,24 +76,83 @@ void ZEye::operator()(){
 			= v_stimulus->getDatum();
 
 		if(!datum.empty()){
+			int count1 = 0;
+			int count2 = 0;
 			double min_dist = DBL_MAX;
 			std::pair<double,double> pos;
+			
+			std::pair<double, double> cohesion;
+			cohesion.first = 0.0;
+			cohesion.second = 0.0;
+
+			std::pair<double, double> alignment;
+			alignment.first = 0.0;
+			alignment.second = 0.0;
+
+			double desired_separation = 10.0;
+			std::pair<double, double> separation;
+			separation.first = 0.0;
+			separation.second = 0.0;
+
 			bool player = false;
 			for (auto& data: datum){
-				if(data.first == EntityType::PLAYER)
+				double dist = std::sqrt(std::pow(data.second.first.first - x, 2.0)
+									+ std::pow(data.second.first.second - z, 2.0));
+				if(data.first == EntityType::PLAYER){
 					player = true;
-				else if(player)
-					continue;
+					if(dist < min_dist){
+						min_dist = dist;
+						cohesion.first = data.second.first.first;
+						cohesion.second = data.second.first.second;
+					}
+				}
+				else{
+					
+					if(dist > 0){
+						//Gestion du flocking
+						count1++;
+						
+						//Si aucun player en vue
+						if(!player){
+							cohesion.first += data.second.first.first;
+							cohesion.second += data.second.first.second;
+						}
 
-				double dist = std::sqrt(std::pow(data.second.first.first - x, 2.0) 
-								+ std::pow(data.second.first.second - z, 2.0));
+						alignment.first += data.second.second.first;
+						alignment.second += data.second.second.second;
 
-				if(dist < min_dist){
-					min_dist = dist;
-					pos.first = data.second.first.first;
-					pos.second = data.second.first.second;
+						if(dist < desired_separation){
+							count2++;
+							std::pair<double, double> tmp;
+							tmp.first = x - data.second.first.first;
+							tmp.second = z - data.second.first.second;
+							double d = std::sqrt(std::pow(tmp.first, 2.0)
+										+ std::pow(tmp.second, 2.0));
+							tmp.first /= d;
+							tmp.second /= d;
+							tmp.first /= dist;
+							tmp.second /= dist;
+
+							separation.first += tmp.first;
+							separation.second += tmp.second;
+						}
+					}	
 				}
 			}
+
+			if(!player){
+				cohesion.first /= count1;
+				cohesion.second /= count1;
+			}
+
+			alignment.first /= count1;
+			alignment.second /= count1;
+
+			separation.first /= count2;
+			separation.second /= count2;
+
+			pos.first = cohesion.first + alignment.first + separation.first;
+			pos.second = cohesion.second + alignment.second + separation.second;
 
 			Order *order;
 			//if(	min_dist < 10 )
