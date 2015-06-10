@@ -70,7 +70,9 @@ void ZEye::operator()(){
 		}
 
 		// On Récupère les données et on les parcourt
-		std::list<std::pair<EntityType, std::pair<double, double>>> datum
+		std::list<std::pair<EntityType, 
+			std::pair<std::pair<double, double>,
+				std::pair<double, double>>>> datum
 			= v_stimulus->getDatum();
 
 		if(!datum.empty()){
@@ -83,13 +85,13 @@ void ZEye::operator()(){
 				else if(player)
 					continue;
 
-				double dist = std::sqrt(std::pow(data.second.first - x, 2.0) 
-								+ std::pow(data.second.second - z, 2.0));
+				double dist = std::sqrt(std::pow(data.second.first.first - x, 2.0) 
+								+ std::pow(data.second.first.second - z, 2.0));
 
 				if(dist < min_dist){
 					min_dist = dist;
-					pos.first = data.second.first;
-					pos.second = data.second.second;
+					pos.first = data.second.first.first;
+					pos.second = data.second.first.second;
 				}
 			}
 

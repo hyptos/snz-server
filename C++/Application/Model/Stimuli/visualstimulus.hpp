@@ -31,26 +31,31 @@ class VisualStimulus : public Stimulus {
 		VisualStimulus(const VisualStimulus&);
 
 		/// Constructeur avec Paramètres
-		VisualStimulus(std::list<std::pair<EntityType, std::pair<double, double>>>);
+		VisualStimulus(std::list<std::pair<EntityType, 
+			std::pair<std::pair<double, double>, std::pair<double, double>>>>);
 
 		/// Destructeur
 		virtual ~VisualStimulus();
 
 
 		/// Retourne la listes des positions
-		virtual std::list<std::pair<EntityType, std::pair<double, double>>>	getDatum() const;
+		virtual std::list<std::pair<EntityType, 
+		std::pair<std::pair<double, double>, 
+		std::pair<double, double>>>>	getDatum() const;
 
 		/// Retourne le nombre de positions stockées
 		virtual int getSize() const;
 
 
 		//Ajoute un élement à la liste
-		virtual void pushData(EntityType, std::pair<double, double>);
+		virtual void pushData(EntityType, 
+			std::pair<double, double>, std::pair<double, double>);
 
 	private :
 
 		std::list<std::pair<EntityType, 
-			std::pair<double, double>>> m_datum; ///< Liste de positions
+			std::pair<std::pair<double, double>, 
+			std::pair<double, double>>>> m_datum; ///< Liste de positions
 
 };
 

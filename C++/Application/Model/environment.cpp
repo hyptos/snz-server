@@ -65,10 +65,14 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
 
     for(std::list<Body*>::iterator it = m_bodies.begin(); it != m_bodies.end(); it++){
 
-        (*it)->lock();
         std::pair<double,double> pos;
+        std::pair<double,double> orientation;
+        
+        (*it)->lock();
         pos.first = (*it)->getX();
         pos.second = (*it)->getZ();
+        orientation.first = (*it)->getDX();
+        orientation.second = (*it)->getDZ();
         (*it)->unlock();
 
         //On commence par regarder ceux dans la bonne distance
@@ -93,17 +97,21 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
             
             //On regarde si l'entité se trouve dans le cone
             if(std::abs(diff) <= alpha)
-                stimulus.pushData(EntityType::PLAYER, pos);
+                stimulus.pushData(EntityType::PLAYER, pos, orientation);
         }
     }
 
 
     for(std::list<RABody*>::iterator it = m_agents.begin(); it != m_agents.end(); it++){
 
-        (*it)->lock();
         std::pair<double,double> pos;
+        std::pair<double,double> orientation;
+        
+        (*it)->lock();
         pos.first = (*it)->getX();
         pos.second = (*it)->getZ();
+        orientation.first = (*it)->getDX();
+        orientation.second = (*it)->getDZ();
         (*it)->unlock();
 
         //On commence par regarder ceux dans la bonne distance
@@ -127,7 +135,7 @@ VisualStimulus Environment::getVisualStimulus(double x, double z, double distanc
             
             //On regarde si l'entité se trouve dans le cone
             //if(std::abs(diff) <= alpha)
-                stimulus.pushData(EntityType::AGENT, pos);
+                stimulus.pushData(EntityType::AGENT, pos, orientation);
         }
     }
 
