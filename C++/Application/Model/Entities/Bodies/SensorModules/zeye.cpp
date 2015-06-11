@@ -116,40 +116,47 @@ void ZEye::operator()(){
 						if(!player){
 							cohesion.first += data.second.first.first;
 							cohesion.second += data.second.first.second;
+							
+							alignment.first += data.second.second.first;
+							alignment.second += data.second.second.second;
 						}
 
-						alignment.first += data.second.second.first;
-						alignment.second += data.second.second.second;
 
+						//*
 						if(dist < desired_separation){
 							count2++;
 							std::pair<double, double> tmp;
 							tmp.first = x - data.second.first.first;
 							tmp.second = z - data.second.first.second;
-							double d = std::sqrt(std::pow(tmp.first, 2.0)
-										+ std::pow(tmp.second, 2.0));
-							tmp.first /= d;
-							tmp.second /= d;
+							
 							tmp.first /= dist;
 							tmp.second /= dist;
 
 							separation.first += tmp.first;
 							separation.second += tmp.second;
-						}
+						}//*/
 					}	
 				}
 			}
 
-			if(!player){
-				cohesion.first /= count1;
-				cohesion.second /= count1;
+			if(count1 != 0){
+				if(!player){
+					cohesion.first /= count1;
+					cohesion.second /= count1;
+				}
+
+				//*
+				alignment.first /= count1;
+				alignment.second /= count1;
+				//*/
 			}
 
-			alignment.first /= count1;
-			alignment.second /= count1;
-
-			separation.first /= count2;
-			separation.second /= count2;
+			//*
+			if(count2 != 0){
+				separation.first /= count2;
+				separation.second /= count2;
+			}
+			//*/
 
 			pos.first = cohesion.first + alignment.first + separation.first;
 			pos.second = cohesion.second + alignment.second + separation.second;
