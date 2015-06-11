@@ -55,19 +55,38 @@ void ZEye::operator()(){
 
 			v_stimulus = dynamic_cast<VisualStimulus*>(stimulus);
 		}
-		else{
-			double beta = atan(dx / dz);
-			if(dz < 0){
-                if(dx > 0)
-                    beta += M_PI;
-                else 
-                    beta -= M_PI;
-            }
 
-			v_stimulus = new VisualStimulus(
-				m_body->getEnvironment()->getVisualStimulus(
-					x, z, 50.0, M_PI_4, beta, m_body));
-		}
+		double beta = atan(dx / dz);
+		if(dz < 0){
+            if(dx > 0)
+                beta += M_PI;
+            else 
+                beta -= M_PI;
+        }
+
+        bool player = false;
+        int count1 = 0;
+		int count2 = 0;
+		double min_dist = DBL_MAX;
+		std::pair<double,double> pos;
+		
+		std::pair<double, double> cohesion;
+		cohesion.first = 0.0;
+		cohesion.second = 0.0;
+
+		std::pair<double, double> alignment;
+		alignment.first = 0.0;
+		alignment.second = 0.0;
+
+		double desired_separation = 10.0;
+		std::pair<double, double> separation;
+		separation.first = 0.0;
+		separation.second = 0.0;
+
+		// On get les player
+		v_stimulus = new VisualStimulus(
+			m_body->getEnvironment()->getVisualStimulus(
+				EntityType::PLAYER, x, z, 50.0, M_PI_4, beta, m_body));
 
 		// On Récupère les données et on les parcourt
 		std::list<std::pair<EntityType, 
@@ -76,106 +95,80 @@ void ZEye::operator()(){
 			= v_stimulus->getDatum();
 
 		if(!datum.empty()){
-			int count1 = 0;
-			int count2 = 0;
-			double min_dist = DBL_MAX;
-			std::pair<double,double> pos;
 			
-			std::pair<double, double> cohesion;
-			cohesion.first = 0.0;
-			cohesion.second = 0.0;
-
-			std::pair<double, double> alignment;
-			alignment.first = 0.0;
-			alignment.second = 0.0;
-
-			double desired_separation = 10.0;
-			std::pair<double, double> separation;
-			separation.first = 0.0;
-			separation.second = 0.0;
-
-			bool player = false;
+			bool player = true;
+			
 			for (auto& data: datum){
-				double dist = std::sqrt(std::pow(data.second.first.first - x, 2.0)
-									+ std::pow(data.second.first.second - z, 2.0));
-				if(data.first == EntityType::PLAYER){
-					player = true;
-					if(dist < min_dist){
-						min_dist = dist;
-						cohesion.first = data.second.first.first;
-						cohesion.second = data.second.first.second;
-					}
-				}
-				else{
-					
-					if(dist > 0){
-						//Gestion du flocking
-						count1++;
-						
-						//Si aucun player en vue
-						if(!player){
-							cohesion.first += data.second.first.first;
-							cohesion.second += data.second.first.second;
-							
-							alignment.first += data.second.second.first;
-							alignment.second += data.second.second.second;
-						}
+				double dist = std::sqrt(std::pow(x - data.second.first.first, 2.0) 
+							+ std::pow(z - data.second.first.second, 2.0));
 
-
-						//*
-						if(dist < desired_separation){
-							count2++;
-							std::pair<double, double> tmp;
-							tmp.first = x - data.second.first.first;
-							tmp.second = z - data.second.first.second;
-							
-							tmp.first /= dist;
-							tmp.second /= dist;
-
-							separation.first += tmp.first;
-							separation.second += tmp.second;
-						}//*/
-					}	
+				if(dist < min_dist){
+					min_dist = dist;
+					cohesion.first = data.second.first.first;
+					cohesion.second = data.second.first.second;
 				}
 			}
+		}
 
-			if(count1 != 0){
-				if(!player){
-					cohesion.first /= count1;
-					cohesion.second /= count1;
-				}
+		if(v_stimulus != NULL)
+			delete v_stimulus;
 
-				//*
-				alignment.first /= count1;
-				alignment.second /= count1;
-				//*/
+		v_stimulus = new VisualStimulus(
+		m_body->getEnvironment()->getVisualStimulus(
+			EntityType::AGENT, x, z, 50.0, 3*M_PI_4, beta, m_body));			
+		
+		datum = v_stimulus->getDatum();
+		for (auto& data: datum){
+			count1++;
+
+			//Si aucun joueur vu, on s'aligne aux autres
+			if(!player){
+				alignment.first += data.second.second.first;
+				alignment.second += data.second.second.second;
+
+				cohesion.first += data.second.first.first;
+				cohesion.second += data.second.first.second;
 			}
 
-			//*
-			if(count2 != 0){
-				separation.first /= count2;
-				separation.second /= count2;
+			//Séparation
+			double dist = std::sqrt(std::pow(x - data.second.first.first, 2.0) 
+							+ std::pow(z - data.second.first.second, 2.0));
+
+			if(dist <= desired_separation){
+				count2++;
+				separation.first += (x - data.second.first.first);
+				separation.second += (z - data.second.first.second);
 			}
-			//*/
+		}
 
-			pos.first = cohesion.first + alignment.first + separation.first;
-			pos.second = cohesion.second + alignment.second + separation.second;
+		if(!player && count1 != 0){
+			alignment.first /= count1;
+			alignment.second /=	count1;
 
-			Order *order;
-			//if(	min_dist < 10 )
-				//order = new Order(OrderType::STAY);
-			//else
-				order = new MoveOrder(pos.first, pos.second);
+			cohesion.first /= count1;
+			cohesion.second /= count1;
+		}
+
+		if(count2 != 0){
+			separation.first /= count2;
+			separation.second / count2;
+		}
+		
+		//Définition de la destination
+		pos.first = cohesion.first + alignment.first + separation.first;
+		pos.second = cohesion.second + alignment.second + separation.second;
+
+		if(!datum.empty() || player){
+			MoveOrder *order = new MoveOrder(pos.first, pos.second);
 
 			for(std::vector<MotorModule*>::iterator it = m_motors.begin() ; it != m_motors.end() ; it++)
-				*(*it) << order;
+					*(*it) << order;
 
 			delete order;
 		}
 
 		if(v_stimulus != NULL)
 			delete v_stimulus;
-		
 
 		//On attends un dixième de seconde
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));

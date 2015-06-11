@@ -61,7 +61,7 @@ class Environment {
         void emitSound(double,double,double,double);
 
         ///Retourne une liste d'info sur les corps présent dans un cone de vision
-        VisualStimulus getVisualStimulus(double,double,double,double,double, Body*);
+        VisualStimulus getVisualStimulus(EntityType,double,double,double,double,double, Body*);
 
     private :
 

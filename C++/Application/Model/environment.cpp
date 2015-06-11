@@ -59,85 +59,87 @@ void Environment::emitSound(double x, double z, double y, double power){
 }
 
 // Retourne les info sur les entités présentes dans un cone de vision
-VisualStimulus Environment::getVisualStimulus(double x, double z, double distance, double alpha, double beta, Body* body){
+VisualStimulus Environment::getVisualStimulus(EntityType type, double x, double z, double distance, double alpha, double beta, Body* body){
     
     VisualStimulus stimulus;
 
-    for(std::list<Body*>::iterator it = m_bodies.begin(); it != m_bodies.end(); it++){
+    if(type == EntityType::PLAYER){
+        for(std::list<Body*>::iterator it = m_bodies.begin(); it != m_bodies.end(); it++){
 
-        std::pair<double,double> pos;
-        std::pair<double,double> orientation;
-        
-        (*it)->lock();
-        pos.first = (*it)->getX();
-        pos.second = (*it)->getZ();
-        orientation.first = (*it)->getDX();
-        orientation.second = (*it)->getDZ();
-        (*it)->unlock();
+            std::pair<double,double> pos;
+            std::pair<double,double> orientation;
+            
+            (*it)->lock();
+            pos.first = (*it)->getX();
+            pos.second = (*it)->getZ();
+            orientation.first = (*it)->getDX();
+            orientation.second = (*it)->getDZ();
+            (*it)->unlock();
 
-        //On commence par regarder ceux dans la bonne distance
-        double dist = std::sqrt(std::pow(x - pos.first, 2.0) + std::pow(z - pos.second, 2.0));
+            //On commence par regarder ceux dans la bonne distance
+            double dist = std::sqrt(std::pow(x - pos.first, 2.0) + std::pow(z - pos.second, 2.0));
 
-        if(dist <= distance && body->isNotMe(*(*it))){
+            if(dist <= distance && body->isNotMe(*(*it))){
 
-            //On calcul son angle par rapport à la position (x, z)
-            double x2 = (pos.first - x) / dist;
-            double z2 = (pos.second - z) / dist;
-            double gamma = atan(x2 / z2);
-            if(z2 < 0){
-                if(x2 > 0)
-                    gamma += M_PI;
-                else 
-                    gamma -= M_PI;
+                //On calcul son angle par rapport à la position (x, z)
+                double x2 = (pos.first - x) / dist;
+                double z2 = (pos.second - z) / dist;
+                double gamma = atan(x2 / z2);
+                if(z2 < 0){
+                    if(x2 > 0)
+                        gamma += M_PI;
+                    else 
+                        gamma -= M_PI;
+                }
+                
+                double diff = gamma - beta;
+                while(diff < -M_PI) diff += 2*M_PI;
+                while(diff > M_PI) diff -= 2*M_PI;
+                
+                //On regarde si l'entité se trouve dans le cone
+                if(std::abs(diff) <= alpha)
+                    stimulus.pushData(EntityType::PLAYER, pos, orientation);
             }
-            
-            double diff = gamma - beta;
-            while(diff < -M_PI) diff += 2*M_PI;
-            while(diff > M_PI) diff -= 2*M_PI;
-            
-            //On regarde si l'entité se trouve dans le cone
-            if(std::abs(diff) <= alpha)
-                stimulus.pushData(EntityType::PLAYER, pos, orientation);
         }
     }
+    else if(type == EntityType::AGENT){
+        for(std::list<RABody*>::iterator it = m_agents.begin(); it != m_agents.end(); it++){
 
-
-    for(std::list<RABody*>::iterator it = m_agents.begin(); it != m_agents.end(); it++){
-
-        std::pair<double,double> pos;
-        std::pair<double,double> orientation;
-        
-        (*it)->lock();
-        pos.first = (*it)->getX();
-        pos.second = (*it)->getZ();
-        orientation.first = (*it)->getDX();
-        orientation.second = (*it)->getDZ();
-        (*it)->unlock();
-
-        //On commence par regarder ceux dans la bonne distance
-        double dist = std::sqrt(std::pow(x - pos.first, 2.0) + std::pow(z - pos.second, 2.0));
-
-        if(dist <= distance && body->isNotMe(*(*it))){
-            //On calcul son angle par rapport à la position (x, z)
-            double x2 = (pos.first - x) / dist;
-            double z2 = (pos.second - z) / dist;
-            double gamma = atan(x2 / z2);
-            if(z2 < 0){
-                if(x2 > 0)
-                    gamma += M_PI;
-                else 
-                    gamma -= M_PI;
-            }
-
-            double diff = gamma - beta;
-            while(diff < -M_PI) diff += 2*M_PI;
-            while(diff > M_PI) diff -= 2*M_PI;
+            std::pair<double,double> pos;
+            std::pair<double,double> orientation;
             
-            //On regarde si l'entité se trouve dans le cone
-            if(std::abs(diff) <= alpha)
-                stimulus.pushData(EntityType::AGENT, pos, orientation);
+            (*it)->lock();
+            pos.first = (*it)->getX();
+            pos.second = (*it)->getZ();
+            orientation.first = (*it)->getDX();
+            orientation.second = (*it)->getDZ();
+            (*it)->unlock();
+
+            //On commence par regarder ceux dans la bonne distance
+            double dist = std::sqrt(std::pow(x - pos.first, 2.0) + std::pow(z - pos.second, 2.0));
+
+            if(dist <= distance && body->isNotMe(*(*it))){
+                //On calcul son angle par rapport à la position (x, z)
+                double x2 = (pos.first - x) / dist;
+                double z2 = (pos.second - z) / dist;
+                double gamma = atan(x2 / z2);
+                if(z2 < 0){
+                    if(x2 > 0)
+                        gamma += M_PI;
+                    else 
+                        gamma -= M_PI;
+                }
+
+                double diff = gamma - beta;
+                while(diff < -M_PI) diff += 2*M_PI;
+                while(diff > M_PI) diff -= 2*M_PI;
+                
+                //On regarde si l'entité se trouve dans le cone
+                if(std::abs(diff) <= M_PI_4*3)
+                    stimulus.pushData(EntityType::AGENT, pos, orientation);
+            }
         }
     }
-
+    
     return stimulus;
 }
