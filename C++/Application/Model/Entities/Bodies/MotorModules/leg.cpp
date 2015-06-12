@@ -117,13 +117,13 @@ void Leg::operator()(){
         	int width = env->getWidth();
 
 			//On calcule les nouvelles coordonnées
-			double new_x = old_x + dx * speed;
+			double new_x = old_x + dx * (speed/2.0);
 			if(new_x >= length)
 				new_x -= length;
 			else if(new_x <= 0)
 				new_x += length;
 
-			double new_z = old_z + dz * speed;
+			double new_z = old_z + dz * (speed/2.0);
 			if(new_z >= width)
 				new_z -= width;
 			else if(new_z <= 0)
