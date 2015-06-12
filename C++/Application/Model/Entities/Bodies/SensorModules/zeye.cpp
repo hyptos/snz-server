@@ -96,7 +96,7 @@ void ZEye::operator()(){
 
 		if(!datum.empty()){
 			
-			bool player = true;
+			player = true;
 			
 			for (auto& data: datum){
 				double dist = std::sqrt(std::pow(x - data.second.first.first, 2.0) 
@@ -115,7 +115,7 @@ void ZEye::operator()(){
 
 		v_stimulus = new VisualStimulus(
 		m_body->getEnvironment()->getVisualStimulus(
-			EntityType::AGENT, x, z, 50.0, 3*M_PI_4, beta, m_body));			
+			EntityType::AGENT, x, z, 50.0, M_PI_2, beta, m_body));			
 		
 		datum = v_stimulus->getDatum();
 		for (auto& data: datum){
@@ -136,8 +136,8 @@ void ZEye::operator()(){
 
 			if(dist <= desired_separation){
 				count2++;
-				separation.first += (x - data.second.first.first);
-				separation.second += (z - data.second.first.second);
+				separation.first += (x - data.second.first.first) / dist;
+				separation.second += (z - data.second.first.second) / dist;
 			}
 		}
 
@@ -159,7 +159,12 @@ void ZEye::operator()(){
 		pos.second = cohesion.second + alignment.second + separation.second;
 
 		if(!datum.empty() || player){
-			MoveOrder *order = new MoveOrder(pos.first, pos.second);
+
+			Order *order;
+			if(player && min_dist <= 5.0)
+				order = new Order(OrderType::STAY);
+			else
+				order = new MoveOrder(pos.first, pos.second);
 
 			for(std::vector<MotorModule*>::iterator it = m_motors.begin() ; it != m_motors.end() ; it++)
 					*(*it) << order;
@@ -171,6 +176,6 @@ void ZEye::operator()(){
 			delete v_stimulus;
 
 		//On attends un dixième de seconde
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(200));
 	}
 }
