@@ -20,11 +20,13 @@ void ZEar::operator<<(Stimulus* stimulus){
 
 	if(stimulus->getType() == StimulusType::SOUND){
 
-		SoundStimulus *cpy = new SoundStimulus(*(dynamic_cast<SoundStimulus*>(stimulus)));
+		for(int i = 0 ; i < 10 ; i++){
+			SoundStimulus *cpy = new SoundStimulus(*(dynamic_cast<SoundStimulus*>(stimulus)));
 
-		m_mutex.lock();
-		m_stimuli.push_back(cpy);
-		m_mutex.unlock();
+			m_mutex.lock();
+			m_stimuli.push_back(cpy);
+			m_mutex.unlock();
+		}
 	}
 }
 
