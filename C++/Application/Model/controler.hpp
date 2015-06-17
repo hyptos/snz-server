@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "Server/Message/protocolemanager.h"
+#include "Server/communicationserver.hpp"
 #include "constantes.hpp"
 #include "Info/infoplayer.hpp"
 #include "model.hpp"
@@ -34,12 +35,16 @@ class Controler : public IMessageHandler {
 		///Connecte au modèle
 		void connect_to_model(SNZ_Model*);
 
+		///Connecte au serveur
+		void connect_to_server(ICommunicationServer*);
+
 		///Réception des messages
 		void onOutPutMessage(IMessage*);
 
 	private :
 
 		SNZ_Model* m_model;							///< pointeur sur le modèle
+		ICommunicationServer* m_server;				///< pointeur vers serveur
 		std::vector<unsigned long long> m_players; 	///< list des joueurs déjà connectés
 };
 

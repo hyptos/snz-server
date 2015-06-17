@@ -92,12 +92,14 @@ void *client_thread_receive ( void* data)
     ByteBuffer* message = new ByteBuffer;
     while ( ! client->closeMe ) {
       if ( socket_server->dataAvailable(client->uuid)) {
+            std::cout << "data available" << std::endl;
             socket_server->receive(client->uuid,*message);
         }
         if ( message->getLength() > 0 ) {
             client->recv_buffering.add(message);
             message = new ByteBuffer;
             client->server->onReceiveMessage( client->uuid );
+            std::cout << "Receive done" << std::endl;
         }
         pthread_yield();
     }
@@ -146,7 +148,6 @@ int SNZ_Server::sendBroadCast(IMessage *msg) {
     int  i = 0;
     for( auto key: mClients.keys() )
     {
-
         ByteBuffer *test = msg->toByteBuffer();
         mClients.value( key )->send_buffering.add(test);i++;
     }

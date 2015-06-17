@@ -15,25 +15,27 @@
 #include "Model/map_tree.hpp"
 #include "Model/controler.hpp"
 
-#define NB_ZOMBIE   50
+#define NB_ZOMBIE   1
 #define ENV_SIZE    500
 
 int main(int argc, char** argv){
     
     //Main Server
-    /*
+    //*
     SNZ_Server s;
 
     Controler control;
 
     implMessageDispatcher dispatcher;
-    //MessageHandlerExample msgH(&s);
-    //dispatcher.registerMessageHandler('u', (IMessageHandler*) &msgH);
+    MessageHandlerExample msgH(&s);
     dispatcher.registerMessageHandler('u', (IMessageHandler*) &control);
+    dispatcher.registerMessageHandler('w', (IMessageHandler*) &control);
+    //dispatcher.registerMessageHandler('u', (IMessageHandler*) &msgH);
     //dispatcher.registerMessageHandler('w', (IMessageHandler*) &msgH);
     s.setMessageDispatcher(&dispatcher);
     s.start();
-    /*while(s.isRunning()) {
+    /*
+    while(s.isRunning()) {
         pthread_yield();
     }
     return 0;
@@ -47,13 +49,14 @@ int main(int argc, char** argv){
 
     ModelView view(ENV_SIZE, ENV_SIZE);
 
-    //control.connect_to_model(&model);
+    control.connect_to_model(&model);
+    control.connect_to_server(&s);
 
     view.connect_to_model(&model);
 
     model.connect_to_view(&view);
 
-    //view.connect_to_server(&s);
+    view.connect_to_server(&s);
 
     view.show();
 
