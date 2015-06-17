@@ -37,6 +37,8 @@ public:
 
     int sendBroadCast(IMessage *);
 
+    int sendToClient(QUuid, IMessage *);
+
 private :
 
     SimpleTcpStartPoint *mSocketServer;

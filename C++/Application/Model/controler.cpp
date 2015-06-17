@@ -69,7 +69,8 @@ void Controler::onOutPutMessage(QUuid client, IMessage* msg){
 	       	else{
 	       		unsigned long long id = m_model->addEntity(player);
 	       		m_players.push_back(id);
-	       		// TODO : Envoyer son id au client
+                info.setEntity(id);
+	       		m_server->sendToClient(client, &info);
 	       	}
 		}
 		else if(code == 'd'){

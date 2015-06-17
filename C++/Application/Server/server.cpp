@@ -157,3 +157,14 @@ int SNZ_Server::sendBroadCast(IMessage *msg) {
     }
     return i;
 }
+
+int SNZ_Server::sendToClient(QUuid client, IMessage *msg){
+
+    if(!mClients.contains(client))
+      return 1;
+
+    ByteBuffer *buff = msg->toByteBuffer();
+    mClients.value(client)->send_buffering.add(buff);
+
+    return 0;
+}
