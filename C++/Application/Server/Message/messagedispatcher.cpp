@@ -11,7 +11,7 @@ implMessageDispatcher::~implMessageDispatcher()
 
 }
 
-void implMessageDispatcher::dispatchMessage(IMessage *msg) {
+void implMessageDispatcher::dispatchMessage(QUuid client, IMessage *msg) {
     if(mProtocoleMap.find(msg->getCode()) == mProtocoleMap.end()) {
         std::cerr << "dispatch error , message id unknow : "<< msg->getCode() << std::endl;
         return;
@@ -20,7 +20,7 @@ void implMessageDispatcher::dispatchMessage(IMessage *msg) {
     std::list<IMessageHandler *> list = mProtocoleMap.at(msg->getCode());
     for(std::list<IMessageHandler *>::iterator it = list.begin(); it != list.end(); it++) {
         IMessageHandler *handler = (*it);
-        handler->onOutPutMessage(msg);
+        handler->onOutPutMessage(client, msg);
     }
 }
 

@@ -39,7 +39,7 @@ class Controler : public IMessageHandler {
 		void connect_to_server(ICommunicationServer*);
 
 		///Réception des messages
-		void onOutPutMessage(IMessage*);
+		void onOutPutMessage(QUuid, IMessage*);
 
 	private :
 

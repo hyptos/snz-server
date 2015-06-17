@@ -20,7 +20,7 @@ void Controler::connect_to_server(ICommunicationServer* server){
 	m_server = server;
 }
 
-void Controler::onOutPutMessage(IMessage* msg){
+void Controler::onOutPutMessage(QUuid client, IMessage* msg){
 
 	if(m_model != NULL){
 	    char code = msg->getCode();

@@ -18,13 +18,13 @@ class IMessageDispatcher {
     public :
         IMessageDispatcher();
         ~IMessageDispatcher();
-        virtual void dispatchMessage(IMessage *msg) = 0;
+        virtual void dispatchMessage(QUuid client, IMessage *msg) = 0;
         virtual void registerMessageHandler(char id, IMessageHandler *Me) = 0;
 };
 
 class IMessageHandler {
 public:
-    virtual void onOutPutMessage(IMessage *msg) = 0;
+    virtual void onOutPutMessage(QUuid client, IMessage *msg) = 0;
 };
 
 #endif // PROTOCOLEMANAGER

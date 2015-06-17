@@ -15,7 +15,7 @@ public:
 
     ~MessageHandlerExample();
 
-    void onOutPutMessage(IMessage *msg) {
+    void onOutPutMessage(QUuid client, IMessage *msg) {
         char code = msg->getCode();
         std::cout << "reçu : " << code << std::endl;
         switch(code){

@@ -42,7 +42,7 @@ void SNZ_Server::onReceiveMessage(QUuid client) const {
     ByteBuffer* message = NULL;
     mClients [ client ]->recv_buffering.get(message);
     if(this->mMessageDispatcher != NULL) {
-        mMessageDispatcher->dispatchMessage(this->getMessage(*message));
+        mMessageDispatcher->dispatchMessage(client, this->getMessage(*message));
     }
     if(message != NULL) {
         delete message;

@@ -13,7 +13,7 @@ public:
 
     ~implMessageDispatcher();
 
-    void dispatchMessage(IMessage *msg);
+    void dispatchMessage(QUuid client, IMessage *msg);
 
     void registerMessageHandler(char id, IMessageHandler *Me);
 
