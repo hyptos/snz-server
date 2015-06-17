@@ -57,6 +57,7 @@ void SNZ_Server::stopServer() {
 }
 
 void SNZ_Server::acceptClient(QUuid client) {
+    
     ClientData* clt_data  = new ClientData;
     clt_data->uuid        = client;
     clt_data->server      = this;
@@ -65,6 +66,7 @@ void SNZ_Server::acceptClient(QUuid client) {
     clt_data->closeMe     = false;
     pthread_create ( &(clt_data->send_thread), NULL, client_thread_send, clt_data );
     pthread_create ( &(clt_data->recv_thread), NULL, client_thread_receive, clt_data );
+    
     mClients[ client ]     = clt_data;
 }
 
@@ -91,9 +93,10 @@ void *client_thread_receive ( void* data)
     SimpleTcpStartPoint *socket_server = client->server->getSocketServer();
     ByteBuffer* message = new ByteBuffer;
     while ( ! client->closeMe ) {
-      if ( socket_server->dataAvailable(client->uuid)) {
+        if ( socket_server->dataAvailable(client->uuid)) {
             std::cout << "data available" << std::endl;
-            socket_server->receive(client->uuid,*message);
+            socket_server->receive(client->uuid, *message);
+            std::cout << "data available2" << std::endl;
         }
         if ( message->getLength() > 0 ) {
             client->recv_buffering.add(message);
@@ -124,6 +127,7 @@ void *client_thread_send ( void* data )
 }
 
 void SNZ_Server::OnDisconnect ( QUuid client ) {
+  std::cout << "on disconnect" << std::endl;
     SNZ_Server::mClients[ client ]->closeMe = true;
     pthread_join(mClients [ client ]->send_thread, NULL );
     pthread_join(mClients [ client ]->recv_thread, NULL );
