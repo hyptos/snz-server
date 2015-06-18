@@ -47,6 +47,8 @@ void Controler::onOutPutMessage(QUuid client, IMessage* msg){
         	else
         		std::cout << "Error : player id " 
         			<< info.getEntity() << " unknown" << std::endl;
+
+            delete player;
 		}
 		else if(code == 'c'){
 			std::cout << "Connection !" << std::endl;
@@ -70,8 +72,11 @@ void Controler::onOutPutMessage(QUuid client, IMessage* msg){
 	       		unsigned long long id = m_model->addEntity(player);
 	       		m_players.push_back(id);
                 info.setEntity(id);
-	       		m_server->sendToClient(client, &info);
+                InfoEntity *inf = new InfoEntity(info);
+	       		m_server->sendToClient(client, inf);
+                delete inf;
 	       	}
+            delete player;
 		}
 		else if(code == 'd'){
 			std::cout << "Deconnection !" << std::endl;
@@ -95,6 +100,7 @@ void Controler::onOutPutMessage(QUuid client, IMessage* msg){
         	else
         		std::cout << "Error : player id " 
         			<< info.getEntity() << " unknown" << std::endl;
+            delete player;
 		}
 		else if(code == 'w'){
             std::cout << "Je passe par le case w" << std::endl;

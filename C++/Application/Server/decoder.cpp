@@ -33,31 +33,35 @@ template<> void decode(ByteBuffer &buff, InfoEntity &res) {
     std::cout << "decode bytebuffer to InfoEntity " << buff.getLength() << std::endl;
 
     unsigned long long index = 0;
+    unsigned long long size = 0;
     char code;
-    unsigned long long entity;
-    int type;
-    double x = 0,y =0,z =0,dx=0,dy=0,dz=0;
+    unsigned long long entity = 0;
+    int type = 0, s_int;
+    float x = 0,y =0,z =0,dx=0,dy=0,dz=0;
     unsigned long long test = 0;
 
     index = fromBuffer<unsigned long long>(buff,index,&entity,1); //8
-
+    
     index = fromBuffer<int>(buff,index,&type,1); //4
 
-    index = fromBuffer<double>(buff,index,&x,1); //4
+    index = fromBuffer<float>(buff,index,&x,1); //4
 
-    index = fromBuffer<double>(buff,index,&z,1); //4
+    index = fromBuffer<float>(buff,index,&z,1); //4
 
-    index = fromBuffer<double>(buff,index,&y,1); //4
+    index = fromBuffer<float>(buff,index,&y,1); //4
 
-    index = fromBuffer<double>(buff,index,&dx,1); //4
+    index = fromBuffer<float>(buff,index,&dx,1); //4
 
-    index = fromBuffer<double>(buff,index,&dz,1); //4
+    index = fromBuffer<float>(buff,index,&dz,1); //4
 
-    index = fromBuffer<double>(buff,index,&dy,1); //4
-
+    index = fromBuffer<float>(buff,index,&dy,1); //4
 
     std::cout << "x" << x << " z" << z << " type" << type << std::endl  ;
+    std::cout << "id : " << entity << std::endl;
+    std::cout << "size : " << size << std::endl;
+    std::cout << "dy : " << dy << std::endl;
 
+//*
     if(type == 2){
        res.setType(EntityType::PLAYER);
     } 
@@ -66,14 +70,14 @@ template<> void decode(ByteBuffer &buff, InfoEntity &res) {
     } else {
         res.setType(EntityType::AGENT);
     }
-
+//*/
     res.setEntity(entity);
-    res.setDX(dx);
-    res.setDZ(dz);
-    res.setDY(dy);
     res.setX(x);
     res.setZ(z);
     res.setY(y);
+    res.setDX(dx);
+    res.setDZ(dz);
+    res.setDY(dy);
 
     res.affiche();
 

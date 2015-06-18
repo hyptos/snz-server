@@ -28,10 +28,16 @@ int main(int argc, char** argv){
 
     implMessageDispatcher dispatcher;
     MessageHandlerExample msgH(&s);
+    //*
     dispatcher.registerMessageHandler('u', (IMessageHandler*) &control);
+    dispatcher.registerMessageHandler('c', (IMessageHandler*) &control);
+    dispatcher.registerMessageHandler('d', (IMessageHandler*) &control);
     dispatcher.registerMessageHandler('w', (IMessageHandler*) &control);
-    //dispatcher.registerMessageHandler('u', (IMessageHandler*) &msgH);
-    //dispatcher.registerMessageHandler('w', (IMessageHandler*) &msgH);
+    //*/
+    /*
+    dispatcher.registerMessageHandler('u', (IMessageHandler*) &msgH);
+    dispatcher.registerMessageHandler('w', (IMessageHandler*) &msgH);
+    //*/
     s.setMessageDispatcher(&dispatcher);
     s.start();
     /*
@@ -42,7 +48,7 @@ int main(int argc, char** argv){
     //*/
 
     //Main IA
-    //*
+    //* 
     QApplication app(argc, argv);
 
     SNZ_Model model(ENV_SIZE, NB_ZOMBIE);

@@ -1,6 +1,7 @@
 #ifndef DECODER
 #define DECODER
 
+#include <stdint.h>
 #include "Message/message.hpp"
 #include "utility"
 #include "Model/Info/infoentity.hpp"

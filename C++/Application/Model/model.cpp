@@ -62,15 +62,13 @@ unsigned long long SNZ_Model::getNbEntities(){
 unsigned long long SNZ_Model::addEntity(InfoEntity *entity){
     unsigned long long id = m_nbEntities++;
     int env_size = m_environment->getLength();
-
-    if(entity->getType() == EntityType::PLAYER){
+    if(entity != NULL && entity->getType() == EntityType::PLAYER){
         InfoPlayer *info = dynamic_cast<InfoPlayer*>(entity);
         Player* player = new Player(id, m_environment, info->getX(), info->getZ(), info->getY(), info->getDX(), info->getDZ(), info->getDY(), info->getMoveState(), info->getHealth(), this);
-    
         m_entities.insert(std::pair<unsigned long long, Entity*>(id, player));
         m_environment->addEntity(EntityType::PLAYER, player->getBody());
     }
-    else if(entity->getType() == EntityType::AGENT){
+    else if(entity != NULL && entity->getType() == EntityType::AGENT){
         InfoAgent *info = dynamic_cast<InfoAgent*>(entity);
 
         Zombie *zombie = new Zombie(id, m_environment, info->getX(), info->getZ(), info->getY(), info->getDX(), info->getDZ(), info->getDY(), info->getMoveState(), info->getHealth(), this);
@@ -78,7 +76,6 @@ unsigned long long SNZ_Model::addEntity(InfoEntity *entity){
         m_entities.insert(std::pair<unsigned long long, Entity*>(id, zombie));
         m_environment->addEntity(EntityType::AGENT, zombie->getBody());
     }
-
     if(m_view != NULL){
         entity->setEntity(id);
         m_view->addEntity(entity);
