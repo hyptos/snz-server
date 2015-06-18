@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Snz-server</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/hyptos/snz-server">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/hyptos/snz-server/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/hyptos/snz-server/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Snz-server</h1>
+          <p></p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/hyptos">hyptos</a>
+            <a href="https://github.com/ironeP">ironeP</a>
+            <a href="https://github.com/oldDad
+
+            ou">oldDadou</a>
+            <a href="https://github.com/Avzgui">Avzgui</a>
+            <a href="https://github.com/kappasaleth">Kappasaleth</a>
+          </span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h3>
+<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Shingeki no Zombie aka SNZ</h3>
+
+<h3>
+<a id="designer-templates" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
+
+<p>Le but de ce projet est de réaliser une application client/serveur dans un contexte MMO. Notre jeu est un jeu de survie à la première personne (FPS). Dans un monde apocalyptique, le joueur doit survivre dans un monde peuplé de zombie.</p>
+
+<p>Ce projet se divise en deux parties, un serveur et un client. Chaque client peut se connecter au serveur. Le client est implémenté en C# avec Unity tandis que le serveur a été implémenter en C++. La connexion entre le client et le serveur se fait uniquement en TCP.</p>
+
+<p>Vous pouvez accéder au site de la partie cliente en suivant ce lient : <a id="lien-client" href="http://hyptos.github.io/snz-client/" aria-hidden="true">snz-client</a></p>
+
+
+
+<h3>
+<a id="designer-templates" class="anchor" href="#intro-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie Server</h3>
+<h3>Présentation</h3>
+<p>
+   Le serveur de communication est implémenté directement dessus le server de socket fournis avec le projet. Il présente
+une interface de passage de messages et permet la connexion simultané de plusieurs clients. Même si destiné au
+jeux, celui ci est tout à fait générique.
+</p>
+<h4>Les messages</h4>
+<p>
+Chaque données devant être envoyé/reçu par le serveur devra implémenter un classe virtuel pure de message generique (IMessage).
+L'interface IMessage demande l'implémentation des fonctions permettant l'encodage de la donné en flux d'octets, ainsi que de spécifié le tag du message. Ceci servira à l'identification du type de message,  et est necessaire pour l'indentification des flux d'octets.
+</p>
+<h4>Les interfaces du serveur</h4>
+<p>
+Ensuite, le serveur de communication présente deux intefaces, la première permmettra l'envoie de message. En identifiant un  client grâce à un id, le serveur sera capable d'envoyé le message. La seconde intereface pêrmet la reception de message. Chaques module présent sur le serveur desireux de recevoir un type de message devra alors implémenter une interface ("MessageHandler"). Il suffira ensuite s'abonner au serveur en notifiant le type des messages souhaité. Il est à noté qu'il est de la responsabilité du message handler de décoder le message, car le server transmettra uniquement un flux d'octet ainsi que le type de message transmis (ce qui permet de s'abonner à plusieur type de messages).
+</p>
+<h4>
+<a id="designer-templates" class="anchor" href="#marche" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ce qui fonctionne</h3>
+
+<p>Introduction au projet du server</p>
+
+<h3>
+<a id="designer-templates" class="anchor" href="#amelioration" aria-hidden="true"><span class="octicon octicon-link"></span></a>L'intelligence artificielle</h3>
+
+<p>texte pour l'ia</p>
+
+<h3>
+<a id="designer-templates" class="anchor" href="#amelioration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Les améliorations possibles</h3>
+
+
+<p>
+les améliorations.
+</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+  </body>
+</html>
