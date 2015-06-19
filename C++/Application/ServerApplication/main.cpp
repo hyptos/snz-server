@@ -16,7 +16,7 @@
 #include "Model/controler.hpp"
 
 #define NB_ZOMBIE   1
-#define ENV_SIZE    500
+#define ENV_SIZE    1000
 
 int main(int argc, char** argv){
     
@@ -24,7 +24,7 @@ int main(int argc, char** argv){
     //*
     SNZ_Server s;
 
-    Controler control;
+    Controler control(ENV_SIZE);
 
     implMessageDispatcher dispatcher;
     MessageHandlerExample msgH(&s);

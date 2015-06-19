@@ -2,8 +2,8 @@
 #include "Server/decoder.h"
 
 //Constructeur
-Controler::Controler() 
-	: m_model(NULL), m_server(NULL) {
+Controler::Controler(int env_size) 
+	: m_model(NULL), m_server(NULL), m_env_size(env_size) {
 }
 
 //Destructeur
@@ -40,22 +40,29 @@ void Controler::onOutPutMessage(QUuid client, IMessage* msg){
         			known = true;
         	}
 
-        	if(known){
-        		if(info.getEntity() < m_model->getNbEntities())
-        			m_model->notifyEntity(player);
-        	}
+        	if(known)
+        		m_model->notifyEntity(player);
         	else
         		std::cout << "Error : player id " 
         			<< info.getEntity() << " unknown" << std::endl;
 
-            delete player;
+            //delete player;
 		}
 		else if(code == 'c'){
 			std::cout << "Connection !" << std::endl;
 			InfoEntity info;
 	        decode<InfoEntity>(*(msg->toByteBuffer()), info);
 
-	        InfoPlayer *player = new InfoPlayer(info);
+            /*
+            info.setX(((double) rand() / RAND_MAX) * m_env_size);
+            info.setZ(((double) rand() / RAND_MAX) * m_env_size);
+            info.setY(0.0);
+            info.setDX(((double) rand() / RAND_MAX));
+            info.setDZ(((double) rand() / RAND_MAX));
+            info.setDY(0.0);
+            //*/
+
+            InfoPlayer *player = new InfoPlayer(info);
 
         	int known = false;
 
@@ -72,9 +79,12 @@ void Controler::onOutPutMessage(QUuid client, IMessage* msg){
 	       		unsigned long long id = m_model->addEntity(player);
 	       		m_players.push_back(id);
                 info.setEntity(id);
-                InfoEntity *inf = new InfoEntity(info);
-	       		m_server->sendToClient(client, inf);
-                delete inf;
+                if(m_server != NULL){
+                    InfoEntity *inf = new InfoEntity(info);
+                    if(m_server->sendToClient(client, inf, 'c'))
+                        std::cout << "Echec de l'envoi" << std::endl;
+                    delete inf;
+                }
 	       	}
             delete player;
 		}

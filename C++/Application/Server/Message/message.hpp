@@ -14,6 +14,7 @@ public:
     ~IMessage();
 
     virtual ByteBuffer *toByteBuffer() = 0;
+    virtual ByteBuffer *toByteBuffer(char);
     virtual char getCode() = 0;
 
 };

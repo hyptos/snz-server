@@ -38,6 +38,7 @@ public:
     int sendBroadCast(IMessage *);
 
     int sendToClient(QUuid, IMessage *);
+    int sendToClient(QUuid, IMessage *, char);
 
 private :
 

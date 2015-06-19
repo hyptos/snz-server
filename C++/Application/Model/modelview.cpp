@@ -12,7 +12,7 @@ ModelView::ModelView(int w, int h)
 
     QTimer* timerServ = new QTimer();
     timerServ->connect(timerServ, SIGNAL(timeout()), this, SLOT(notifyServer()));
-    timerServ->start(1000);
+    timerServ->start(100);
 }
 
 ModelView::~ModelView(){
@@ -36,17 +36,25 @@ void ModelView::connect_to_server(ICommunicationServer* server){
 }
 
 void ModelView::setEntity(InfoEntity* info){
-
-    InfoEntity* cpy = new InfoEntity(*info);
-
-    if(m_entities.find(info->getEntity()) != m_entities.end()){
-        InfoEntity* tmp = m_entities[cpy->getEntity()];
-        m_entities[cpy->getEntity()] = cpy;
+    InfoEntity* cpy = new InfoEntity();
+    cpy->setEntity(info->getEntity());
+    cpy->setType(info->getType());
+    cpy->setX(info->getX());
+    cpy->setZ(info->getZ());
+    cpy->setY(info->getY());
+    cpy->setDX(info->getDX());
+    cpy->setDZ(info->getDZ());
+    cpy->setDY(info->getDY());
+    if(m_entities.find(cpy->getEntity()) != m_entities.end()){
+        InfoEntity* tmp = m_entities.find(cpy->getEntity())->second;
+        m_entities.find(cpy->getEntity())->second = cpy;
         delete tmp;
     }
 }
 
 void ModelView::addEntity(InfoEntity* info){
+    if(info->getType() == EntityType::PLAYER)
+        std::cout << "View Ajout player" << std::endl;
 
     if(m_entities.find(info->getEntity()) == m_entities.end()){
         InfoEntity* cpy = new InfoEntity(*info);
@@ -84,9 +92,12 @@ void ModelView::repaint_scene(){
             << QPointF(entity.getX() + sin(alpha + M_PI_4)*50, entity.getZ() + cos(alpha + M_PI_4)*50)
             << QPointF(entity.getX() + sin(alpha - M_PI_4)*50, entity.getZ() + cos(alpha - M_PI_4)*50);
 
-        if(entity.getType() == EntityType::PLAYER)
+        if(entity.getType() == EntityType::PLAYER){
+            std::cout << "View Affiche player" << std::endl;
             m_scene->addPolygon(triangle, QPen(QColor("yellow"), 1), QBrush(QColor("yellow")));
+        }
         else{
+            std::cout << "View Affiche zombie" << std::endl;
             m_scene->addPolygon(cone, QPen(QColor("orange"), 1), Qt::NoBrush);
             m_scene->addPolygon(triangle, QPen(QColor("red"), 1), QBrush(QColor("red")));
         }

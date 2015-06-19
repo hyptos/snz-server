@@ -46,20 +46,15 @@ template<> void decode(ByteBuffer &buff, InfoEntity &res) {
 
     index = fromBuffer<float>(buff,index,&x,1); //4
 
-    index = fromBuffer<float>(buff,index,&z,1); //4
-
     index = fromBuffer<float>(buff,index,&y,1); //4
+
+    index = fromBuffer<float>(buff,index,&z,1); //4
 
     index = fromBuffer<float>(buff,index,&dx,1); //4
 
-    index = fromBuffer<float>(buff,index,&dz,1); //4
-
     index = fromBuffer<float>(buff,index,&dy,1); //4
 
-    std::cout << "x" << x << " z" << z << " type" << type << std::endl  ;
-    std::cout << "id : " << entity << std::endl;
-    std::cout << "size : " << size << std::endl;
-    std::cout << "dy : " << dy << std::endl;
+    index = fromBuffer<float>(buff,index,&dz,1); //4
 
 //*
     if(type == 2){
@@ -72,18 +67,14 @@ template<> void decode(ByteBuffer &buff, InfoEntity &res) {
     }
 //*/
     res.setEntity(entity);
-    res.setX(x);
-    res.setZ(z);
+    res.setX(z);
+    res.setZ(x);
     res.setY(y);
-    res.setDX(dx);
-    res.setDZ(dz);
+    res.setDX(dz);
+    res.setDZ(dx);
     res.setDY(dy);
 
     res.affiche();
-
-    std::cout << "decoder done!" << std::endl;
-
-
 }
 
 

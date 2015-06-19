@@ -9,6 +9,7 @@ public :
     ~ICommunicationServer();
     virtual int sendBroadCast(IMessage *) = 0;
     virtual int sendToClient(QUuid, IMessage *) = 0;
+    virtual int sendToClient(QUuid, IMessage *, char) = 0;
 };
 
 #endif // COMMUNICATIONSERVER

@@ -33,6 +33,16 @@ Body* Entity::getBody(){
 void Entity::setInfo(InfoEntity* info){
     delete m_info;
     m_info = info;
+
+    //Notify le body
+    m_body->lock();
+    m_body->setX(m_info->getX());
+    m_body->setZ(m_info->getZ());
+    m_body->setY(m_info->getY());
+    m_body->setDX(m_info->getDX());
+    m_body->setDZ(m_info->getDZ());
+    m_body->setDY(m_info->getDY());
+    m_body->unlock();
 }
 
 //Modifie le pointeur sur le body de l'entité

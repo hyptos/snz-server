@@ -119,18 +119,33 @@ char InfoEntity::getCode() {
     return MSG_WOPAINFO;
 }
 
-//Coder
+//Override
 ByteBuffer* InfoEntity::toByteBuffer() {
     //Ordre d'encodage de l'infoEntity dans le ByteBuffer
     ByteBuffer *res = new ByteBuffer();
     res->append(toBuffer<char>(MSG_WOPAINFO));
     res->append(toBuffer<unsigned long long>(this->getEntity()));
     res->append(toBuffer<int>(this->getType()));
-    res->append(toBuffer<double>(this->getX()));
-    res->append(toBuffer<double>(this->getZ()));
-    res->append(toBuffer<double>(this->getY()));
-    res->append(toBuffer<double>(this->getDX()));
-    res->append(toBuffer<double>(this->getDZ()));
-    res->append(toBuffer<double>(this->getDY()));
+    res->append(toBuffer<float>((float) this->getZ()));
+    res->append(toBuffer<float>((float) this->getY()));
+    res->append(toBuffer<float>((float) this->getX()));
+    res->append(toBuffer<float>((float) this->getDZ()));
+    res->append(toBuffer<float>((float) this->getDY()));
+    res->append(toBuffer<float>((float) this->getDX()));
+    return res;
+}
+
+ByteBuffer* InfoEntity::toByteBuffer(char code) {
+    //Ordre d'encodage de l'infoEntity dans le ByteBuffer
+    ByteBuffer *res = new ByteBuffer();
+    res->append(toBuffer<char>(code));
+    res->append(toBuffer<unsigned long long>(this->getEntity()));
+    res->append(toBuffer<int>(this->getType()));
+    res->append(toBuffer<float>((float) this->getZ()));
+    res->append(toBuffer<float>((float) this->getY()));
+    res->append(toBuffer<float>((float) this->getX()));
+    res->append(toBuffer<float>((float) this->getDZ()));
+    res->append(toBuffer<float>((float) this->getDY()));
+    res->append(toBuffer<float>((float) this->getDX()));
     return res;
 }

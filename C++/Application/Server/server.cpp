@@ -168,3 +168,14 @@ int SNZ_Server::sendToClient(QUuid client, IMessage *msg){
 
     return 0;
 }
+
+int SNZ_Server::sendToClient(QUuid client, IMessage *msg, char code){
+
+    if(!mClients.contains(client))
+      return 1;
+
+    ByteBuffer *buff = msg->toByteBuffer(code);
+    mClients.value(client)->send_buffering.add(buff);
+
+    return 0;
+}

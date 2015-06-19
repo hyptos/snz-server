@@ -27,7 +27,7 @@ class Controler : public IMessageHandler {
 	public : 
 
 		///Constructeur
-		Controler();
+		Controler(int);
 
 		///Destructeur
 		~Controler();
@@ -46,6 +46,7 @@ class Controler : public IMessageHandler {
 		SNZ_Model* m_model;							///< pointeur sur le modèle
 		ICommunicationServer* m_server;				///< pointeur vers serveur
 		std::vector<unsigned long long> m_players; 	///< list des joueurs déjà connectés
+		int m_env_size;
 };
 
 #endif // CONTROLER_HPP

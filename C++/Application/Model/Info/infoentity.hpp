@@ -95,6 +95,8 @@ class InfoEntity : public IMessage{
         ///Coder to ByteBuffer
         virtual ByteBuffer *toByteBuffer();
 
+        virtual ByteBuffer *toByteBuffer(char);
+
         /// affichage
         virtual void affiche();
 
