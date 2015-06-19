@@ -161,7 +161,7 @@ void ZEye::operator()(){
 		if(!datum.empty() || player){
 
 			Order *order;
-			if(player && min_dist <= 1.0)
+			if(player && min_dist <= 3.0)
 				order = new Order(OrderType::STAY);
 			else
 				order = new MoveOrder(pos.first, pos.second);

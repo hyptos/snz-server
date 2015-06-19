@@ -12,7 +12,7 @@ ModelView::ModelView(int w, int h)
 
     QTimer* timerServ = new QTimer();
     timerServ->connect(timerServ, SIGNAL(timeout()), this, SLOT(notifyServer()));
-    timerServ->start(100);
+    timerServ->start(1000);
 }
 
 ModelView::~ModelView(){
@@ -92,12 +92,9 @@ void ModelView::repaint_scene(){
             << QPointF(entity.getX() + sin(alpha + M_PI_4)*50, entity.getZ() + cos(alpha + M_PI_4)*50)
             << QPointF(entity.getX() + sin(alpha - M_PI_4)*50, entity.getZ() + cos(alpha - M_PI_4)*50);
 
-        if(entity.getType() == EntityType::PLAYER){
-            std::cout << "View Affiche player" << std::endl;
+        if(entity.getType() == EntityType::PLAYER)
             m_scene->addPolygon(triangle, QPen(QColor("yellow"), 1), QBrush(QColor("yellow")));
-        }
         else{
-            std::cout << "View Affiche zombie" << std::endl;
             m_scene->addPolygon(cone, QPen(QColor("orange"), 1), Qt::NoBrush);
             m_scene->addPolygon(triangle, QPen(QColor("red"), 1), QBrush(QColor("red")));
         }

@@ -6,13 +6,23 @@ SNZ_Model::SNZ_Model(int env_size, int nbZ)
 
     std::srand(std::time(NULL));
 
-    InfoAgent *info = new InfoAgent(0, AgentType::ZOMBIE, 505, 505, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
+    //*
+    InfoAgent* info = new InfoAgent(0, AgentType::ZOMBIE, 400, 400, 1.0, ((double) rand() / RAND_MAX) * 2.0 - 1.0, ((double) rand() / RAND_MAX) * 2.0 - 1.0, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
     addEntity(info);
     delete info;
-
+    info = new InfoAgent(0, AgentType::ZOMBIE, 505, 505, 1.0, (double) rand() / RAND_MAX, ((double) rand() / RAND_MAX) * 2.0 - 1.0, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
+    addEntity(info);
+    delete info;
+    info = new InfoAgent(0, AgentType::ZOMBIE, 320, 640, 1.0, ((double) rand() / RAND_MAX) * 2.0 - 1.0, ((double) rand() / RAND_MAX) * 2.0 - 1.0, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
+    addEntity(info);
+    delete info;
+    info = new InfoAgent(0, AgentType::ZOMBIE, 360, 280, 1.0, ((double) rand() / RAND_MAX) * 2.0 - 1.0, ((double) rand() / RAND_MAX) * 2.0 - 1.0, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
+    addEntity(info);
+    delete info;
+    //*/
     /*
     for(int i = 0 ; i < nbZ ; i++){
-        InfoAgent *info = new InfoAgent(0, AgentType::ZOMBIE, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
+        InfoAgent* info = new InfoAgent(0, AgentType::ZOMBIE, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
         addEntity(info);
         delete info;
     }
@@ -51,6 +61,10 @@ void SNZ_Model::notifyEntity(InfoEntity* info){
     else if(info->getType() == EntityType::PLAYER){
         if(m_entities.find(info->getEntity()) != m_entities.end())
             m_entities.find(info->getEntity())->second->setInfo(info);
+
+        if(m_environment != NULL)
+            m_environment->emitSound(info->getX(), info->getZ(), info->getY(), 10);
+        
         if(m_view != NULL)
           m_view->setEntity(info);
     }
@@ -68,7 +82,7 @@ unsigned long long SNZ_Model::getNbEntities(){
 
 //Ajoute une entité au modèle (TODO)
 unsigned long long SNZ_Model::addEntity(InfoEntity *entity){
-    unsigned long long id = ++m_nbEntities;
+    unsigned long long id = m_nbEntities++;
     int env_size = m_environment->getLength();
     if(entity != NULL && entity->getType() == EntityType::PLAYER){
         InfoPlayer *info = dynamic_cast<InfoPlayer*>(entity);
