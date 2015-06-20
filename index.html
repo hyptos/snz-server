@@ -20,11 +20,10 @@
   <body>
       <div id="header">
         <nav>
-          <li class="fork"><a href="https://github.com/hyptos/snz-server">View On GitHub</a></li>
+          <li class="fork"><a href="https://github.com/hyptos/snz-server">Server On GitHub</a></li>
+          <li class="fork"><a href="https://github.com/hyptos/snz-client">Client On GitHub</a></li>
           <li class="downloads"><a href="https://github.com/hyptos/snz-server/zipball/master">ZIP server</a></li>
-          <li class="downloads"><a href="https://github.com/hyptos/snz-server/tarball/master">TAR server</a></li>
           <li class="downloads"><a href="https://github.com/hyptos/snz-client/zipball/master">ZIP client</a></li>
-          <li class="downloads"><a href="https://github.com/hyptos/snz-client/tarball/master">TAR client</a></li>
           <li class="title">DOWNLOADS</li>
         </nav>
       </div><!-- end header -->
@@ -35,43 +34,46 @@
         <div id="title">
           <h1>Projet SnZ</h1>
           <p></p>
+  		  <hr> 
+  		  <img src="images/header.jpg">
           <hr>
+          
           </span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
-  <img src="images/header.jpg">
 
-        <h3>
-<a id="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages" aria-hidden="true"><span class="octicon octicon-link"></span></a>Shingeki no Zombie aka SNZ</h3>
 
 <h3>
 <a id="designer-templates" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
 
-<p>Le but de ce projet est de réaliser une application client/serveur dans un contexte MMO. Notre jeu est un jeu de survie à la première personne (FPS). Dans un monde apocalyptique, le joueur doit survivre dans un monde peuplé de zombie.</p>
+<p>Le but de ce projet est de réaliser une application client/serveur dans un contexte MMO. Notre jeu est un jeu de survie à la première personne (FPS). Dans un monde post-apocalyptique, le joueur doit survivre dans un monde peuplé de zombie.</p>
 
 <p>Ce projet se divise en deux parties, un serveur et un client. Chaque client peut se connecter au serveur. Le client est implémenté en C# avec Unity tandis que le serveur a été implémenter en C++. La connexion entre le client et le serveur se fait uniquement en TCP.</p>
 
 <p>Ce projet a été réalisé par : 
-<li>Antoine Martin aka <a href="https://github.com/hyptos">hyptos</a></li>
-<li>Antoine Richard aka <a href="https://github.com/Avzgui">Avzgui</a></li>
-<li>Clément Picq aka <a href="https://github.com/IroneP">IroneP</a></li>
-<li>Adrien Faure aka <a href="https://github.com/oldDadou">oldDadou</a></li>
-<li>Cristophe Pinelli aka <a href="https://github.com/Kappasaleth">Kappasaleth</a></li>
-<li>Raphael Fiume aka <a href="https://github.com/McCowboy">McCowboy</a></li>
-<li>Cynthia Perret </li>
-<li>Lucas Bercheti aka <a href="https://github.com/Dragzal">Dragzal</a></li>
+<li>Antoine Martin aka <a href="https://github.com/hyptos">hyptos</a> (Connexion Client/Serveur)</li>
+<li>Antoine Richard aka <a href="https://github.com/Avzgui">Avzgui</a> (IA)</li>
+<li>Clément Picq aka <a href="https://github.com/IroneP">IroneP</a> (Connexion Client/Serveur)</li>
+<li>Adrien Faure aka <a href="https://github.com/oldDadou">oldDadou</a> (Serveur)</li>
+<li>Cristophe Pinelli aka <a href="https://github.com/Kappasaleth">Kappasaleth</a> (IHM)</li>
+<li>Raphael Fiume aka <a href="https://github.com/McCowboy">McCowboy</a> (Unity)</li>
+<li>Cynthia Perret (IHM)</li>
+<li>Lucas Bercheti aka <a href="https://github.com/Dragzal">Dragzal</a> (Unity)</li>
 
 </p>
 
-<p>Vous pouvez accéder au repository de la partie cliente en suivant ce lient : <a id="lien-client" href="https://github.com/hyptos/snz-client" aria-hidden="true">snz-client</a></p>
+<p>Vous pouvez accéder au repository de la partie serveur en suivant ce lient : <a id="lien-serveur" href="https://github.com/hyptos/snz-server" aria-hidden="true">snz-server</a></p>
+
+<p>Vous pouvez accéder au repository de la partie client en suivant ce lient : <a id="lien-client" href="https://github.com/hyptos/snz-client" aria-hidden="true">snz-client</a></p>
+
 
 
 
 <h3>
-<a id="designer-templates" class="anchor" href="#intro-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie Server</h3>
+<a id="designer-templates" class="anchor" href="#intro-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie Serveur</h3>
 <h3>Présentation</h3>
 <p>
-   Le serveur de communication est implémenté directement dessus le server de socket fournis avec le projet. Il présente
+   Le serveur de communication est implémenté directement dessus le serveur de socket fournis avec le projet. Il présente
 une interface de passage de messages et permet la connexion simultané de plusieurs clients. Même si destiné au
 jeux, celui ci est tout à fait générique.
 </p>
@@ -96,11 +98,83 @@ transiter des messages de type Mesh, String, Event (type que nous avons créé p
 pour que le client puisse mettre à jour son affichage. Tout les mouvement des zombies sont calculés par le serveur.
 </p>
 
+<p>
+Nous avons deux protagonistes : 
+<ul>
+<li>Zombie ( contrôleur a la troisième personne avec animation ) réception des données 
+<li>Joueur ( contrôleur a la première personne sans animation) envoi de données </li>
+<li>Joueur ( vue a la troisième personne afin d'intensifier l’immersion) déplacement (zqsd) avec mouvement de la tête par la souris</li> 
+<li>Passage du menu au jeu par un système de chargement afin que la map soit chargée avant l'entrée en jeu</li>
+<li> Bande-son ajoutée </li>
+</ul>
+</p>
+
+
 <h3>
-<a id="designer-templates" class="anchor" href="#amelioration" aria-hidden="true"><span class="octicon octicon-link"></span></a>L'intelligence artificielle</h3>
+<a id="designer-templates" class="anchor" href="#intro-ia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie Intelligence Artificielle</h3>
 
-<p>texte pour l'ia</p>
+<p>
+Le but de notre projet était de créer un Système Multi-Agents (SMA) représentant un écosystème 
+post-apocalyptique. Nous avons donc voulu que les zombies parcourant l'environnement se déplacent
+et réagissent de manière "vraisemblable" et indépendante du joueur, c'est à dire qu'ils ne soient pas
+simplement des bots ayant une zone de déplacement et réaparaissant après un certain temps.
+</p>
 
+<p>
+Nous voulions que nos zombies se déplacent en "horde" à travers l'environnement, qu'ils réagissent
+au sons, à la lumière et à la vue d'un ou plusieurs joueurs.
+</p>
+	
+<img src="images/horde.jpg"><br/>
+
+<p>
+Afin d'implémenter se SMA nous avons utiliser une implémentation permettant de lancer les agents à
+l'aide de threads en suivant le schéma suivant :
+<ul>
+<li>Le modèle créer un Environnement et des Entités  qu'il lie à l'envrionnement.</li>
+<li>Chaque entité possèdent un Corps dans l'environnement.</li>
+<li>Un Agent est une entité, mais un entité peut etre un objet, un joueur ou un agent.</li>
+<li>Le corps de chaque agent possède un certain nombre de modules "senseurs" captant les 
+divers stimuli envoyé depuis l'environnement.</li>
+<li>Le corps de chaque agent possède un certain nombre de modules "moteurs" lui permettant
+d'effectuer des actions sur l'environnement.</li>
+<li>Les Stimuli peuvent etre sonore ou visuel et sont générés depuis l'environnement.</li>
+<li>Chaque modules est lancé dans un thread.</li>
+</ul>
+</p>
+
+
+<div style="text-align: center">
+	<img src="images/SNZ_Class_Diagram.png">
+</div>
+
+<p>
+Pour donner aux zombies le comportement que nous souhaitions, c'est à dire :
+<ul>
+	<li>Se déplacer en groupe.</li>
+	<li>Etre attiré par le bruit.</li>
+	<li>Attaquer les joueurs.</li>
+</ul>
+
+<div style="text-align: center">
+	<img src="images/flocking.png">
+</div>
+
+Nous avons donc implémenté un algorithme de flocking, afin qu'ils se regroupent et 
+se suivent de manière plus ou moins "organisé", en y implémentant de petites modifications
+pour qu'ils soient attiré par les joueurs (au bruit ou à la vue) et qu'ils soient légèrement
+moins "organisés" lorsqu'ils se dirigent sur un joueur étant entré dans leur champ de vision.
+
+</p>
+
+<p>
+Ainsi nous obtenons le comportement souhaité : des hordes de zombies parcourant l'environnement
+et pouvant tomber à tout moment sur le joueur.
+</p>
+
+<div style="text-align: center">
+	<img src="images/Walking_Dead.jpg">
+</div>
 
 
 <h3>
@@ -123,6 +197,10 @@ pour que le client puisse mettre à jour son affichage. Tout les mouvement des z
 <p>
 les améliorations.
 </p>
+
+
+<h3>
+<a id="designer-templates" class="anchor" href="#screenshots" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshots</h3>
       </section>
 
     </div>

@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../Application/Model/constantes.hpp
+
+/home/avzgui/Documents/M1/S2/MIF39/snz-server/C++/Application/Model/Entities/Orders/moveorder.cpp
+moveorder.hpp
+/home/avzgui/Documents/M1/S2/MIF39/snz-server/C++/Application/Model/Entities/Orders/moveorder.hpp
+
+/home/avzgui/Documents/M1/S2/MIF39/snz-server/C++/Application/Model/Entities/Orders/moveorder.hpp
+iostream
+-
+order.hpp
+/home/avzgui/Documents/M1/S2/MIF39/snz-server/C++/Application/Model/Entities/Orders/order.hpp
+
+/home/avzgui/Documents/M1/S2/MIF39/snz-server/C++/Application/Model/Entities/Orders/order.cpp
+order.hpp
+/home/avzgui/Documents/M1/S2/MIF39/snz-server/C++/Application/Model/Entities/Orders/order.hpp
+
+/home/avzgui/Documents/M1/S2/MIF39/snz-server/C++/Application/Model/Entities/Orders/order.hpp
+iostream
+-
+Model/constantes.hpp
+-
+

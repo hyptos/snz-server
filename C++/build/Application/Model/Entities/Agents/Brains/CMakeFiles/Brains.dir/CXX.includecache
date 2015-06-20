@@ -1,0 +1,10 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/avzgui/Documents/M1/S2/MIF39/snz-server/C++/build/Application/Model/Entities/Agents/Brains/Brains_automoc.cpp
+
