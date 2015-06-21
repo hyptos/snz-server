@@ -22,8 +22,8 @@
         <nav>
           <li class="fork"><a href="https://github.com/hyptos/snz-server">Server On GitHub</a></li>
           <li class="fork"><a href="https://github.com/hyptos/snz-client">Client On GitHub</a></li>
-          <li class="downloads"><a href="https://github.com/hyptos/snz-server/zipball/master">ZIP server</a></li>
           <li class="downloads"><a href="https://github.com/hyptos/snz-client/zipball/master">ZIP client</a></li>
+          <li class="downloads"><a href="https://github.com/hyptos/snz-server/zipball/master">ZIP server</a></li>
           <li class="title">DOWNLOADS</li>
         </nav>
       </div><!-- end header -->
@@ -46,11 +46,14 @@
 <h3>
 <a id="designer-templates" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
 
+<div style="text-align: justify">
+  
 <p>Le but de ce projet est de réaliser une application client/serveur dans un contexte MMO. Notre jeu est un jeu de survie à la première personne (FPS). Dans un monde post-apocalyptique, le joueur doit survivre dans un monde peuplé de zombie.</p>
 
 <p>Ce projet se divise en deux parties, un serveur et un client. Chaque client peut se connecter au serveur. Le client est implémenté en C# avec Unity tandis que le serveur a été implémenter en C++. La connexion entre le client et le serveur se fait uniquement en TCP.</p>
 
-<p>Ce projet a été réalisé par : 
+<p>Ce projet a été réalisé par :
+<ul> 
 <li>Antoine Martin aka <a href="https://github.com/hyptos">hyptos</a> (Connexion Client/Serveur)</li>
 <li>Antoine Richard aka <a href="https://github.com/Avzgui">Avzgui</a> (IA)</li>
 <li>Clément Picq aka <a href="https://github.com/IroneP">IroneP</a> (Connexion Client/Serveur)</li>
@@ -59,7 +62,7 @@
 <li>Raphael Fiume aka <a href="https://github.com/McCowboy">McCowboy</a> (Unity)</li>
 <li>Cynthia Perret (IHM)</li>
 <li>Lucas Bercheti aka <a href="https://github.com/Dragzal">Dragzal</a> (Unity)</li>
-
+</ul>
 </p>
 
 <p>Vous pouvez accéder au repository de la partie serveur en suivant ce lient : <a id="lien-serveur" href="https://github.com/hyptos/snz-server" aria-hidden="true">snz-server</a></p>
@@ -94,7 +97,7 @@ Ensuite, le serveur de communication présente deux intefaces, la première perm
 récupèrent une chaine d'octect, et selon l'ID qui a été envoyer en tête de la chaîne, récupère le message voulu. Ainsi, en imposant un formalisme précis entre le client et le serveur, on peut faire
 transiter des messages de type Mesh, String, Event (type que nous avons créé pour signaler un mouvement) et connexion.</p>
 <p>
-	De plus, il est de la responsabilité du client d'informer en temps réelle la position du joueur au serveur. Le serveur, lui, va envoyer continuellement la position de chacun des zombies
+  De plus, il est de la responsabilité du client d'informer en temps réelle la position du joueur au serveur. Le serveur, lui, va envoyer continuellement la position de chacun des zombies
 pour que le client puisse mettre à jour son affichage. Tout les mouvement des zombies sont calculés par le serveur.
 </p>
 
@@ -124,14 +127,15 @@ simplement des bots ayant une zone de déplacement et réaparaissant après un c
 Nous voulions que nos zombies se déplacent en "horde" à travers l'environnement, qu'ils réagissent
 au sons, à la lumière et à la vue d'un ou plusieurs joueurs.
 </p>
-	
+  
 <img src="images/horde.jpg"><br/>
 
 <p>
-Afin d'implémenter se SMA nous avons utiliser une implémentation permettant de lancer les agents à
+Afin d'implémenter ce SMA nous avons utilisé une implémentation permettant de lancer les agents à
 l'aide de threads en suivant le schéma suivant :
 <ul>
-<li>Le modèle créer un Environnement et des Entités  qu'il lie à l'envrionnement.</li>
+<li>Le modèle créer un Environnement et des Entités, 
+entités qu'il lie à l'envrionnement lors de leur création.</li>
 <li>Chaque entité possèdent un Corps dans l'environnement.</li>
 <li>Un Agent est une entité, mais un entité peut etre un objet, un joueur ou un agent.</li>
 <li>Le corps de chaque agent possède un certain nombre de modules "senseurs" captant les 
@@ -145,23 +149,23 @@ d'effectuer des actions sur l'environnement.</li>
 
 
 <div style="text-align: center">
-	<img src="images/SNZ_Class_Diagram.png">
+  <img src="images/SNZ_Class_Diagram.png">
 </div>
 
 <p>
 Pour donner aux zombies le comportement que nous souhaitions, c'est à dire :
 <ul>
-	<li>Se déplacer en groupe.</li>
-	<li>Etre attiré par le bruit.</li>
-	<li>Attaquer les joueurs.</li>
+  <li>Se déplacer en groupe.</li>
+  <li>Etre attiré par le bruit.</li>
+  <li>Attaquer les joueurs.</li>
 </ul>
 
 <div style="text-align: center">
-	<img src="images/flocking.png">
+  <img src="images/flocking.png">
 </div>
 
-Nous avons donc implémenté un algorithme de flocking, afin qu'ils se regroupent et 
-se suivent de manière plus ou moins "organisé", en y implémentant de petites modifications
+Nous avons implémenté un algorithme de flocking, afin qu'ils se regroupent et 
+se suivent de manière plus ou moins "organisé", en y ajoutant de légères modifications
 pour qu'ils soient attiré par les joueurs (au bruit ou à la vue) et qu'ils soient légèrement
 moins "organisés" lorsqu'ils se dirigent sur un joueur étant entré dans leur champ de vision.
 
@@ -173,7 +177,7 @@ et pouvant tomber à tout moment sur le joueur.
 </p>
 
 <div style="text-align: center">
-	<img src="images/Walking_Dead.jpg">
+  <img src="images/Walking_Dead.jpg">
 </div>
 
 
@@ -182,11 +186,11 @@ et pouvant tomber à tout moment sur le joueur.
 
 <p>Voici les fonctionnalités implémentées : </p>
 <ul>
-	<li>Connexion client/serveur</li>
-	<li>Envoies de mesh au client</li>
-	<li>Envoies/Reception de données au client</li>
-	<li>Envoies/Reception de données au serveur</li>
-	<li>Système multi-agent côté serveur</li>
+  <li>Connexion client/serveur</li>
+  <li>Envoies de mesh au client</li>
+  <li>Envoies/Reception de données au client</li>
+  <li>Envoies/Reception de données au serveur</li>
+  <li>Système multi-agent côté serveur</li>
 </ul>
 
 
@@ -196,8 +200,8 @@ et pouvant tomber à tout moment sur le joueur.
 
 <p>
 <ul>
-<li></li>
-<li></li>
+<li>Ajouter les zombies dans le client de manière dynamique.</li>
+<li>Mettre en place un système de "chunk" envoyé depuis le serveur.</li>
 <li>Refonte du Moteur IA afin de pouvoir lancer les agents dans des processus plutot que
 dans des threads et utiliser des temps logiques plutot que des temps réels.</li>
 <li>Ajout de divers autres agents :
@@ -206,11 +210,15 @@ Pouvant se déplacer en meute, communiquant par "aboiements".</li>
 <li>Divers animaux pouvant etre "élevé" par les joueurs : vache, poulet, cochon ...
 Mais pouvant aussi etre attaqué par les zombies.</li>
 <li>Des arbres, plantes et céréales, pouvant etre cultivés par les joueurs et réagissant
-au soleil et à l'eau pour croitre.</li></ul>
+au soleil et à l'eau pour croitre.</li>
+</ul>
 </li>
+<li>Créer des intéractions entre joueurs, agents et environnement.</li>
+<li>Créer un système de craft.</li>
 </ul>
 </p>
 
+</div>
 
 <h3>
 <a id="designer-templates" class="anchor" href="#screenshots" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshots</h3>
