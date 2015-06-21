@@ -34,3 +34,6 @@ In <b>C++/build</b> directory :
 ```
 ./bin/ServeurApplication
 ```
+
+Le repository du client : https://github.com/hyptos/snz-client
+ 
