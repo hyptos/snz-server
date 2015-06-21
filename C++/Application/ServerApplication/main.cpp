@@ -15,7 +15,7 @@
 #include "Model/map_tree.hpp"
 #include "Model/controler.hpp"
 
-#define NB_ZOMBIE   4
+#define NB_ZOMBIE   100
 #define ENV_SIZE    1000
 
 int main(int argc, char** argv){

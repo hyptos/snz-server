@@ -21,7 +21,7 @@ SNZ_Model::SNZ_Model(int env_size, int nbZ)
     delete info;
     //*/
     /*
-    for(int i = 0 ; i < nbZ ; i++){
+    for(int i = 4 ; i < nbZ ; i++){
         InfoAgent* info = new InfoAgent(0, AgentType::ZOMBIE, ((double) rand() / RAND_MAX) * env_size, ((double) rand() / RAND_MAX) * env_size, 0.0, (double) rand() / RAND_MAX, (double) rand() / RAND_MAX, 0.0, AgentMoveState::WALK, AgentHealthState::NORMAL);
         addEntity(info);
         delete info;
