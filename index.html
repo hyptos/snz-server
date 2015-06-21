@@ -50,7 +50,7 @@
   
 <p>Le but de ce projet est de réaliser une application client/serveur dans un contexte MMO. Notre jeu est un jeu de survie à la première personne. Dans un monde postapocalyptique, le joueur doit survivre dans un environnement hostile peuplé de zombie.</p>
 
-<p>Ce projet se divise en deux parties, un serveur et un client. Chaque client peut se connecter au serveur. Le client est implémenté en C# avec Unity tandis que le serveur a été implémenté en C++. La connexion entre le client et le serveur se fait uniquement en TCP.</p>
+<p>Ce projet se divise en deux parties, un serveur et un client. Chaque client peut se connecter au serveur. Le client est implémenté en C# avec Unity tandis que le serveur est implémenté en C++. La connexion entre le client et le serveur se fait uniquement en TCP.</p>
 
 <p>Ce projet a été réalisé par :
 <ul> 
@@ -65,7 +65,7 @@
 </ul>
 </p>
 
-<p>Vous pouvez accéder au repository de la partie serveur en suivant ce lient : <a id="lien-serveur" href="https://github.com/hyptos/snz-server" aria-hidden="true">snz-server</a></p>
+<p>Vous pouvez accéder au repository de la partie serveur en suivant ce lien : <a id="lien-serveur" href="https://github.com/hyptos/snz-server" aria-hidden="true">snz-server</a></p>
 
 <p>Vous pouvez accéder au repository de la partie client en suivant ce lient : <a id="lien-client" href="https://github.com/hyptos/snz-client" aria-hidden="true">snz-client</a></p>
 
@@ -87,14 +87,14 @@ L'interface IMessage demande l'implémentation des fonctions permettant l'encoda
 </p>
 <h4>Les interfaces du serveur</h4>
 <p>
-Ensuite, le serveur de communication présente deux interfaces, la première permet l'envoi de message. En identifiant un  client grâce à un id, le serveur est capable d'envoyé le message. La seconde interface permet la réception de message. Chaque module présent sur le serveur désireux de recevoir un type de message devra alors implémenter une interface ("MessageHandler"). Il suffira ensuite s'abonner au serveur en notifiant le type des messages souhaité. Il est à noter qu'il est de la responsabilité du message handler de décoder le message, car le serveur transmettra uniquement un flux d'octet ainsi que le type de message transmis (ce qui permet de s'abonner à plusieurs types de messages).
+Ensuite, le serveur de communication présente deux interfaces, la première permet l'envoi de messages. En identifiant un  client grâce à un id, le serveur est capable d'envoyer le message. La seconde interface permet la réception de message. Chaque module présent sur le serveur désireux de recevoir un type de message devra alors implémenter une interface ("MessageHandler"). Il suffira ensuite de s'abonner au serveur en notifiant le type des messages souhaité. Il est à noter qu'il est de la responsabilité du MessageHandler de décoder le message, car le serveur transmettra uniquement un flux d'octets ainsi que le type de message transmis (ce qui permet de s'abonner à plusieurs types de messages).
 </p>
 
 <h3>
 <a id="designer-templates" class="anchor" href="#intro-client" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie Client</h3>
 
 <p>Le principal rôle de la partie client est de faire le lien entre ce que nous envoie le serveur et ce dont Unity a besoin pour fonctionner. Pour cela, nous avons créé plusieurs fonctions qui 
-récupèrent une chaine d'octect, et selon l'ID qui a été envoyer en tête de la chaîne, récupère le message voulu. Ainsi, en imposant un formalisme précis entre le client et le serveur, on peut faire
+récupèrent une chaine d'octects, et selon l'ID qui a été envoyé en tête de la chaîne, récupère le message voulu. Ainsi, en imposant un formalisme précis entre le client et le serveur, on peut faire
 transiter des messages de type Mesh, String, Event (type que nous avons créé pour signaler un mouvement) et connexion.</p>
 <p>
   De plus, il est de la responsabilité du client d'informer en temps réel la position du joueur au serveur. Le serveur, lui, va envoyer continuellement la position de chacun des zombies
@@ -104,8 +104,8 @@ pour que le client puisse mettre à jour son affichage. Tous les mouvements des 
 <p>
 Nous avons deux protagonistes : 
 <ul>
-<li>Zombie ( contrôleur a la troisième personne avec animation ) réception des données 
-<li>Joueur ( contrôleur a la première personne sans animation) envoi de données </li>
+<li>Zombie ( contrôleur a la troisième personne avec animation )</li>
+<li>Joueur ( contrôleur a la première personne sans animation)</li>
 <li>Joueur ( vue a la troisième personne afin d'intensifier l’immersion) déplacement (zqsd) avec mouvement de la tête par la souris</li> 
 <li>Passage du menu au jeu par un système de chargement afin que la map soit chargée avant l'entrée en jeu</li>
 <li> Bande-son ajoutée </li>
@@ -118,8 +118,8 @@ Nous avons deux protagonistes :
 
 <p>
 Le but de notre projet était de créer un Système Multi-Agents (SMA) représentant un écosystème 
-post-apocalyptique. Nous avons donc voulu que des zombies parcourent l'environnement, se déplaçant
-et réagissant de manière "vraisemblable" et indépendante du joueur, c'est-à-dire qu'ils ne soient pas
+post-apocalyptique. Nous avons donc voulu que des zombies parcourent l'environnement, se déplacent
+et réagissent de manière "vraisemblable" et indépendante du joueur, c'est-à-dire qu'ils ne soient pas
 simplement des bots ayant une zone de déplacement et réapparaissant après un certain temps.
 </p>
 
@@ -134,15 +134,15 @@ aux sons, à la lumière et à la vue d'un ou plusieurs joueurs.
 Afin d'implémenter ce SMA nous avons utilisé une implémentation permettant de lancer les agents à
 l'aide de threads en suivant le schéma suivant :
 <ul>
-<li>Le modèle créer un Environnement et des Entités, 
+<li>Le modèle créé un Environnement et des Entités, 
 entités qu'il lie à l'environnement lors de leur création.</li>
-<li>Chaque entité possède un Corps dans l'environnement.</li>
-<li>Un Agent est une entité, mais une entité peut être un objet, un joueur ou un agent.</li>
+<li>Chaque entité possède un corps dans l'environnement.</li>
+<li>Un agent est une entité, mais une entité peut être un objet, un joueur ou un agent.</li>
 <li>Le corps de chaque agent possède un certain nombre de modules "senseurs" captant les 
 divers stimuli envoyé depuis l'environnement.</li>
 <li>Le corps de chaque agent possède un certain nombre de modules "moteurs" lui permettant
 d'effectuer des actions sur l'environnement.</li>
-<li>Les Stimuli peuvent être sonore ou visuel et sont générés depuis l'environnement.</li>
+<li>Les Stimuli peuvent être sonores ou visuels et sont générés depuis l'environnement.</li>
 <li>Chaque module est lancé dans un thread.</li>
 </ul>
 </p>
@@ -187,9 +187,9 @@ et pouvant tomber à tout moment sur le joueur.
 <p>Voici les fonctionnalités implémentées : </p>
 <ul>
   <li>Connexion client/serveur</li>
-  <li>Envoies de mesh au client</li>
-  <li>Envoies/Reception de données au client</li>
-  <li>Envoies/Reception de données au serveur</li>
+  <li>Envoi de mesh au client</li>
+  <li>Envoi/Reception de données au client</li>
+  <li>Envoi/Reception de données au serveur</li>
   <li>Système multiagent côté serveur</li>
 </ul>
 
@@ -204,19 +204,19 @@ et pouvant tomber à tout moment sur le joueur.
 <li>Mettre en place un système de "chunk" envoyé depuis le serveur.</li>
 <li>Utiliser du TCP pour la connexion/déconnexion du joueur, puis de l'UDP
 pour l'envoi des positions des entités.</li>
-<li>Refonte du Moteur IA afin de pouvoir lancer les agents dans des processus plutot que
-dans des threads et utiliser des temps logiques plutot que des temps réels.</li>
-<li>Ajout de divers autres agents :
+<li>Refonte du Moteur IA afin de pouvoir lancer les agents dans des processus plutôt que
+dans des threads et utiliser des temps logiques plutôt que des temps réels.</li>
+<li>Ajout de divers agents :
 <ul><li>Des chiens, pouvant s'attacher ou non aux joueurs, les aider, trouver des objets.
 Pouvant se déplacer en meute, communiquant par "aboiements".</li>
-<li>Divers animaux pouvant être "élevé" par les joueurs : vache, poulet, cochon ...
-Mais pouvant aussi être attaqué par les zombies.</li>
+<li>Divers animaux pouvant être "élevés" par les joueurs : vache, poulet, cochon ...
+Mais pouvant aussi être attaqués par les zombies.</li>
 <li>Des arbres, plantes et céréales, pouvant être cultivés par les joueurs et réagissant
 au soleil et à l'eau pour croitre.</li>
 </ul>
 </li>
 <li>Créer des interactions entre joueurs, agents et environnement.</li>
-<li>Créer un système de craft.</li>
+<li>Créer un système de "craft".</li>
 </ul>
 </p>
 
