@@ -34,10 +34,10 @@
         <div id="title">
           <h1>Projet SnZ</h1>
           <p></p>
-  		  <hr> 
+  		  <hr>
   		  <img src="images/header.jpg">
           <hr>
-          
+
           </span>
           <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
         </div>
@@ -47,13 +47,13 @@
 <a id="designer-templates" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h3>
 
 <div style="text-align: justify">
-  
+
 <p>Le but de ce projet est de réaliser une application client/serveur dans un contexte MMO. Notre jeu est un jeu de survie à la première personne. Dans un monde postapocalyptique, le joueur doit survivre dans un environnement hostile peuplé de zombie.</p>
 
 <p>Ce projet se divise en deux parties, un serveur et un client. Chaque client peut se connecter au serveur. Le client est implémenté en C# avec Unity tandis que le serveur est implémenté en C++. La connexion entre le client et le serveur se fait uniquement en TCP.</p>
 
 <p>Ce projet a été réalisé par :
-<ul> 
+<ul>
 <li>Antoine Martin aka <a href="https://github.com/hyptos">hyptos</a> (Connexion Client/Serveur)</li>
 <li>Antoine Richard aka <a href="https://github.com/Avzgui">Avzgui</a> (IA)</li>
 <li>Clément Picq aka <a href="https://github.com/IroneP">IroneP</a> (Connexion Client/Serveur)</li>
@@ -71,9 +71,33 @@
 
 
 
+<h3>
+  Organisation et conception
+</h3>
+<h5>Répartition des tâches</h5>
+<p>
+  La semaine dédiée à cette UE nous à permis de travailler et de prendre place au seins du groupe. Avant de commencer à coder, nous avons pris soin de de faire en sorte de tirer meilleur parti des compétences de chacun. Ainsi nous avons attribué les "rôles" aux membres du groupe.
+</p>
+
+<h5>Conception</h5>
+<p>
+    Afin d'être efficace et autonome, avant de commencer nous avons procédé à une phase de conception communes. C'est à ce moment que le choix important on été fait.
+    <ul>
+      <li> Concept de notre jeu (zombie walk) </li>
+      <li> Modèl IA </li>
+      <li> Besoins réseau - échanges de méssages </li>
+      <li> Interface utilisateur (UI) de notre jeu </li>
+    </ul>
+    Ces échanges on été utiles autant sur le plan conceptuel (gameplay, gamedesign etc ), que sur le plan technique. La participation global des membres du groupes nous a permis, par la suite, d'être plus efficace. Tout les membres du groupe avait après la phase de conception un vision global du projet et un rôle a jouer.
+</p>
 
 <h3>
 <a id="designer-templates" class="anchor" href="#intro-server" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie Serveur</h3>
+<h3>avant propos</h3>
+<p>
+  La partie serveur à été commencé depuis le début de la semaine intensive, car un membre était motivé pour créer cette partie du projet. Hors le serveur de base, fournis avec le projet, ne présentais pas de fonctionnalité multi-threadé, et donc aucune gestion de plusieurs clients (c'est dommage pour un jeu multi-joueurs).
+  La première partie de l'implémentation du serveur de communication consistait donc à définir et créer cette implémentation afin de permettre la connexion simultanée de plusieurs joueurs. Au milieu de la semaine intensive, une version multi-threadé proposant la gestion de plusieurs clients fut ajouté au projet principal. Nous avons donc abandonné celui que nous concevions, pour utiliser celui finalement fournis.
+</p>
 <h3>Présentation</h3>
 <p>
    Le serveur de communication est implémenté directement par-dessus le serveur de socket fourni avec le projet. Il présente
@@ -87,13 +111,32 @@ L'interface IMessage demande l'implémentation des fonctions permettant l'encoda
 </p>
 <h4>Les interfaces du serveur</h4>
 <p>
-Ensuite, le serveur de communication présente deux interfaces, la première permet l'envoi de messages. En identifiant un  client grâce à un id, le serveur est capable d'envoyer le message. La seconde interface permet la réception de message. Chaque module présent sur le serveur désireux de recevoir un type de message devra alors implémenter une interface ("MessageHandler"). Il suffira ensuite de s'abonner au serveur en notifiant le type des messages souhaité. Il est à noter qu'il est de la responsabilité du MessageHandler de décoder le message, car le serveur transmettra uniquement un flux d'octets ainsi que le type de message transmis (ce qui permet de s'abonner à plusieurs types de messages).
+Ensuite, le serveur de communication présente deux interfaces, la première permet l'envoi de messages. En identifiant un  client grâce à un id, le serveur est capable d'envoyer le message. La seconde interface permet la réception de messages. Chaques modules présent sur le serveur désireux de recevoir un type de message devra alors implémenter une interface ("MessageHandler"). Il suffira ensuite de s'abonner au serveur en notifiant le type des messages souhaité. Il est à noter qu'il est de la responsabilité du MessageHandler de décoder le message, car le serveur transmettra uniquement un flux d'octets ainsi que le type de message transmis (ce qui permet de s'abonner à plusieurs types de messages).
 </p>
+<p>
+  Une fois le travail du serveur fini, il suffit de définir les messages que nous utiliserons (même à la volée si necessaire) et de fournir les fonctions pour les transformations binaires/structures.
+</p>
+<p>
+voici une diagramme de classe illustrant la machinerie interne du server.
+<img src="images/diagramme-serveur.png" />
+</p>
+<h4>Les échanges réseau </h4>
+<p>
+  Dans ce paragraphe, nous parlerons des échanges réseau. Nous utiliserons le mots trame à la place de message. Les méssages sont un procédé "haut niveau" de notre application. Afin de pouvoir dialoguer grâce au socket, nous avions besoin d'un format générique de trames. En effet, le nombre d'informations que nous devons faire transiter entre le serveur et le client est indéfini (assets, mouvement/action joueur etc). Nous avons donc gardé l'implémentation faite avec les byteBuffers (envoie de la taille, puis lecture de la trame), et nous avons ajouté un caractère au début de la trame afin de différencier les différentes trames réseau.
 
+<TABLE BORDER="1">
+  <CAPTION> format d'une trame </CAPTION>
+  <TR>
+ <TH> taille : int </TH>
+ <TH> id trame : char </TH>
+ <TH> Message : bytes </TH>
+ </TR>
+</TABLE>
+</p>
 <h3>
 <a id="designer-templates" class="anchor" href="#intro-client" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie Client</h3>
 
-<p>Le principal rôle de la partie client est de faire le lien entre ce que nous envoie le serveur et ce dont Unity a besoin pour fonctionner. Pour cela, nous avons créé plusieurs fonctions qui 
+<p>Le principal rôle de la partie client est de faire le lien entre ce que nous envoie le serveur et ce dont Unity a besoin pour fonctionner. Pour cela, nous avons créé plusieurs fonctions qui
 récupèrent une chaine d'octects, et selon l'ID qui a été envoyé en tête de la chaîne, récupère le message voulu. Ainsi, en imposant un formalisme précis entre le client et le serveur, on peut faire
 transiter des messages de type Mesh, String, Event (type que nous avons créé pour signaler un mouvement) et connexion.</p>
 <p>
@@ -102,11 +145,11 @@ pour que le client puisse mettre à jour son affichage. Tous les mouvements des 
 </p>
 
 <p>
-Nous avons deux protagonistes : 
+Nous avons deux protagonistes :
 <ul>
 <li>Zombie ( contrôleur a la troisième personne avec animation )</li>
 <li>Joueur ( contrôleur a la première personne sans animation)</li>
-<li>Joueur ( vue a la troisième personne afin d'intensifier l’immersion) déplacement (zqsd) avec mouvement de la tête par la souris</li> 
+<li>Joueur ( vue a la troisième personne afin d'intensifier l’immersion) déplacement (zqsd) avec mouvement de la tête par la souris</li>
 <li>Passage du menu au jeu par un système de chargement afin que la map soit chargée avant l'entrée en jeu</li>
 <li> Bande-son ajoutée </li>
 </ul>
@@ -117,7 +160,7 @@ Nous avons deux protagonistes :
 <a id="designer-templates" class="anchor" href="#intro-ia" aria-hidden="true"><span class="octicon octicon-link"></span></a>Partie Intelligence Artificielle</h3>
 
 <p>
-Le but de notre projet était de créer un Système Multi-Agents (SMA) représentant un écosystème 
+Le but de notre projet était de créer un Système Multi-Agents (SMA) représentant un écosystème
 post-apocalyptique. Nous avons donc voulu que des zombies parcourent l'environnement, se déplacent
 et réagissent de manière "vraisemblable" et indépendante du joueur, c'est-à-dire qu'ils ne soient pas
 simplement des bots ayant une zone de déplacement et réapparaissant après un certain temps.
@@ -127,18 +170,18 @@ simplement des bots ayant une zone de déplacement et réapparaissant après un 
 Nous voulions que nos zombies se déplacent en "horde" à travers l'environnement, qu'ils réagissent
 aux sons, à la lumière et à la vue d'un ou plusieurs joueurs.
 </p>
-  
+
 <img src="images/horde.jpg"><br/>
 
 <p>
 Afin d'implémenter ce SMA nous avons utilisé une implémentation permettant de lancer les agents à
 l'aide de threads en suivant le schéma suivant :
 <ul>
-<li>Le modèle créé un Environnement et des Entités, 
+<li>Le modèle créé un Environnement et des Entités,
 entités qu'il lie à l'environnement lors de leur création.</li>
 <li>Chaque entité possède un corps dans l'environnement.</li>
 <li>Un agent est une entité, mais une entité peut être un objet, un joueur ou un agent.</li>
-<li>Le corps de chaque agent possède un certain nombre de modules "senseurs" captant les 
+<li>Le corps de chaque agent possède un certain nombre de modules "senseurs" captant les
 divers stimuli envoyé depuis l'environnement.</li>
 <li>Le corps de chaque agent possède un certain nombre de modules "moteurs" lui permettant
 d'effectuer des actions sur l'environnement.</li>
@@ -164,7 +207,7 @@ Pour donner aux zombies le comportement que nous souhaitions, c'est-à-dire :
   <img src="images/flocking.png">
 </div>
 
-Nous avons implémenté un algorithme de flocking, afin qu'ils se regroupent et 
+Nous avons implémenté un algorithme de flocking, afin qu'ils se regroupent et
 se suivent de manière plus ou moins "organisé", en y ajoutant de légères modifications
 pour qu'ils soient attirés par les joueurs (au bruit ou à la vue) et qu'ils soient légèrement
 moins "organisés" lorsqu'ils se dirigent sur un joueur étant entré dans leur champ de vision.
